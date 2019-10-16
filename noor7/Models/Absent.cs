@@ -12,7 +12,7 @@ namespace noor7.Models
         public bool IsCertificate { get; set; }
         public bool IsTrue { get; set; }
 
-        public virtual Student Student { get; set; }
+        public  Student Student { get; set; }
 
     }
 }

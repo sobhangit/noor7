@@ -9,6 +9,6 @@ namespace noor7.Models
         public string Problem { get; set; }
         public string Result { get; set; }
         public DateTime SpeakDate { get; set; }
-        public virtual Student Student { get; set; }
+        public Student Student { get; set; }
     }
 }

@@ -127,14 +127,10 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="DAL\SchoolContext.cs" />
-    <Compile Include="DAL\SchoolInitializer.cs" />
+    <Compile Include="Enums\ExamType.cs" />
+    <Compile Include="Enums\DefectType.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201910161632107_first.cs" />
-    <Compile Include="Migrations\201910161632107_first.Designer.cs">
-      <DependentUpon>201910161632107_first.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Absent.cs" />
@@ -144,8 +140,10 @@
     <Compile Include="Models\Late.cs" />
     <Compile Include="Models\Notebook.cs" />
     <Compile Include="Models\Practice.cs" />
+    <Compile Include="Models\Context\SchoolContext.cs" />
     <Compile Include="Models\Speak.cs" />
     <Compile Include="Models\Student.cs" />
+    <Compile Include="Models\Test.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -200,11 +198,6 @@
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.3.1.min.map" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\201910161632107_first.resx">
-      <DependentUpon>201910161632107_first.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

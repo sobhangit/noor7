@@ -1,4 +1,5 @@
-﻿using System;
+﻿using noor7.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -10,6 +11,12 @@ namespace noor7.Controllers
     {
         public ActionResult Index()
         {
+            var context = new SchoolContext();
+            context.Tests.Add(new Test
+            {
+                Name = ""
+            });
+
             return View();
         }
 
