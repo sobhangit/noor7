@@ -1,4 +1,9 @@
+<<<<<<< HEAD
 ﻿using noor7.DAL;
+using noor7.Models;
+=======
+﻿using noor7.Models;
+>>>>>>> 32807faf1aac43dcdc9da648ad9a5b21f371bbf0
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +16,12 @@ namespace noor7.Controllers
     {
         public ActionResult Index()
         {
+            var context = new SchoolContext();
+            context.Tests.Add(new Test
+            {
+                Name = ""
+            });
+
             return View();
         }
 

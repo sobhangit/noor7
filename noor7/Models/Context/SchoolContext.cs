@@ -1,19 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Data.Entity;
-using System.Web;
-using noor7.Models;
-using System.Data.Entity.ModelConfiguration.Conventions;
+﻿using System.Data.Entity;
 
-namespace noor7.DAL
+namespace noor7.Models
 {
     public class SchoolContext : DbContext
     {
-        public SchoolContext() : base("SchoolContext"){
-
+        public SchoolContext()
+        {
+            Database.SetInitializer(new MigrateDatabaseToLatestVersion
+                <SchoolContext,Migrations.Configuration>());
         }
 
+        //Set your Table
         public DbSet<Student> Students { get; set; }
         public DbSet<Late> Lates { get; set; }
         public DbSet<Absent> Absents { get; set; }
@@ -23,10 +20,6 @@ namespace noor7.DAL
         public DbSet<Course> Courses { get; set; }
         public DbSet<Notebook> Notebooks { get; set; }
         public DbSet<Practice> Practices { get; set; }
-
-        protected override void OnModelCreating(DbModelBuilder modelBuilder)
-        {
-            modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
-        }
+        public DbSet<Test> Tests { get; set; }
     }
 }

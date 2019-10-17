@@ -9,6 +9,6 @@ namespace noor7.Models
         public int Numbers { get; set; }
         public int PassedNumbers { get; set; }
         public DateTime PracticeDate { get; set; }
-        public virtual Course Course { get; set; }
+        public  Course Course { get; set; }
     }
 }

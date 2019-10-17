@@ -10,6 +10,6 @@ namespace noor7.Models
         public int LateTime { get; set; }
         public string Problem { get; set; } 
         public bool IsTrue { get; set; }
-        public virtual Student Student { get; set; }
+        public  Student Student { get; set; }
     }
 }

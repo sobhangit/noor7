@@ -8,7 +8,7 @@ namespace noor7.Models
         public int StudentID { get; set; }
         public int Grade { get; set; }
         public DateTime NoteBookDate { get; set; }
-        public virtual Student Student { get; set; }
+        public  Student Student { get; set; }
 
     }
 
