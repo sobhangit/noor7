@@ -1,0 +1,46 @@
+@media print {
+    body,html {
+        width: 100%; 
+        margin: 0; 
+        float: none;
+        color: #000;
+        background-color: #fff;
+    }
+
+    @page{
+        margin-right: 2cm !important;
+    }
+    
+    header,.dont-print,footer{
+        display: none !important;
+    }
+
+    .report-view div {
+        page-break-after: always !important;
+    }
+
+    .report-view-table {
+        width: 100%;
+        height: 100%;
+        page-break-after: always !important;
+    }
+
+    .report-view-chart  {
+        margin: 0 !important;
+        margin-right: 150px !important;
+        position: relative;
+        height: auto !important;
+        page-break-inside:avoid !important;
+    }
+
+    .report-view-chart .row .col-md-7 {
+        margin: 5px 10% !important;
+    }
+
+    table {
+        background-color: lightgray;
+        border:2px solid #000;
+    }
+
+   
+  }

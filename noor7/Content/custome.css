@@ -1,0 +1,225 @@
+@font-face {
+    font-family: Tanha;
+    src: url('./tanha.ttf') format('truetype');
+    font-weight: normal;
+}
+
+html,body{
+    overflow: hidden;
+    font-family: Tanha;
+}
+
+header {
+    font-family: Tanha;
+    font-weight: 900;
+    border-bottom: 0 !important;
+    box-shadow: 0 !important;
+}
+
+header .navbar {
+    padding: 0 !important;
+    border-bottom: 0 !important;
+    box-shadow: 0 !important;
+}
+
+    :root {
+        --underline-height: .5em;
+        --transition-duration : .5s;
+    }
+
+
+    nav {
+        position: relative;
+        white-space: nowrap;
+        background: white;
+    }
+
+    .underline {
+        display: block;
+        position: absolute;
+        z-index: 0;
+        bottom: 0;
+        right: 0;
+        height: 5px;
+        width: 130px;
+        background: rgb(102, 184, 255);
+        pointer-events: none;
+        mix-blend-mode: multiply;
+        transition: transform 0.5s ease-in-out;
+    }
+
+    .underline:nth-child(1) {
+		background: yellow;
+		transition: transform 1s;
+	}
+	.underline:nth-child(2) {
+		background: cyan;
+		transition: transform 1.5s;
+	}
+	.underline:nth-child(3) {
+		background: transform magenta;
+	}
+    
+
+header .navbar > .container-fluid {
+    padding: 0;
+}    
+
+header .navbar ul {
+    padding: 0;
+}
+
+header .navbar li {
+    text-align: center;
+    cursor: pointer;
+    padding: 5px;
+    width: 130px;
+} 
+
+div.panel-tiles {
+    text-align: center;
+    margin: 15px auto;
+}
+div.panel-tiles .tile{
+    border-radius: 5px; 
+    padding: 0;
+    height: 240px;
+    margin: 0 1.6%;
+}
+
+div.panel-tiles .tile h5 {
+    padding:10px 0;
+}
+    
+    .flip-card {
+        box-shadow: 0 1px 2px -5px;
+        background-color: transparent;
+        width: 300px;
+        height: 200px;
+        border: 1px solid #388cfa;
+        perspective: 1000px; /* Remove this if you don't want the 3D effect */
+      }
+      
+      /* This container is needed to position the front and back side */
+      .flip-card-inner {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        text-align: center;
+        transition: transform 0.8s;
+        transform-style: preserve-3d;
+      }
+      
+      /* Do an horizontal flip when you move the mouse over the flip box container */
+      .flip-card:hover .flip-card-inner {
+        transform: rotateY(180deg);
+      }
+      
+      /* Position the front and back side */
+      .flip-card-front, .flip-card-back {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        backface-visibility: hidden;
+      }
+      
+      /* Style the front side (fallback if image is missing) */
+      .flip-card-front {
+        background-color: #bbb;
+        color: black;
+      }
+      
+      /* Style the back side */
+      .flip-card-back {
+        background-color: dodgerblue;
+        color: white;
+        transform: rotateY(180deg);
+
+      }
+
+
+
+.report-action input {
+    margin : 0 5px;
+    border-radius: 2px !important;
+}
+
+
+.report-view-table , .report-view-chart{  
+    white-space: nowrap;
+    overflow-y: scroll;
+    /* add for scroll in div */
+    margin: 30px auto 0;
+    direction: rtl !important;
+    float: right !important;
+    text-align: right !important;
+    padding: 20px 10px 20px 10px;
+    background-color: rgb(192, 188, 188);
+    height: 450px;
+    margin: 10px auto 0;
+}
+
+
+
+        .report-view-table::-webkit-scrollbar , .report-view-chart::-webkit-scrollbar{  
+            width: 0.5em;
+            height: 0.5em;
+        }
+        .report-view-table::-webkit-scrollbar-thumb , .report-view-chart::-webkit-scrollbar-thumb{  
+            background-color: rgba(255,255,255,.1);
+            border-radius: 3px;
+        }
+        .report-view-table::-webkit-scrollbar:hover , .report-view-chart::-webkit-scrollbar:hover{  
+            background: rgba(255,255,255,.2);
+        }
+
+.report-view-table table{
+    text-align: center;
+    background-color: #ffffff;
+}
+
+.report-view-table table .exam-status-title td {
+    padding: 1px;
+}
+
+.report-view-table table td {
+    vertical-align: middle;
+    position: relative;
+}
+
+.report-view-table table td .exam-type {
+    position: absolute;
+    z-index: 100;
+    top: 25px;
+    right: 40.4px;
+    opacity: 0.5;
+}
+
+    .report-view-table table .first-table-row td:nth-child(1) {
+        width: 5%;
+    }
+    .report-view-table table .first-table-row td:nth-child(2) {
+        width: 15%;
+    }
+    .report-view-table table .first-table-row td:nth-child(3) {
+        width: 25%;
+    }
+    .report-view-table table .first-table-row td:nth-child(4) {
+        width: 25%;
+    }
+    .report-view-table table .first-table-row td:nth-child(5) {
+        width: 25%;
+    }
+
+.report-view-chart .row > div {
+    margin-bottom: 40px;
+}
+
+.report-view-chart canvas {
+    border-radius: 3px;
+    background-color: #ffffff;
+}
+
+.print-header {
+    display: none;
+}
