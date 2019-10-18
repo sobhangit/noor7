@@ -1,0 +1,892 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+@{
+    ViewData["Title"] = "گزارش گیری";
+}
+
+
+<div class="dont-print row d-flex justify-content-center">
+    <div class="report-action col-md-6">
+        <div class="input-group">
+            <input list="search-report" class="form-control width100 col-md-4" placeholder="نام و نام خانوادگی">
+            <datalist id="search-report">
+                <option value="علی کریمی">الف</option>
+                <option value="علی کریمی">ب</option>
+            </datalist>
+
+            <input list="month-report" class="form-control width100 col-md-2" placeholder="ماه">
+            <datalist id="month-report">
+                <option value="مهر"></option>
+                <option value="آبان"></option>
+            </datalist>
+
+            <span class="input-group-btn col-md-4 text-center">
+                <button type="button" class="btn btn-primary" onclick="convertCanvasToImgElement()">نمایش</button>
+                <button type="button" class="btn btn-success" onclick="Export2Doc();">چاپ</button>
+            </span>
+        </div>
+    </div>
+</div>
+
+<h4 class="print-header">
+    کارنامه ماهیانه دانش آموز - علی کریمی - پایه هفتم
+</h4>
+<div class="row report-view justify-content-center">
+    <div id="printa" class="report-view-table col-md-6">
+        <table class="table table-striped table-hover table-bordered">
+            <tbody>
+                <tr class="first-table-row">
+                    <td rowspan="4">1</td>
+                    <td colspan="4" rowspan="4"> حساب </td>
+                    <td colspan="4">دفعات بازدید</td>
+                    <td colspan="4">درصدانجام تکلیف</td>
+                    <td colspan="4">درصد تکالیف کلاس</td>
+
+                </tr>
+                <tr>
+                    <td colspan="4"></td>
+                    <td colspan="4"></td>
+                    <td colspan="4"></td>
+
+
+                </tr>
+                <tr class="exam-status-title">
+                    <td class="exam-status1">
+                        <span>بارم</span>
+                        <span class="exam-type">
+                            آزمون هفتگی
+                        </span>
+                    </td>
+                    <td><span>نمره</span></td>
+                    <td><span>میانگین</span></td>
+                    <td><span>تاریخ</span></td>
+                    <td class="exam-status1">
+                        <span>بارم</span>
+                        <span class="exam-type">
+                            آزمون هفتگی
+                        </span>
+                    </td>
+                    <td><span>نمره</span></td>
+                    <td><span>میانگین</span></td>
+                    <td><span>تاریخ</span></td>
+                    <td class="exam-status1">
+                        <span>بارم</span>
+                        <span class="exam-type">
+                            آزمون هفتگی
+                        </span>
+                    </td>
+                    <td><span>نمره</span></td>
+                    <td><span>میانگین</span></td>
+                    <td><span>تاریخ</span></td>
+
+
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+
+
+                </tr>
+            </tbody>
+            <tbody>
+                <tr class="first-table-row">
+                    <td rowspan="4">1</td>
+                    <td colspan="4" rowspan="4"> حساب </td>
+                    <td colspan="4">دفعات بازدید</td>
+                    <td colspan="4">درصدانجام تکلیف</td>
+                    <td colspan="4">درصد تکالیف کلاس</td>
+
+                </tr>
+                <tr>
+                    <td colspan="4"></td>
+                    <td colspan="4"></td>
+                    <td colspan="4"></td>
+
+
+                </tr>
+                <tr class="exam-status-title">
+                    <td class="exam-status1">
+                        <span>بارم</span>
+                        <span class="exam-type">
+                            آزمون هفتگی
+                        </span>
+                    </td>
+                    <td><span>نمره</span></td>
+                    <td><span>میانگین</span></td>
+                    <td><span>تاریخ</span></td>
+                    <td class="exam-status1">
+                        <span>بارم</span>
+                        <span class="exam-type">
+                            آزمون هفتگی
+                        </span>
+                    </td>
+                    <td><span>نمره</span></td>
+                    <td><span>میانگین</span></td>
+                    <td><span>تاریخ</span></td>
+                    <td class="exam-status1">
+                        <span>بارم</span>
+                        <span class="exam-type">
+                            آزمون هفتگی
+                        </span>
+                    </td>
+                    <td><span>نمره</span></td>
+                    <td><span>میانگین</span></td>
+                    <td><span>تاریخ</span></td>
+
+
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+
+
+                </tr>
+            </tbody>
+            <tbody>
+                <tr class="first-table-row">
+                    <td rowspan="4">1</td>
+                    <td colspan="4" rowspan="4"> حساب </td>
+                    <td colspan="4">دفعات بازدید</td>
+                    <td colspan="4">درصدانجام تکلیف</td>
+                    <td colspan="4">درصد تکالیف کلاس</td>
+
+                </tr>
+                <tr>
+                    <td colspan="4"></td>
+                    <td colspan="4"></td>
+                    <td colspan="4"></td>
+
+
+                </tr>
+                <tr class="exam-status-title">
+                    <td class="exam-status1">
+                        <span>بارم</span>
+                        <span class="exam-type">
+                            آزمون هفتگی
+                        </span>
+                    </td>
+                    <td><span>نمره</span></td>
+                    <td><span>میانگین</span></td>
+                    <td><span>تاریخ</span></td>
+                    <td class="exam-status1">
+                        <span>بارم</span>
+                        <span class="exam-type">
+                            آزمون هفتگی
+                        </span>
+                    </td>
+                    <td><span>نمره</span></td>
+                    <td><span>میانگین</span></td>
+                    <td><span>تاریخ</span></td>
+                    <td class="exam-status1">
+                        <span>بارم</span>
+                        <span class="exam-type">
+                            آزمون هفتگی
+                        </span>
+                    </td>
+                    <td><span>نمره</span></td>
+                    <td><span>میانگین</span></td>
+                    <td><span>تاریخ</span></td>
+
+
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+
+
+                </tr>
+            </tbody>
+            <tbody>
+                <tr class="first-table-row">
+                    <td rowspan="4">1</td>
+                    <td colspan="4" rowspan="4"> حساب </td>
+                    <td colspan="4">دفعات بازدید</td>
+                    <td colspan="4">درصدانجام تکلیف</td>
+                    <td colspan="4">درصد تکالیف کلاس</td>
+
+                </tr>
+                <tr>
+                    <td colspan="4"></td>
+                    <td colspan="4"></td>
+                    <td colspan="4"></td>
+
+
+                </tr>
+                <tr class="exam-status-title">
+                    <td class="exam-status1">
+                        <span>بارم</span>
+                        <span class="exam-type">
+                            آزمون هفتگی
+                        </span>
+                    </td>
+                    <td><span>نمره</span></td>
+                    <td><span>میانگین</span></td>
+                    <td><span>تاریخ</span></td>
+                    <td class="exam-status1">
+                        <span>بارم</span>
+                        <span class="exam-type">
+                            آزمون هفتگی
+                        </span>
+                    </td>
+                    <td><span>نمره</span></td>
+                    <td><span>میانگین</span></td>
+                    <td><span>تاریخ</span></td>
+                    <td class="exam-status1">
+                        <span>بارم</span>
+                        <span class="exam-type">
+                            آزمون هفتگی
+                        </span>
+                    </td>
+                    <td><span>نمره</span></td>
+                    <td><span>میانگین</span></td>
+                    <td><span>تاریخ</span></td>
+
+
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+
+
+                </tr>
+            </tbody>
+            <tbody>
+                <tr class="first-table-row">
+                    <td rowspan="4">1</td>
+                    <td colspan="4" rowspan="4"> حساب </td>
+                    <td colspan="4">دفعات بازدید</td>
+                    <td colspan="4">درصدانجام تکلیف</td>
+                    <td colspan="4">درصد تکالیف کلاس</td>
+
+                </tr>
+                <tr>
+                    <td colspan="4"></td>
+                    <td colspan="4"></td>
+                    <td colspan="4"></td>
+
+
+                </tr>
+                <tr class="exam-status-title">
+                    <td class="exam-status1">
+                        <span>بارم</span>
+                        <span class="exam-type">
+                            آزمون هفتگی
+                        </span>
+                    </td>
+                    <td><span>نمره</span></td>
+                    <td><span>میانگین</span></td>
+                    <td><span>تاریخ</span></td>
+                    <td class="exam-status1">
+                        <span>بارم</span>
+                        <span class="exam-type">
+                            آزمون هفتگی
+                        </span>
+                    </td>
+                    <td><span>نمره</span></td>
+                    <td><span>میانگین</span></td>
+                    <td><span>تاریخ</span></td>
+                    <td class="exam-status1">
+                        <span>بارم</span>
+                        <span class="exam-type">
+                            آزمون هفتگی
+                        </span>
+                    </td>
+                    <td><span>نمره</span></td>
+                    <td><span>میانگین</span></td>
+                    <td><span>تاریخ</span></td>
+
+
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+
+
+                </tr>
+            </tbody>
+            <tbody>
+                <tr class="first-table-row">
+                    <td rowspan="4">1</td>
+                    <td colspan="4" rowspan="4"> حساب </td>
+                    <td colspan="4">دفعات بازدید</td>
+                    <td colspan="4">درصدانجام تکلیف</td>
+                    <td colspan="4">درصد تکالیف کلاس</td>
+
+                </tr>
+                <tr>
+                    <td colspan="4"></td>
+                    <td colspan="4"></td>
+                    <td colspan="4"></td>
+
+
+                </tr>
+                <tr class="exam-status-title">
+                    <td class="exam-status1">
+                        <span>بارم</span>
+                        <span class="exam-type">
+                            آزمون هفتگی
+                        </span>
+                    </td>
+                    <td><span>نمره</span></td>
+                    <td><span>میانگین</span></td>
+                    <td><span>تاریخ</span></td>
+                    <td class="exam-status1">
+                        <span>بارم</span>
+                        <span class="exam-type">
+                            آزمون هفتگی
+                        </span>
+                    </td>
+                    <td><span>نمره</span></td>
+                    <td><span>میانگین</span></td>
+                    <td><span>تاریخ</span></td>
+                    <td class="exam-status1">
+                        <span>بارم</span>
+                        <span class="exam-type">
+                            آزمون هفتگی
+                        </span>
+                    </td>
+                    <td><span>نمره</span></td>
+                    <td><span>میانگین</span></td>
+                    <td><span>تاریخ</span></td>
+
+
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+
+
+                </tr>
+            </tbody>
+            <tbody>
+                <tr class="first-table-row">
+                    <td rowspan="4">1</td>
+                    <td colspan="4" rowspan="4"> حساب </td>
+                    <td colspan="4">دفعات بازدید</td>
+                    <td colspan="4">درصدانجام تکلیف</td>
+                    <td colspan="4">درصد تکالیف کلاس</td>
+
+                </tr>
+                <tr>
+                    <td colspan="4"></td>
+                    <td colspan="4"></td>
+                    <td colspan="4"></td>
+
+
+                </tr>
+                <tr class="exam-status-title">
+                    <td class="exam-status1">
+                        <span>بارم</span>
+                        <span class="exam-type">
+                            آزمون هفتگی
+                        </span>
+                    </td>
+                    <td><span>نمره</span></td>
+                    <td><span>میانگین</span></td>
+                    <td><span>تاریخ</span></td>
+                    <td class="exam-status1">
+                        <span>بارم</span>
+                        <span class="exam-type">
+                            آزمون هفتگی
+                        </span>
+                    </td>
+                    <td><span>نمره</span></td>
+                    <td><span>میانگین</span></td>
+                    <td><span>تاریخ</span></td>
+                    <td class="exam-status1">
+                        <span>بارم</span>
+                        <span class="exam-type">
+                            آزمون هفتگی
+                        </span>
+                    </td>
+                    <td><span>نمره</span></td>
+                    <td><span>میانگین</span></td>
+                    <td><span>تاریخ</span></td>
+
+
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+
+
+                </tr>
+            </tbody>
+            <tbody>
+                <tr class="first-table-row">
+                    <td rowspan="4">1</td>
+                    <td colspan="4" rowspan="4"> حساب </td>
+                    <td colspan="4">دفعات بازدید</td>
+                    <td colspan="4">درصدانجام تکلیف</td>
+                    <td colspan="4">درصد تکالیف کلاس</td>
+
+                </tr>
+                <tr>
+                    <td colspan="4"></td>
+                    <td colspan="4"></td>
+                    <td colspan="4"></td>
+
+
+                </tr>
+                <tr class="exam-status-title">
+                    <td class="exam-status1">
+                        <span>بارم</span>
+                        <span class="exam-type">
+                            آزمون هفتگی
+                        </span>
+                    </td>
+                    <td><span>نمره</span></td>
+                    <td><span>میانگین</span></td>
+                    <td><span>تاریخ</span></td>
+                    <td class="exam-status1">
+                        <span>بارم</span>
+                        <span class="exam-type">
+                            آزمون هفتگی
+                        </span>
+                    </td>
+                    <td><span>نمره</span></td>
+                    <td><span>میانگین</span></td>
+                    <td><span>تاریخ</span></td>
+                    <td class="exam-status1">
+                        <span>بارم</span>
+                        <span class="exam-type">
+                            آزمون هفتگی
+                        </span>
+                    </td>
+                    <td><span>نمره</span></td>
+                    <td><span>میانگین</span></td>
+                    <td><span>تاریخ</span></td>
+
+
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+
+
+                </tr>
+            </tbody>
+            <tbody>
+                <tr class="first-table-row">
+                    <td rowspan="4">1</td>
+                    <td colspan="4" rowspan="4"> حساب </td>
+                    <td colspan="4">دفعات بازدید</td>
+                    <td colspan="4">درصدانجام تکلیف</td>
+                    <td colspan="4">درصد تکالیف کلاس</td>
+
+                </tr>
+                <tr>
+                    <td colspan="4"></td>
+                    <td colspan="4"></td>
+                    <td colspan="4"></td>
+
+
+                </tr>
+                <tr class="exam-status-title">
+                    <td class="exam-status1">
+                        <span>بارم</span>
+                        <span class="exam-type">
+                            آزمون هفتگی
+                        </span>
+                    </td>
+                    <td><span>نمره</span></td>
+                    <td><span>میانگین</span></td>
+                    <td><span>تاریخ</span></td>
+                    <td class="exam-status1">
+                        <span>بارم</span>
+                        <span class="exam-type">
+                            آزمون هفتگی
+                        </span>
+                    </td>
+                    <td><span>نمره</span></td>
+                    <td><span>میانگین</span></td>
+                    <td><span>تاریخ</span></td>
+                    <td class="exam-status1">
+                        <span>بارم</span>
+                        <span class="exam-type">
+                            آزمون هفتگی
+                        </span>
+                    </td>
+                    <td><span>نمره</span></td>
+                    <td><span>میانگین</span></td>
+                    <td><span>تاریخ</span></td>
+
+
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+
+
+                </tr>
+            </tbody>
+            <tbody>
+                <tr class="first-table-row">
+                    <td rowspan="4">1</td>
+                    <td colspan="4" rowspan="4"> حساب </td>
+                    <td colspan="4">دفعات بازدید</td>
+                    <td colspan="4">درصدانجام تکلیف</td>
+                    <td colspan="4">درصد تکالیف کلاس</td>
+
+                </tr>
+                <tr>
+                    <td colspan="4"></td>
+                    <td colspan="4"></td>
+                    <td colspan="4"></td>
+
+
+                </tr>
+                <tr class="exam-status-title">
+                    <td class="exam-status1">
+                        <span>بارم</span>
+                        <span class="exam-type">
+                            آزمون هفتگی
+                        </span>
+                    </td>
+                    <td><span>نمره</span></td>
+                    <td><span>میانگین</span></td>
+                    <td><span>تاریخ</span></td>
+                    <td class="exam-status1">
+                        <span>بارم</span>
+                        <span class="exam-type">
+                            آزمون هفتگی
+                        </span>
+                    </td>
+                    <td><span>نمره</span></td>
+                    <td><span>میانگین</span></td>
+                    <td><span>تاریخ</span></td>
+                    <td class="exam-status1">
+                        <span>بارم</span>
+                        <span class="exam-type">
+                            آزمون هفتگی
+                        </span>
+                    </td>
+                    <td><span>نمره</span></td>
+                    <td><span>میانگین</span></td>
+                    <td><span>تاریخ</span></td>
+
+
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+
+
+                </tr>
+            </tbody>
+            <tbody>
+                <tr class="first-table-row">
+                    <td rowspan="4">1</td>
+                    <td colspan="4" rowspan="4"> حساب </td>
+                    <td colspan="4">دفعات بازدید</td>
+                    <td colspan="4">درصدانجام تکلیف</td>
+                    <td colspan="4">درصد تکالیف کلاس</td>
+
+                </tr>
+                <tr>
+                    <td colspan="4"></td>
+                    <td colspan="4"></td>
+                    <td colspan="4"></td>
+
+
+                </tr>
+                <tr class="exam-status-title">
+                    <td class="exam-status1">
+                        <span>بارم</span>
+                        <span class="exam-type">
+                            آزمون هفتگی
+                        </span>
+                    </td>
+                    <td><span>نمره</span></td>
+                    <td><span>میانگین</span></td>
+                    <td><span>تاریخ</span></td>
+                    <td class="exam-status1">
+                        <span>بارم</span>
+                        <span class="exam-type">
+                            آزمون هفتگی
+                        </span>
+                    </td>
+                    <td><span>نمره</span></td>
+                    <td><span>میانگین</span></td>
+                    <td><span>تاریخ</span></td>
+                    <td class="exam-status1">
+                        <span>بارم</span>
+                        <span class="exam-type">
+                            آزمون هفتگی
+                        </span>
+                    </td>
+                    <td><span>نمره</span></td>
+                    <td><span>میانگین</span></td>
+                    <td><span>تاریخ</span></td>
+
+
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+
+
+                </tr>
+            </tbody>
+            <tbody>
+                <tr class="first-table-row">
+                    <td rowspan="4">1</td>
+                    <td colspan="4" rowspan="4"> حساب </td>
+                    <td colspan="4">دفعات بازدید</td>
+                    <td colspan="4">درصدانجام تکلیف</td>
+                    <td colspan="4">درصد تکالیف کلاس</td>
+
+                </tr>
+                <tr>
+                    <td colspan="4"></td>
+                    <td colspan="4"></td>
+                    <td colspan="4"></td>
+
+
+                </tr>
+                <tr class="exam-status-title">
+                    <td class="exam-status1">
+                        <span>بارم</span>
+                        <span class="exam-type">
+                            آزمون هفتگی
+                        </span>
+                    </td>
+                    <td><span>نمره</span></td>
+                    <td><span>میانگین</span></td>
+                    <td><span>تاریخ</span></td>
+                    <td class="exam-status1">
+                        <span>بارم</span>
+                        <span class="exam-type">
+                            آزمون هفتگی
+                        </span>
+                    </td>
+                    <td><span>نمره</span></td>
+                    <td><span>میانگین</span></td>
+                    <td><span>تاریخ</span></td>
+                    <td class="exam-status1">
+                        <span>بارم</span>
+                        <span class="exam-type">
+                            آزمون هفتگی
+                        </span>
+                    </td>
+                    <td><span>نمره</span></td>
+                    <td><span>میانگین</span></td>
+                    <td><span>تاریخ</span></td>
+
+
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+
+
+                </tr>
+            </tbody>
+            <tbody>
+                <tr class="first-table-row">
+                    <td rowspan="4">1</td>
+                    <td colspan="4" rowspan="4"> حساب </td>
+                    <td colspan="4">دفعات بازدید</td>
+                    <td colspan="4">درصدانجام تکلیف</td>
+                    <td colspan="4">درصد تکالیف کلاس</td>
+
+                </tr>
+                <tr>
+                    <td colspan="4"></td>
+                    <td colspan="4"></td>
+                    <td colspan="4"></td>
+
+
+                </tr>
+                <tr class="exam-status-title">
+                    <td class="exam-status1">
+                        <span>بارم</span>
+                        <span class="exam-type">
+                            آزمون هفتگی
+                        </span>
+                    </td>
+                    <td><span>نمره</span></td>
+                    <td><span>میانگین</span></td>
+                    <td><span>تاریخ</span></td>
+                    <td class="exam-status1">
+                        <span>بارم</span>
+                        <span class="exam-type">
+                            آزمون هفتگی
+                        </span>
+                    </td>
+                    <td><span>نمره</span></td>
+                    <td><span>میانگین</span></td>
+                    <td><span>تاریخ</span></td>
+                    <td class="exam-status1">
+                        <span>بارم</span>
+                        <span class="exam-type">
+                            آزمون هفتگی
+                        </span>
+                    </td>
+                    <td><span>نمره</span></td>
+                    <td><span>میانگین</span></td>
+                    <td><span>تاریخ</span></td>
+
+
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+
+
+                </tr>
+            </tbody>
+
+        </table>
+    </div>
+
+    <div class="report-view-chart col-md-6">
+        <div class="row">
+            <div class="noteBook-chart col-md-12 justify-content-center">
+                <canvas id="line-chart" width="700" height="450"></canvas>
+            </div>
+
+            <div class="noteBook-chart-av col-md-12 justify-content-center">
+                <canvas id="line-chart1" width="700" height="450"></canvas>
+            </div>
+
+            <div class="a-chart col-md-12 justify-content-center">
+                <canvas id="bar-chart" width="700" height="450"></canvas>
+            </div>
+
+        </div>
+
+    </div>
+
+   
