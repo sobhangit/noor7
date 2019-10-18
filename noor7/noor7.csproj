@@ -157,6 +157,7 @@
     <Content Include="Content\bootstrap-reboot.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\course.jpg" />
     <Content Include="Content\custome.css" />
     <Content Include="Content\print.css" />
     <Content Include="Content\site.css" />
@@ -177,7 +178,6 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\LICENSE.txt" />
-    <Content Include="Scripts\reimg.js" />
     <Content Include="Scripts\site.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -211,6 +211,7 @@
     <Content Include="Scripts\bootstrap.min.js.map" />
     <Content Include="Scripts\jquery.min.map" />
     <Content Include="Views\Report\Index.cshtml" />
+    <Content Include="Views\Home\AddStudent.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201910180424362_DbCreate.resx">

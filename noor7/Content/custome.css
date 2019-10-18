@@ -5,6 +5,7 @@
 }
 
 html,body{
+    text-align:right !important;
     overflow: hidden;
     font-family: Tanha;
 }

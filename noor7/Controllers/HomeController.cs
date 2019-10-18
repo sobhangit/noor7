@@ -14,10 +14,20 @@ namespace noor7.Controllers
          
         public ActionResult Index()
         {
-
+            return View();
+        }
+        [HttpGet]
+        public ActionResult AddStudent()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult AddStudent(Student student)
+        {
             return View();
         }
 
-        
+
+
     }
 }
