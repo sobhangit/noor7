@@ -151,6 +151,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\absent.jpg" />
     <Content Include="Content\bootstrap-grid.css" />
     <Content Include="Content\bootstrap-grid.min.css" />
     <Content Include="Content\bootstrap-reboot.css" />
@@ -159,8 +160,15 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\course.jpg" />
     <Content Include="Content\custome.css" />
+    <Content Include="Content\defact.jpg" />
+    <Content Include="Content\exam.jpg" />
+    <Content Include="Content\late.jpg" />
+    <Content Include="Content\notebook.jpg" />
+    <Content Include="Content\practice.jpg" />
     <Content Include="Content\print.css" />
+    <Content Include="Content\setting.jpg" />
     <Content Include="Content\site.css" />
+    <Content Include="Content\speak.jpg" />
     <Content Include="Content\student.jpg" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
