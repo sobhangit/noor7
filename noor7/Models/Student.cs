@@ -12,12 +12,17 @@ namespace noor7.Models
         public int Id { get; set; }
         [Required]
         public string FirstName { get; set; }
+        [Required]
         public string LastName { get; set; }
         public string FatherName { get; set; }
+        [Required]
         public int InSchoolFrom { get; set; }
+        [Required]
         public string Class { get; set; }
-        public int Code { get; set; }
-        public int ClassListNumber { get; set; }
+        public int? Code { get; set; }
+        [Required]
+        public int? ClassListNumber { get; set; }
+        public bool? Exit { get; set; }
 
         public  ICollection<Course> Courses { get; set; }
         public  ICollection<Notebook> Notebooks { get; set; }

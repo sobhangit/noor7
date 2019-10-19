@@ -1,4 +1,4 @@
-﻿using noor7.Models;
+using noor7.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,29 +9,70 @@ namespace noor7.Controllers
 {
     public class HomeController : Controller
     {
+
+        SchoolContext context = new SchoolContext();
+         
         public ActionResult Index()
         {
-            var context = new SchoolContext();
-            context.Tests.Add(new Test
+            return View();
+        }
+        [HttpGet]
+        public ActionResult AddStudent()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult AddStudent(Student student)
+        {
+            
+            context.Students.Add(student);
+            context.SaveChanges();
+
+            ModelState.Clear();
+
+            return View();
+            
+        }
+        [HttpGet]
+        public ActionResult AddCourse()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult AddCourse(Course course)
+        {
+
+            List<Student> stu = context.Students.ToList();
+            
+
+            for (int i = 0; i < stu.Count; i++)
             {
-                Name = ""
-            });
+                course.StudentID = stu[i].Id;
+                context.Courses.Add(course);
+                context.SaveChanges();
+            }
 
+            ModelState.Clear();
             return View();
         }
-
-        public ActionResult About()
+        [HttpGet]
+        public ActionResult AddDefect()
         {
-            ViewBag.Message = "Your application description page.";
 
+            List<Student> stu = context.Students.ToList();
+            ViewBag.student = stu;
             return View();
+            
         }
-
-        public ActionResult Contact()
+        [HttpPost]
+        public ActionResult AddDefect(Defect defect)
         {
-            ViewBag.Message = "Your contact page.";
 
             return View();
+
         }
+
+        
+
     }
 }

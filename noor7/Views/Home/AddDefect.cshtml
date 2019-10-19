@@ -1,0 +1,35 @@
+﻿@model noor7.Models.Defect
+@{
+    ViewData["Title"] = "افزودن نقص";
+}
+
+@using (Html.BeginForm())
+{
+    <form>
+
+        <div class="form-row">
+            <div class="form-group col-md-4">
+                <label for="name">شناسه دانش آموز : </label>
+                <input list="encodings" value="" class="col-sm-4 custom-select custom-select-sm">
+                <datalist id="encodings" name="encodings">
+                    @foreach (var item in ViewBag.student)
+                    {
+                        <option value="@item.Id">@item.FirstName @item.LastName  کلاس @item.Class</option>
+                    }
+
+                </datalist>
+            </div>
+            
+
+
+        </div>
+
+        <button type="submit" class="btn btn-primary">ثبت</button>
+    </form>
+}
+
+<div style="position:absolute;bottom:70px">
+    @Html.ActionLink("بازگشت به پنل کاربری", "Index")
+</div>
+
+

@@ -1,31 +1,138 @@
 ﻿@{
-    ViewBag.Title = "Home Page";
+    ViewData["Title"] = "پنل کاربری";
 }
 
-<div class="jumbotron">
-    <h1>ASP.NET</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
-</div>
 
-<div class="row">
-    <div class="col-md-4">
-        <h2>Getting started</h2>
-        <p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
-        </p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
+<div class="panel-tiles row">
+    <div class="tile col-md-2 flip-card">
+        <div class="flip-card-inner">
+            <div class="flip-card-front">
+                <img src="~/Content/student.jpg" alt="Avatar" style="width:100%;height:100%;">
+            </div>
+            <div class="flip-card-back">
+                <h5 class="text-center">
+                    دانش آموز
+                </h5>
+                <button class="btn btn-light">
+                    @Html.ActionLink("افزودن کاربر جدید",
+"AddStudent")
+                </button>
+                
+            </div>
+        </div>
     </div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
+    <div class="tile col-md-2 flip-card">
+        <div class="flip-card-inner">
+            <div class="flip-card-front">
+                <img src="~/Content/course.jpg" alt="Avatar" style="width:100%;height:100%;">
+            </div>
+            <div class="flip-card-back">
+                <h5 class="text-center">
+                    درس
+                </h5>
+                <button class="btn btn-light">
+                    @Html.ActionLink("افزودن درس جدید",
+"AddCourse")
+                </button>
+            </div>
+        </div>
     </div>
-    <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
+    <div class="tile col-md-2 flip-card">
+        <div class="flip-card-inner">
+            <div class="flip-card-front">
+                <img src="~/Content/notebook.jpg" alt="Avatar" style="width:100%;height:100%;">
+            </div>
+            <div class="flip-card-back">
+                <h5 class="text-center">
+                    دفترچه راهنما
+                </h5>
+            </div>
+        </div>
+    </div>
+    <div class="tile col-md-2 flip-card">
+        <div class="flip-card-inner">
+            <div class="flip-card-front">
+                <img src="~/Content/absent.jpg" alt="Avatar" style="width:100%;height:100%;">
+            </div>
+            <div class="flip-card-back">
+                <h5 class="text-center">
+                    غیبت
+                </h5>
+            </div>
+        </div>
+    </div>
+    <div class="tile col-md-2 flip-card">
+        <div class="flip-card-inner">
+            <div class="flip-card-front">
+                <img src="~/Content/late.jpg" alt="Avatar" style="width:100%;height:100%;">
+            </div>
+            <div class="flip-card-back">
+                <h5 class="text-center">
+                    تاخیر
+                </h5>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="panel-tiles row">
+    <div class="tile col-md-2 flip-card">
+        <div class="flip-card-inner">
+            <div class="flip-card-front">
+                <img src="~/Content/exam.jpg" alt="Avatar" style="width:100%;height:100%;">
+            </div>
+            <div class="flip-card-back">
+                <h5 class="text-center">
+                    امتحان
+                </h5>
+            </div>
+        </div>
+    </div>
+    <div class="tile col-md-2 flip-card">
+        <div class="flip-card-inner">
+            <div class="flip-card-front">
+                <img src="~/Content/defact.jpg" alt="Avatar" style="width:100%;height:100%;">
+            </div>
+            <div class="flip-card-back">
+                <h5 class="text-center">
+                    نقص
+                </h5>
+            </div>
+        </div>
+    </div>
+    <div class="tile col-md-2 flip-card">
+        <div class="flip-card-inner">
+            <div class="flip-card-front">
+                <img src="~/Content/practice.jpg" alt="Avatar" style="width:100%;height:100%;">
+            </div>
+            <div class="flip-card-back">
+                <h5 class="text-center">
+                    تمرین
+                </h5>
+            </div>
+        </div>
+    </div>
+    <div class="tile col-md-2 flip-card">
+        <div class="flip-card-inner">
+            <div class="flip-card-front">
+                <img src="~/Content/speak.jpg" alt="Avatar" style="width:100%;height:100%;">
+            </div>
+            <div class="flip-card-back">
+                <h5 class="text-center">
+                    گفتگو
+                </h5>
+            </div>
+        </div>
+    </div>
+    <div class="tile col-md-2 flip-card">
+        <div class="flip-card-inner">
+            <div class="flip-card-front">
+                <img src="~/Content/setting.jpg" alt="Avatar" style="width:100%;height:100%;">
+            </div>
+            <div class="flip-card-back">
+                <h5 class="text-center">
+                    تنظیمات
+                </h5>
+            </div>
+        </div>
     </div>
 </div>
