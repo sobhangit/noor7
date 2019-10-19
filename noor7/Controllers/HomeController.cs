@@ -24,7 +24,14 @@ namespace noor7.Controllers
         [HttpPost]
         public ActionResult AddStudent(Student student)
         {
+            
+            context.Students.Add(student);
+            context.SaveChanges();
+
+            ModelState.Clear();
+
             return View();
+            
         }
 
 
