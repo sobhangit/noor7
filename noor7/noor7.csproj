@@ -221,6 +221,7 @@
     <Content Include="Views\Report\Index.cshtml" />
     <Content Include="Views\Home\AddStudent.cshtml" />
     <Content Include="Views\Home\AddCourse.cshtml" />
+    <Content Include="Views\Home\AddDefect.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201910180424362_DbCreate.resx">

@@ -41,7 +41,6 @@ namespace noor7.Controllers
         [HttpPost]
         public ActionResult AddCourse(Course course)
         {
-            int count = context.Students.Count();
 
             List<Student> stu = context.Students.ToList();
             
@@ -56,7 +55,24 @@ namespace noor7.Controllers
             ModelState.Clear();
             return View();
         }
+        [HttpGet]
+        public ActionResult AddDefect()
+        {
 
+            List<Student> stu = context.Students.ToList();
+            ViewBag.student = stu;
+            return View();
+            
+        }
+        [HttpPost]
+        public ActionResult AddDefect(Defect defect)
+        {
+
+            return View();
+
+        }
+
+        
 
     }
 }
