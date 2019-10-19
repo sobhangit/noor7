@@ -45,7 +45,6 @@ header .navbar {
         width: 130px;
         background: rgb(102, 184, 255);
         pointer-events: none;
-        mix-blend-mode: multiply;
         transition: transform 0.5s ease-in-out;
     }
 
@@ -223,4 +222,9 @@ div.panel-tiles .tile h5 {
 
 .print-header {
     display: none;
+}
+
+#backToIndex {
+    position:absolute !important;
+    bottom : 50px !important;
 }

@@ -33,7 +33,29 @@ namespace noor7.Controllers
             return View();
             
         }
+        [HttpGet]
+        public ActionResult AddCourse()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult AddCourse(Course course)
+        {
+            int count = context.Students.Count();
 
+            List<Student> stu = context.Students.ToList();
+            
+
+            for (int i = 0; i < stu.Count; i++)
+            {
+                course.StudentID = stu[i].Id;
+                context.Courses.Add(course);
+                context.SaveChanges();
+            }
+
+            ModelState.Clear();
+            return View();
+        }
 
 
     }

@@ -220,6 +220,7 @@
     <Content Include="Scripts\jquery.min.map" />
     <Content Include="Views\Report\Index.cshtml" />
     <Content Include="Views\Home\AddStudent.cshtml" />
+    <Content Include="Views\Home\AddCourse.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201910180424362_DbCreate.resx">
