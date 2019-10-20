@@ -65,7 +65,7 @@ namespace noor7.Controllers
             
         }
         [HttpPost]
-        public ActionResult AddDefect(Defect defect)
+        public ActionResult AddDefect(Defect defect , String encodings)
         {
 
             return View();
