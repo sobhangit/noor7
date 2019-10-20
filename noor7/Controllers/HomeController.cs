@@ -9,70 +9,80 @@ namespace noor7.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly SchoolContext _context;
 
-        SchoolContext context = new SchoolContext();
-         
+        public HomeController()
+        {
+            _context = new SchoolContext();
+        }
+
         public ActionResult Index()
         {
             return View();
         }
+
         [HttpGet]
         public ActionResult AddStudent()
         {
+            //why is empty?
+            // what is this ?
             return View();
         }
+
         [HttpPost]
         public ActionResult AddStudent(Student student)
         {
-            
-            context.Students.Add(student);
-            context.SaveChanges();
+
+            _context.Students.Add(student);
+            _context.SaveChanges();
 
             ModelState.Clear();
 
             return View();
-            
+
         }
+
         [HttpGet]
         public ActionResult AddCourse()
         {
             return View();
         }
+
         [HttpPost]
         public ActionResult AddCourse(Course course)
         {
+            //????????????
 
-            List<Student> stu = context.Students.ToList();
-            
+            var students = _context.Students.ToList();
 
-            for (int i = 0; i < stu.Count; i++)
+            for (int i = 0; i < students.Count; i++)
             {
-                course.StudentID = stu[i].Id;
-                context.Courses.Add(course);
-                context.SaveChanges();
+                course.StudentID = students[i].Id;
+                _context.Courses.Add(course);
+                _context.SaveChanges();
             }
 
             ModelState.Clear();
             return View();
         }
+
         [HttpGet]
         public ActionResult AddDefect()
         {
-
-            List<Student> stu = context.Students.ToList();
-            ViewBag.student = stu;
+            //???????????
+            var students = _context.Students.ToList();
+            ViewBag.student = students;
             return View();
-            
+
         }
+
         [HttpPost]
         public ActionResult AddDefect(Defect defect , String encodings)
         {
 
             return View();
-
         }
 
-        
 
     }
 }

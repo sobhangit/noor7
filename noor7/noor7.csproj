@@ -128,14 +128,13 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ReportController.cs" />
+    <Compile Include="Dtos\Student\CreateStudentDto.cs" />
+    <Compile Include="Dtos\Student\StudentDto.cs" />
+    <Compile Include="Dtos\Student\UpdateStudentDto.cs" />
     <Compile Include="Enums\ExamType.cs" />
     <Compile Include="Enums\DefectType.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201910180424362_DbCreate.cs" />
-    <Compile Include="Migrations\201910180424362_DbCreate.Designer.cs">
-      <DependentUpon>201910180424362_DbCreate.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Absent.cs" />
@@ -222,11 +221,6 @@
     <Content Include="Views\Home\AddStudent.cshtml" />
     <Content Include="Views\Home\AddCourse.cshtml" />
     <Content Include="Views\Home\AddDefect.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\201910180424362_DbCreate.resx">
-      <DependentUpon>201910180424362_DbCreate.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
