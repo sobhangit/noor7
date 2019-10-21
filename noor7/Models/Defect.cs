@@ -4,7 +4,6 @@ using System.ComponentModel.DataAnnotations;
 
 namespace noor7.Models
 {
-
     public class Defect
     {
         public int ID { get; set; }

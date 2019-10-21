@@ -1,4 +1,4 @@
-using noor7.Models;
+﻿using noor7.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -77,7 +77,7 @@ namespace noor7.Controllers
         }
 
         [HttpPost]
-        public ActionResult AddDefect(Defect defect , String encodings)
+        public ActionResult AddDefect(Defect defect )
         {
 
             return View();

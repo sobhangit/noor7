@@ -8,19 +8,31 @@
     <form>
 
         <div class="form-row">
-            <div class="form-group col-md-4">
+            <div class="form-group col-md-3">
                 <label for="name">شناسه دانش آموز : </label>
-                <input list="encodings" value="" class="col-sm-4 custom-select custom-select-sm">
-                <datalist id="encodings" name="encodings">
-                    @foreach (var item in ViewBag.student)
-                    {
-                        <option value="@item.Id">@item.FirstName @item.LastName  کلاس @item.Class</option>
-                    }
+                <br />
+                <input list="encodings" value="" class="col-sm-4 custom-select custom-select-sm" style="width:150px !important;">
+                
+                @Html.DropDownListFor(x => x.StudentID, new SelectList(ViewBag.student, "Id", "LastName"),new { @class ="form-control" })
 
-                </datalist>
             </div>
-            
 
+            <div class="form-group col-md-2">
+                <label for="name">نوع نقص : </label>
+                @Html.EnumDropDownListFor(x => x.Type, new
+                {
+                    @class = "form-control"
+                })
+            </div>
+            <div class="form-group col-md-4">
+                <label for="name">توضیحات : </label>
+                @Html.TextBoxFor(x => x.Description, new { @class = "form-control" })
+            </div>
+
+            <div class="form-group col-md-2">
+                <label for="name">تاریخ : </label>
+                @Html.TextBoxFor(x => x.DefaceDate, new { @class = "form-control" })
+            </div>
 
         </div>
 
