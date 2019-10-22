@@ -71,20 +71,52 @@ namespace noor7.Controllers
         {
             //???????????
             var students = _context.Students.ToList();
-            ViewBag.student = students;
+
+            SelectList selectLists = new SelectList(_context.Students.Select(
+                c => new
+                {
+
+                    StudentID = c.Id,
+                    FullInfo = c.FirstName + " " + c.LastName + " " + " کلاس " + c.Class
+
+                }
+            ), "StudentID", "FullInfo") ;
+
+            ViewBag.student = selectLists;
+
+            //ViewData["student"] = selectLists;
             return View();
 
         }
 
         [HttpPost]
-        public ActionResult AddDefect(Defect defect,FormCollection form)
+        public ActionResult AddDefect(FormCollection form)
         {
             var students = _context.Students.ToList();
+
             ViewBag.student = students;
 
-            var StudentID = form[0];
-            defect.StudentID = Convert.ToInt32(StudentID);
-            _context.Defects.Add(defect);
+            Defect obj = new Defect();
+
+            var studentID = form[0];
+            var defactType = form[1];
+            var description = form[2];
+            var defactDate = form[3];
+
+            obj.StudentID = Convert.ToInt32(studentID);
+            if (defactType == "انضباطی")
+            {
+                obj.Type = Enums.DefectType.انضباطی;
+            }
+            else
+            {
+                obj.Type = Enums.DefectType.علمی;
+            }
+
+            obj.Description = description;
+            obj.DefaceDate = Convert.ToDateTime(defactDate);
+
+            _context.Defects.Add(obj);
             _context.SaveChanges();
 
             ModelState.Clear();

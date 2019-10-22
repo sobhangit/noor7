@@ -147,6 +147,7 @@
     <Compile Include="Models\Context\SchoolContext.cs" />
     <Compile Include="Models\Speak.cs" />
     <Compile Include="Models\Student.cs" />
+    <Compile Include="Models\StudentAndDefectViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

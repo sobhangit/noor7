@@ -86,6 +86,16 @@
 
     <script>
 
+            function getStudentId() {
+
+                var e = document.getElementById("ddlViewBy");
+                var strUser = e.options[e.selectedIndex].value;
+                alert(strUser);
+                /*var e = document.getElementById("encodings");
+                var stdID = e.options[e.selectedIndex].value;
+                document.getElementById["stdVal"].value = stdID;*/
+            }
+
             /*function convertCanvasToImgElement() {
 
                     var imgElement = ReImg.fromCanvas(document.querySelector('canvas')).toImg();
