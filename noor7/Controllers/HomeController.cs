@@ -77,9 +77,17 @@ namespace noor7.Controllers
         }
 
         [HttpPost]
-        public ActionResult AddDefect(Defect defect )
+        public ActionResult AddDefect(Defect defect , String encodings)
         {
+            var students = _context.Students.ToList();
+            ViewBag.student = students;
 
+
+            defect.StudentID = Convert.ToInt32(encodings);
+            _context.Defects.Add(defect);
+            _context.SaveChanges();
+
+            ModelState.Clear();
             return View();
         }
 
