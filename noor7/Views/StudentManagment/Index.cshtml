@@ -1,52 +1,45 @@
-﻿@model noor7.Models.Student
-@{
-    ViewData["Title"] = "افزودن کاربر";
-}
-
-@using (Html.BeginForm())
+﻿@using (Html.BeginForm("AddStudent", "StudentManagment"))
 {
     <form>
-
         <div class="form-row">
             <div class="form-group col-md-4">
                 <label for="name">نام : </label>
-                @Html.TextBoxFor(x => x.FirstName, new { @class = "form-control" })
+                <input type="text" name="firstName" />
             </div>
             <div class="form-group col-md-4">
                 <label for="family">نام خانوادگی : </label>
-                @Html.TextBoxFor(x => x.LastName, new { @class = "form-control" })
+                <input type="text" name="lastName" />
             </div>
             <div class="form-group col-md-4">
                 <label for="family">نام پدر : </label>
-                @Html.TextBoxFor(x => x.FatherName, new { @class = "form-control" })
+                <input type="text" name="fatherName" />
             </div>
         </div>
 
         <div class="form-row">
             <div class="form-group col-md-3">
                 <label for="family">ورودی : </label>
-                @Html.TextBoxFor(x => x.InSchoolFrom, new { @class = "form-control" })
+                <input type="text" name="inSchoolFrom" />
             </div>
             <div class="form-group col-md-3">
                 <label for="family">کلاس : </label>
-                @Html.TextBoxFor(x => x.Class, new { @class = "form-control" })
+                <input type="text" name="classType" />
             </div>
             <div class="form-group col-md-3">
                 <label for="family">کدملی : </label>
-                @Html.TextBoxFor(x => x.Code, new { @class = "form-control" })
+                <input type="text" name="nationalCode" />
             </div>
             <div class="form-group col-md-3">
                 <label for="family">شماره لیست کلاسی : </label>
-                @Html.TextBoxFor(x => x.ClassListNumber, new { @class = "form-control" })
+                <input type="text" name="classListNumber" />
             </div>
         </div>
-
-        <button type="submit" class="btn btn-primary">ثبت</button>
+        <input type="submit" value="insert" />
     </form>
 }
 
 <div style="position:absolute;bottom:70px">
-    @Html.ActionLink("بازگشت به پنل کاربری", "Index")
-</div>
+        @Html.ActionLink("بازگشت به پنل کاربری", "Index")
+    </div>
 
 

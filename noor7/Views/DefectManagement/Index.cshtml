@@ -1,0 +1,65 @@
+﻿
+<div class="form-row">
+    <div class="form-group col-md-3">
+        <label for="name">شناسه دانش آموز : </label>
+        <input type="text" name="Harchi" value="" />
+        <input type="submit" value="Get Student" id="getStudent">
+
+        <select id="stuList">
+            <option value="volvo">Volvo</option>
+            <option value="saab">Saab</option>
+            <option value="mercedes">Mercedes</option>
+            <option value="audi">Audi</option>
+        </select>
+
+        <div class="form-group col-md-2">
+            <label for="name">نوع نقص : </label>
+            <select>
+                <option value="volvo">Volvo</option>
+                <option value="saab">Saab</option>
+                <option value="mercedes">Mercedes</option>
+                <option value="audi">Audi</option>
+            </select>
+        </div>
+        <div class="form-group col-md-4">
+            <label for="name">توضیحات : </label>
+            <textarea rows="4" cols="50"> type the descriptions </textarea>
+        </div>
+
+        <div class="form-group col-md-2">
+            <label for="name">تاریخ : </label>
+            <input type="text" name=" ">
+        </div>
+
+    </div>
+</div>
+
+<button type="submit" class="btn btn-primary" onclick="getStudentId()">ثبت</button>
+
+
+<div style="position:absolute;bottom:70px">
+    @Html.ActionLink("بازگشت به پنل کاربری", "Index")
+</div>
+
+
+<script>
+    $(document).on("click","#getStudent", function () {
+
+        var harchi = $("input[name=Harchi]").val();
+        $.ajax(
+            {
+                url: "/DefectManagement/AddDefect?harchi=" + harchi,
+                type: "post",
+                success: function (data) {
+                    var a = $("select#stuList");
+                    a.empty();
+                    $.each(data, function (i, item) {
+                    
+                        a.append('<option value='+item.ID+'>'+item.Name+'</option>')
+                    })
+
+                }
+            }
+        )
+    })
+</script>
