@@ -13,13 +13,13 @@
                 <br />
 
                 <input list="encodings" value="" class="col-sm-4 custom-select custom-select-sm">	               
-                <datalist id="encodings" name="encodings">
-                    <input list="encodings" value="" class="col-sm-4 custom-select custom-select-sm" style="width:150px !important;">
+                <datalist id="encodings">
+                    <input list="encodings" name="encodings" value="2" class="col-sm-4 custom-select custom-select-sm" style="width:150px !important;">
                     @foreach (var item in ViewBag.student)
                     {
 
                         <option value="@item.Id">@item.FirstName @item.LastName  کلاس @item.Class</option>
-
+                        
                     }
 
                 </datalist>
