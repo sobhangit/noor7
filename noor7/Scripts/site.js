@@ -20,10 +20,26 @@ function getJsonData() {
         });
     });
 
+    var courseName = document.getElementById("courseName").innerText;
+    var practiceDate = document.getElementById("practiceDate").innerText;
+
+
+    //alert(practiceInfo);
+
     // Let's put this in the object like you want and convert to JSON (Note: jQuery will also do this for you on the Ajax request)
     var jsonObject = {};
     jsonObject.practiceData = practiceData;
+    jsonObject.courseName = courseName;
+    jsonObject.practiceDate = practiceDate;
+    //jsonObject.other = getJsonData(practiceInfo);
 
+
+    
+
+    // Get the form data with our (yet to be defined) function.
+    
+
+    console.log(JSON.stringify(jsonObject));
 
     $.ajax({
         url: "/PracticeManagment/AddPractice",
@@ -35,7 +51,7 @@ function getJsonData() {
             alert(response.responseText);
         },
         success: function (response) {
-            //alert(JSON.stringify(jsonObject));
+            alert(JSON.stringify(jsonObject));
         }
     });
 

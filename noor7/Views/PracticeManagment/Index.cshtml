@@ -39,10 +39,10 @@
 
         <div class="row">
             <div class="practiceInfo">
-                <span>درس : @ViewBag.course</span>
+                <span>درس : <span id="courseName">@ViewBag.course</span> </span>
                 <span>تعداد تمرین : @ViewBag.parcticeValue</span>
                 <span>کلاس : @ViewBag.className</span>
-                <span>تاریخ : @ViewBag.pDate</span>
+                <span>تاریخ : <span id="practiceDate">@ViewBag.pDate</span> </span>
             </div>
 
         </div>
@@ -66,10 +66,10 @@
                         <table class="table table-bordered table-responsive-md table-striped text-center">
                             <thead>
                                 <tr>
-                                    <th class="text-center">شناسه</th>
-                                    <th class="text-center">نام و نام خانوادگی</th>
-                                    <th class="text-center">مقدار کل</th>
-                                    <th class="text-center">حل شده</th>
+                                    <th class="text-center">StudentId</th>
+                                    <th class="text-center">StudentName</th>
+                                    <th class="text-center">Value</th>
+                                    <th class="text-center">PassedValue</th>
                                 </tr>
                             </thead>
                             <tbody>

@@ -141,6 +141,10 @@
     <Compile Include="Migrations\201910230522103_dbcreateOnline.Designer.cs">
       <DependentUpon>201910230522103_dbcreateOnline.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201910240727354_offline database.cs" />
+    <Compile Include="Migrations\201910240727354_offline database.Designer.cs">
+      <DependentUpon>201910240727354_offline database.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Absent.cs" />
     <Compile Include="Models\AddPracticeModle.cs" />
@@ -235,6 +239,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201910230522103_dbcreateOnline.resx">
       <DependentUpon>201910230522103_dbcreateOnline.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201910240727354_offline database.resx">
+      <DependentUpon>201910240727354_offline database.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

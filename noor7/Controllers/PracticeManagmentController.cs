@@ -1,4 +1,5 @@
-﻿using noor7.Models;
+﻿using Newtonsoft.Json;
+using noor7.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,20 +20,21 @@ namespace noor7.Controllers
 
         public ActionResult Index(string course, string parcticeValue, string className, string pDate)
         {
+
+            string GetEnglishNumber(string persianNumber)
+            {
+                string englishNumber = "";
+                foreach (char ch in persianNumber)
+                {
+                    englishNumber += char.GetNumericValue(ch);
+                }
+                return englishNumber;
+            }
+
             if (!string.IsNullOrEmpty(course) && !string.IsNullOrEmpty(parcticeValue) && !string.IsNullOrEmpty(className) && !string.IsNullOrEmpty(pDate))
             {
 
-                var studentContext = _context.Students.Where( s => s.Class == className).ToList();//دریافت دانش اموزان بر اساس نام کلاس
-                var stdID = studentContext.Select(s => s.Id);//انتخاب ایدی دانش اموزان کلاس انتخابی
-
-                var courseContext = _context.Courses.ToList();
-
-                //پیدا کردن ایدی درس براساس ایدی دانش اموز و عنوان درس
-                foreach (var item in stdID)
-                {
-                    var coID = courseContext.Where(s => s.StudentID == item & s.Title == course).Select(t=>t.ID).ToList();
-                }
-
+                var studentContext = _context.Students.Where(s => s.Class == className).ToList();//دریافت دانش اموزان بر اساس نام کلاس
 
                 ViewBag.course = course;
                 ViewBag.parcticeValue = parcticeValue;
@@ -47,20 +49,60 @@ namespace noor7.Controllers
             return View();
         }
 
-        public class practiceData
+        public class Rootobject
         {
-            public int[] StudentId { get; set; }
-            public string[] StudentName { get; set; }
-            public int[] Value { get; set; }
-            public int[] PassedValue { get; set; }
+            public Practicedata[] practiceData { get; set; }
+            public string courseName { get; set; }
+            public string practiceDate { get; set; }
+        }
+
+        public class Practicedata
+        {
+            public string StudentId { get; set; }
+            public string StudentName { get; set; }
+            public string Value { get; set; }
+            public string PassedValue { get; set; }
         }
 
         [HttpPost]
-        public ActionResult AddPractice(practiceData practice) {
+        public ActionResult AddPractice(Rootobject jsonObject)
+        {
 
-            if (practice != null)
+            if (jsonObject != null)
             {
-                return Content("ok");
+
+                var practiceContext = _context.Practices;
+                var courseContext = _context.Courses.ToList();
+
+                var courseName = jsonObject.courseName;
+                var practiceDate = jsonObject.practiceDate;
+                var Data = jsonObject.practiceData;
+
+                var practice = new List<Practice>();
+
+                for (int i = 0; i < Data.Length; i++)
+                {
+
+                    var stuID = Convert.ToInt32(Data[i].StudentId);
+                    var courseID = courseContext.Where(s => s.StudentID == stuID && s.Title == courseName).Select(s => s.ID).Single();
+                   
+                    //پرکردن ارایه از تمرین ها
+                    practice.Add(new Practice
+                    {
+                        CourseID = Convert.ToInt32(courseID),
+                        Numbers = Convert.ToInt32(Data[i].Value),
+                        PassedNumbers = Convert.ToInt32(Data[i].PassedValue),
+                        PracticeDate = Convert.ToDateTime(practiceDate)
+                    });
+                }
+
+                _context.Practices.AddRange(practice);
+                _context.SaveChanges();
+
+
+
+                return Content("اطلاعات وارد شد");
+
             }
             else
             {
@@ -72,7 +114,17 @@ namespace noor7.Controllers
 
 
 
+        
 
-       
+
+
+
+
+
+
+
+
+
+
     }
 }
