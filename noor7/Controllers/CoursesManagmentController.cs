@@ -40,7 +40,7 @@ namespace noor7.Controllers
                 _context.SaveChanges();
 
             }
-            return Content("Done");
+            return RedirectToAction("Index", "CoursesManagment");
         }
     }
 }

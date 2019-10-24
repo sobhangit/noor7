@@ -41,7 +41,7 @@ namespace noor7.Controllers
                 //handle errors
                 throw;
             }
-            return Content("done");
+            return RedirectToAction("Index", "StudentManagment");
         }
     }
 }

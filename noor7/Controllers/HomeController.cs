@@ -31,8 +31,20 @@ namespace noor7.Controllers
 
         public ActionResult AddDefect()
         {
-            return RedirectToAction("Index", "DefectManagement");
+            return RedirectToAction("Index", "DefectManagment");
         }
 
+        public ActionResult AddExam()
+        {
+            return RedirectToAction("Index", "DefectManagment");
+        }
+        public ActionResult AddLate()
+        {
+            return RedirectToAction("Index", "DefectManagment");
+        }
+        public ActionResult AddAbsent()
+        {
+            return RedirectToAction("Index", "DefectManagment");
+        }
     }
 }

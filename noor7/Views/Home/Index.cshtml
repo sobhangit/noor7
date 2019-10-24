@@ -46,6 +46,10 @@
                 <h5 class="text-center">
                     دفترچه راهنما
                 </h5>
+                <button class="btn btn-light">
+                    @Html.ActionLink("افزودن درس جدید",
+"AddCourse")
+                </button>
             </div>
         </div>
     </div>
@@ -58,6 +62,10 @@
                 <h5 class="text-center">
                     غیبت
                 </h5>
+                <button class="btn btn-light">
+                    @Html.ActionLink("افزودن درس جدید",
+"AddCourse")
+                </button>
             </div>
         </div>
     </div>
@@ -70,6 +78,10 @@
                 <h5 class="text-center">
                     تاخیر
                 </h5>
+                <button class="btn btn-light">
+                    @Html.ActionLink("افزودن درس جدید",
+"AddCourse")
+                </button>
             </div>
         </div>
     </div>
@@ -84,6 +96,10 @@
                 <h5 class="text-center">
                     امتحان
                 </h5>
+                <button class="btn btn-light">
+                    @Html.ActionLink("افزودن درس جدید",
+"AddCourse")
+                </button>
             </div>
         </div>
     </div>
@@ -96,6 +112,10 @@
                 <h5 class="text-center">
                     نقص
                 </h5>
+                <button class="btn btn-light">
+                    @Html.ActionLink("افزودن نقص جدید",
+"AddDefact")
+                </button>
             </div>
         </div>
     </div>
@@ -108,6 +128,24 @@
                 <h5 class="text-center">
                     تمرین
                 </h5>
+                
+
+                @using (Html.BeginForm("Index", "PracticeManagment"))
+                {
+                    <form>
+                        
+                            <input type="text" name="course" placeholder="نام درس"/>
+                            
+                            <input type="text" name="parcticeValue" placeholder="نعداد" />
+                            
+                            <input type="text" name="className" placeholder="کلاس" />
+                          
+                            <input type="text" name="pDate" placeholder="تاریخ" />
+                           
+                            <input type="submit" name="create" />
+                        
+                    </form>
+                }
             </div>
         </div>
     </div>
@@ -120,6 +158,10 @@
                 <h5 class="text-center">
                     گفتگو
                 </h5>
+                <button class="btn btn-light">
+                    @Html.ActionLink("افزودن درس جدید",
+"AddCourse")
+                </button>
             </div>
         </div>
     </div>
@@ -132,6 +174,10 @@
                 <h5 class="text-center">
                     تنظیمات
                 </h5>
+                <button class="btn btn-light">
+                    @Html.ActionLink("افزودن درس جدید",
+"AddCourse")
+                </button>
             </div>
         </div>
     </div>

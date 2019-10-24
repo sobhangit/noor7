@@ -57,7 +57,7 @@ header .navbar {
 		transition: transform 1.5s;
 	}
 	.underline:nth-child(3) {
-		background: transform magenta;
+		background: magenta;
 	}
     
 
@@ -227,4 +227,18 @@ div.panel-tiles .tile h5 {
 #backToIndex {
     position:absolute !important;
     bottom : 50px !important;
+}
+
+
+.practiceInfo {
+    text-align:center;
+    width:60%;
+    margin: 0 auto;
+}
+
+.practiceInfo span {
+    font-size:16px;
+    font-weight:bold;
+    padding:3px;
+    margin: 0 2.5px;
 }

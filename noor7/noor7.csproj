@@ -126,6 +126,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\PracticeManagmentController.cs" />
     <Compile Include="Controllers\CoursesManagmentController.cs" />
     <Compile Include="Controllers\DefectManagementController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -136,12 +137,13 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201910221507395_first.cs" />
-    <Compile Include="Migrations\201910221507395_first.Designer.cs">
-      <DependentUpon>201910221507395_first.cs</DependentUpon>
+    <Compile Include="Migrations\201910230522103_dbcreateOnline.cs" />
+    <Compile Include="Migrations\201910230522103_dbcreateOnline.Designer.cs">
+      <DependentUpon>201910230522103_dbcreateOnline.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Absent.cs" />
+    <Compile Include="Models\AddPracticeModle.cs" />
     <Compile Include="Models\Course.cs" />
     <Compile Include="Models\Defect.cs" />
     <Compile Include="Models\Exam.cs" />
@@ -153,6 +155,7 @@
     <Compile Include="Models\Student.cs" />
     <Compile Include="Models\StudentAndDefectViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="System\Windows\Forms.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\absent.jpg" />
@@ -225,11 +228,13 @@
     <Content Include="Views\Report\Index.cshtml" />
     <Content Include="Views\StudentManagment\Index.cshtml" />
     <Content Include="Views\CoursesManagment\Index.cshtml" />
-    <Content Include="Views\DefectManagement\Index.cshtml" />
+    <Content Include="Views\DefectManagment\Index.cshtml" />
+    <Content Include="Views\PracticeManagment\Index.cshtml" />
+    <Content Include="Views\PracticeManagment\AddPractice.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201910221507395_first.resx">
-      <DependentUpon>201910221507395_first.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201910230522103_dbcreateOnline.resx">
+      <DependentUpon>201910230522103_dbcreateOnline.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

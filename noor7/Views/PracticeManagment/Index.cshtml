@@ -1,0 +1,201 @@
+﻿
+@*
+    
+
+@using (Html.BeginForm("CreatePractice","PracticeManagment"))
+{
+    <form>
+        <div class="form-row">
+            <div class="form-group col-md-3">
+                <label for="name">نام درس : </label>
+                <br />
+                <input type="text" name="course" />
+            </div>
+            <div class="form-group col-md-3">
+                <label for="name">تعداد تمرین : </label>
+                <br />
+                <input type="text" name="parcticeValue" />
+            </div>
+            <div class="form-group col-md-3">
+                <label for="name">کلاس : </label>
+                <br />
+                <input type="text" name="className" />
+            </div>
+            <div class="form-group col-md-3">
+                <label for="name">تاریخ : </label>
+                <br />
+                <input type="text" name="pDate" />
+            </div>
+            <input type="submit" name="create" />
+
+        </div>
+    </form>
+}
+
+*@
+
+
+    <div>
+
+        <div class="row">
+            <div class="practiceInfo">
+                <span>درس : @ViewBag.course</span>
+                <span>تعداد تمرین : @ViewBag.parcticeValue</span>
+                <span>کلاس : @ViewBag.className</span>
+                <span>تاریخ : @ViewBag.pDate</span>
+            </div>
+
+        </div>
+
+
+
+        @using (Html.BeginForm("AddPractice", "PracticeManagment"))
+        {
+   
+
+
+            <!-- Editable table -->
+            <div class="card" style="white-space: nowrap;overflow-y: scroll;margin-top:20px;max-height:380px;">
+                <div class="card-body">
+                    <div id="table" class="table-editable">
+                        <span class="table-add float-right mb-3 mr-2">
+                            <a href="#!" class="text-success">
+                                <i class="fas fa-plus fa-2x" aria-hidden="true"></i>
+                            </a>
+                        </span>
+                        <table class="table table-bordered table-responsive-md table-striped text-center">
+                            <thead>
+                                <tr>
+                                    <th class="text-center">شناسه</th>
+                                    <th class="text-center">نام و نام خانوادگی</th>
+                                    <th class="text-center">مقدار کل</th>
+                                    <th class="text-center">حل شده</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                @foreach(var item in ViewBag.vv)
+                                {
+                                    <tr>
+                                        <td class="a3 pt-3-half" name="StudentId" contenteditable="true">@item.Id</td>
+                                        <td class="pt-3-half" name="StudentName" contenteditable="true">@item.FirstName @item.LastName</td>
+                                        <td class="pt-3-half" name="Value" contenteditable="true">@ViewBag.parcticeValue</td>
+                                        <td class="pt-3-half" name="PassedValue" contenteditable="true">@ViewBag.parcticeValue</td>
+                                    </tr>
+                                }
+                                
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <button type="button" onclick="getJsonData();">ارسال</button>
+   
+            
+        }
+
+
+
+
+
+
+    </div>
+
+<script>
+
+
+    const $tableID = $('#table');
+ const $BTN = $('#export-btn');
+ const $EXPORT = $('#export');
+
+ const newTr = `
+<tr class="hide">
+  <td class="pt-3-half" contenteditable="true">Example</td>
+  <td class="pt-3-half" contenteditable="true">Example</td>
+  <td class="pt-3-half" contenteditable="true">Example</td>
+  <td class="pt-3-half" contenteditable="true">Example</td>
+  <td class="pt-3-half" contenteditable="true">Example</td>
+  <td class="pt-3-half">
+    <span class="table-up"><a href="#!" class="indigo-text"><i class="fas fa-long-arrow-alt-up" aria-hidden="true"></i></a></span>
+    <span class="table-down"><a href="#!" class="indigo-text"><i class="fas fa-long-arrow-alt-down" aria-hidden="true"></i></a></span>
+  </td>
+  <td>
+    <span class="table-remove"><button type="button" class="btn btn-danger btn-rounded btn-sm my-0 waves-effect waves-light">Remove</button></span>
+  </td>
+</tr>`;
+
+ $('.table-add').on('click', 'i', () => {
+
+   const $clone = $tableID.find('tbody tr').last().clone(true).removeClass('hide table-line');
+
+   if ($tableID.find('tbody tr').length === 0) {
+
+     $('tbody').append(newTr);
+   }
+
+   $tableID.find('table').append($clone);
+ });
+
+ $tableID.on('click', '.table-remove', function () {
+
+   $(this).parents('tr').detach();
+ });
+
+ $tableID.on('click', '.table-up', function () {
+
+   const $row = $(this).parents('tr');
+
+   if ($row.index() === 1) {
+     return;
+   }
+
+   $row.prev().before($row.get(0));
+ });
+
+ $tableID.on('click', '.table-down', function () {
+
+   const $row = $(this).parents('tr');
+   $row.next().after($row.get(0));
+ });
+
+ // A few jQuery helpers for exporting only
+ jQuery.fn.pop = [].pop;
+ jQuery.fn.shift = [].shift;
+
+ $BTN.on('click', () => {
+
+   const $rows = $tableID.find('tr:not(:hidden)');
+   const headers = [];
+   const data = [];
+
+   // Get the headers (add special header logic here)
+   $($rows.shift()).find('th:not(:empty)').each(function () {
+
+     headers.push($(this).text().toLowerCase());
+   });
+
+   // Turn all existing rows into a loopable array
+   $rows.each(function () {
+     const $td = $(this).find('td');
+     const h = {};
+
+     // Use the headers from earlier to name our hash keys
+     headers.forEach((header, i) => {
+
+       h[header] = $td.eq(i).text();
+     });
+
+     data.push(h);
+   });
+
+   // Output the result
+   $EXPORT.text(JSON.stringify(data));
+ });
+</script>
+
+<div style="position:absolute;bottom:70px">
+    @Html.ActionLink("بازگشت به پنل کاربری", "Index", "Home")
+</div>
+
+
