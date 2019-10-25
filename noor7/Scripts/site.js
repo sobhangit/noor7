@@ -176,7 +176,71 @@ function sendJsonDataForAbsent() {
     });
 }
 
+function sendJsonDataForDefect() {
 
+    var defectType = document.getElementById("defectType").value;
+    var defectDescription = document.getElementById("defectDescription").value;
+    var defectDate = document.getElementById("defectDate").value;
+    var studentID = document.getElementById("selectedStudent").value;
+
+    var jsonObject = {};
+
+    jsonObject.studentID = studentID;
+    jsonObject.defectType = defectType;
+    jsonObject.defectDescription = defectDescription;
+    jsonObject.defectDate = defectDate;
+
+    console.log(JSON.stringify(jsonObject));
+
+
+    $.ajax({
+        url: "/DefectManagment/AddDefect",
+        type: "POST",
+        data: JSON.stringify(jsonObject),
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        error: function (response) {
+            alert(response.responseText);
+        },
+        success: function (response) {
+            alert(JSON.stringify(jsonObject));
+        }
+    });
+}
+
+function sendJsonDataForLate() {
+
+    var studentID = document.getElementById("selectedStudent").value;
+    var lateDate = document.getElementById("lateDate").value;
+    var howMuch = document.getElementById("howMuch").value;
+    var problem = document.getElementById("problem").value;
+    var isTrue = document.getElementById("isTrue").value;
+
+    var jsonObject = {};
+
+    jsonObject.studentID = studentID;
+    jsonObject.lateDate = lateDate;
+    jsonObject.howMuch = howMuch;
+    jsonObject.problem = problem;
+    jsonObject.isTrue = isTrue;
+
+    console.log(JSON.stringify(jsonObject));
+
+
+    $.ajax({
+        url: "/LateManagment/AddLate",
+        type: "POST",
+        data: JSON.stringify(jsonObject),
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        error: function (response) {
+            alert(response.responseText);
+        },
+        success: function (response) {
+            alert(JSON.stringify(jsonObject));
+        }
+    });
+}
 /*function ul(index) {
     console.log('click!' + index)
 

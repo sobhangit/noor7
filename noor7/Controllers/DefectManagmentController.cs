@@ -1,6 +1,7 @@
 ﻿using MD.PersianDateTime;
 using Newtonsoft.Json;
 using noor7.Dtos;
+using noor7.Dtos.Defect;
 using noor7.Models;
 using System;
 using System.Collections.Generic;
@@ -10,12 +11,12 @@ using System.Web.Mvc;
 
 namespace noor7.Controllers
 {
-    public class AbsentManagmentController : Controller
+    public class DefectManagmentController : Controller
     {
 
         private readonly SchoolContext _context;
 
-        public AbsentManagmentController()
+        public DefectManagmentController()
         {
             _context = new SchoolContext();
         }
@@ -30,26 +31,23 @@ namespace noor7.Controllers
 
 
         [HttpPost]
-        public ActionResult AddAbsent(AbsentClassDto absentDto)
+        public ActionResult AddDefect(DefectClassDto defectDto)
         {
-            if (absentDto.StudentID != null)
+            if (defectDto.studentID != null)
             {
-                var persianDateFrom = PersianDateTime.Parse(absentDto.FromDate);
-                var persianDateTo = PersianDateTime.Parse(absentDto.ToDate);
+                var persianDate = PersianDateTime.Parse(defectDto.defectDate);
 
-                var absent = new Absent
+                var defect = new Defect
                 {
-                    StudentID = int.Parse(absentDto.StudentID),
-                    FromDate = persianDateFrom.ToDateTime(),
-                    ToDate = persianDateTo.ToDateTime(),
-                    IsCertificate = absentDto.IsCertificate,
-                    Problem = absentDto.Problem,
-                    IsTrue = absentDto.IsTrue,
+                    StudentID = int.Parse(defectDto.studentID),
+                    Type = (Enums.DefectType)Enum.Parse(typeof(Enums.DefectType), defectDto.defectType, true),
+                    Description = defectDto.defectDescription,
+                    DefaceDate = persianDate.ToDateTime()
                 };
 
                 try
                 {
-                    _context.Absents.Add(absent);
+                    _context.Defects.Add(defect);
                     _context.SaveChanges();
                     ModelState.Clear();
                     return Content("اطلاعات وارد شد");

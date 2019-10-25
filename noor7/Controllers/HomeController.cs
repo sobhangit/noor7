@@ -38,5 +38,10 @@ namespace noor7.Controllers
         {
             return RedirectToAction("Index", "AbsentManagment");
         }
+
+        public ActionResult AddLate()
+        {
+            return RedirectToAction("Index", "LateManagment");
+        }
     }
 }

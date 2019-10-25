@@ -3,7 +3,7 @@
 
     <div>
 
-        @using (Html.BeginForm("AddDefect", "DefectManagment"))
+        @using (Html.BeginForm("AddLate", "LateManagment"))
         {
 
 
@@ -22,18 +22,17 @@
 
                     </datalist>
 
-                    <input id="defectType" list="defectTypes" class="form-control col-md-1" placeholder="نوع">
-                    <datalist id="defectTypes">
+                    
 
-                            <option value="انضباطی">انضباطی</option>
-                            <option value="علمی">علمی</option>
-                        
-                    </datalist>
+                    <input id="lateDate" class="form-control col-md-3" placeholder="تاریخ">
+                    <input id="howMuch" class="form-control col-md-1" placeholder="میزان تاخیر">
+                    <input id="problem" class="form-control col-md-1" placeholder="مشکل">
+                    <div class="form-group col-md-2">
+                        <label for="isTrue">موجه :</label>
+                        <input name="isTrue" type="checkbox" id="isTrue" class="form-control" value="موجه">
+                    </div>
 
-                    <input id="defectDescription" class="form-control col-md-3" placeholder="توضیحات">
-                    <input id="defectDate" class="form-control col-md-1" placeholder="تاریخ">
-
-                    <input type="button" class="btn btn-success" value="ثبت" onclick="sendJsonDataForDefect();">
+                    <input type="button" class="btn btn-success" value="ثبت" onclick="sendJsonDataForLate();">
 
 
 

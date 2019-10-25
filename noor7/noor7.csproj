@@ -129,16 +129,19 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\LateManagmentController.cs" />
+    <Compile Include="Controllers\DefectManagmentController.cs" />
     <Compile Include="Controllers\AbsentManagmentController.cs" />
     <Compile Include="Controllers\NotebookManagmentController.cs" />
     <Compile Include="Controllers\ExamManagmentController.cs" />
     <Compile Include="Controllers\PracticeManagmentController.cs" />
     <Compile Include="Controllers\CoursesManagmentController.cs" />
-    <Compile Include="Controllers\DefectManagementController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ReportController.cs" />
     <Compile Include="Controllers\StudentManagmentController.cs" />
     <Compile Include="Dtos\Absent\AbsentClassDto.cs" />
+    <Compile Include="Dtos\Defect\DefectClassDto.cs" />
+    <Compile Include="Dtos\Late\LateClassDto.cs" />
     <Compile Include="Enums\ExamType.cs" />
     <Compile Include="Enums\DefectType.cs" />
     <Compile Include="Global.asax.cs">
@@ -154,7 +157,6 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Absent.cs" />
-    <Compile Include="Models\AddPracticeModle.cs" />
     <Compile Include="Models\Course.cs" />
     <Compile Include="Models\Defect.cs" />
     <Compile Include="Models\Exam.cs" />
@@ -164,7 +166,6 @@
     <Compile Include="Models\Context\SchoolContext.cs" />
     <Compile Include="Models\Speak.cs" />
     <Compile Include="Models\Student.cs" />
-    <Compile Include="Models\StudentAndDefectViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="System\Windows\Forms.cs" />
   </ItemGroup>
@@ -198,6 +199,8 @@
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\Chart.min.js" />
     <Content Include="Scripts\jquery.js" />
+    <Content Include="Scripts\jquery.md.bootstrap.datetimepicker.js" />
+    <Content Include="Content\jquery.md.bootstrap.datetimepicker.style.css" />
     <Content Include="Scripts\jquery.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
@@ -239,11 +242,12 @@
     <Content Include="Views\Report\Index.cshtml" />
     <Content Include="Views\StudentManagment\Index.cshtml" />
     <Content Include="Views\CoursesManagment\Index.cshtml" />
-    <Content Include="Views\DefectManagment\Index.cshtml" />
     <Content Include="Views\PracticeManagment\Index.cshtml" />
     <Content Include="Views\ExamManagment\Index.cshtml" />
     <Content Include="Views\NotebookManagment\Index.cshtml" />
     <Content Include="Views\AbsentManagment\Index.cshtml" />
+    <Content Include="Views\DefectManagment\Index.cshtml" />
+    <Content Include="Views\LateManagment\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201910230522103_dbcreateOnline.resx">

@@ -1,6 +1,8 @@
 ﻿using MD.PersianDateTime;
 using Newtonsoft.Json;
 using noor7.Dtos;
+using noor7.Dtos.Defect;
+using noor7.Dtos.Late;
 using noor7.Models;
 using System;
 using System.Collections.Generic;
@@ -10,12 +12,12 @@ using System.Web.Mvc;
 
 namespace noor7.Controllers
 {
-    public class AbsentManagmentController : Controller
+    public class LateManagmentController : Controller
     {
 
         private readonly SchoolContext _context;
 
-        public AbsentManagmentController()
+        public LateManagmentController()
         {
             _context = new SchoolContext();
         }
@@ -30,26 +32,24 @@ namespace noor7.Controllers
 
 
         [HttpPost]
-        public ActionResult AddAbsent(AbsentClassDto absentDto)
+        public ActionResult AddLate(LateClassDto lateDto)
         {
-            if (absentDto.StudentID != null)
+            if (lateDto.studentID != null)
             {
-                var persianDateFrom = PersianDateTime.Parse(absentDto.FromDate);
-                var persianDateTo = PersianDateTime.Parse(absentDto.ToDate);
+                var persianDate = PersianDateTime.Parse(lateDto.lateDate);
 
-                var absent = new Absent
+                var late = new Late
                 {
-                    StudentID = int.Parse(absentDto.StudentID),
-                    FromDate = persianDateFrom.ToDateTime(),
-                    ToDate = persianDateTo.ToDateTime(),
-                    IsCertificate = absentDto.IsCertificate,
-                    Problem = absentDto.Problem,
-                    IsTrue = absentDto.IsTrue,
+                    StudentID = Convert.ToInt32(lateDto.studentID),
+                    LateDate = persianDate.ToDateTime(),
+                    LateTime = Convert.ToInt32(lateDto.howMuch),
+                    Problem = lateDto.problem,
+                    IsTrue = lateDto.isTrue
                 };
 
                 try
                 {
-                    _context.Absents.Add(absent);
+                    _context.Lates.Add(late);
                     _context.SaveChanges();
                     ModelState.Clear();
                     return Content("اطلاعات وارد شد");
