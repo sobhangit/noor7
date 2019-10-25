@@ -25,7 +25,8 @@ namespace noor7.Controllers
             if (!string.IsNullOrEmpty(course) && !string.IsNullOrEmpty(parcticeValue) && !string.IsNullOrEmpty(className) && !string.IsNullOrEmpty(pDate))
             {
 
-                var studentContext = _context.Students.Where(s => s.Class == className).ToList();//دریافت دانش اموزان بر اساس نام کلاس
+                var studentContext = 
+                    _context.Students.Where(s => s.Class == className).ToList();//دریافت دانش اموزان بر اساس نام کلاس
 
                 ViewBag.course = course;
                 ViewBag.parcticeValue = parcticeValue;

@@ -138,6 +138,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ReportController.cs" />
     <Compile Include="Controllers\StudentManagmentController.cs" />
+    <Compile Include="Dtos\Absent\AbsentClassDto.cs" />
     <Compile Include="Enums\ExamType.cs" />
     <Compile Include="Enums\DefectType.cs" />
     <Compile Include="Global.asax.cs">

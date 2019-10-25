@@ -1,5 +1,6 @@
 ﻿using MD.PersianDateTime;
 using Newtonsoft.Json;
+using noor7.Dtos;
 using noor7.Models;
 using System;
 using System.Collections.Generic;
@@ -28,58 +29,39 @@ namespace noor7.Controllers
         }
 
 
-        public class Rootobject
-        {
-            public string studentID { get; set; }
-            public string problem { get; set; }
-            public string fromDate { get; set; }
-            public string toDate { get; set; }
-            public bool isCertificate { get; set; }
-            public bool isTrue { get; set; }
-        }
-
-
         [HttpPost]
-        public ActionResult AddAbsent(Rootobject jsonObject)
+        public ActionResult AddAbsent(AbsentClassDto absentDto)
         {
-
-            if (jsonObject.studentID != null)
+            if (absentDto.StudentID != null)
             {
+                var persianDateFrom = PersianDateTime.Parse(absentDto.FromDate);
+                var persianDateTo = PersianDateTime.Parse(absentDto.ToDate);
 
-                var studentID = jsonObject.studentID;
-                var problem = jsonObject.problem;
-                var fromDate = jsonObject.fromDate;
-                var toDate = jsonObject.toDate;
-                var isCertificate = jsonObject.isCertificate;
-                var isTrue = jsonObject.isTrue;
-
-                var persianDateFrom = PersianDateTime.Parse(fromDate);
-                var persianDateTo = PersianDateTime.Parse(toDate);
-                var englishTimeFrom = persianDateFrom.ToDateTime();
-                var englishTimeTo = persianDateTo.ToDateTime();
-
-                _context.Absents.Add(new Absent
+                var absent = new Absent
                 {
-                    StudentID = Convert.ToInt32(studentID),
-                    Problem = problem,
-                    FromDate = englishTimeFrom,
-                    ToDate = englishTimeTo,
-                    IsCertificate = isCertificate,
-                    IsTrue = isTrue
+                    StudentID = int.Parse(absentDto.StudentID),
+                    FromDate = persianDateFrom.ToDateTime(),
+                    ToDate = persianDateTo.ToDateTime(),
+                    IsCertificate = absentDto.IsCertificate,
+                    Problem = absentDto.Problem,
+                    IsTrue = absentDto.IsTrue,
+                };
 
-                });
+                try
+                {
+                    _context.Absents.Add(absent);
+                    _context.SaveChanges();
+                    return Content("اطلاعات وارد شد");
+                }
+                catch (Exception exc)
+                {
 
-                _context.SaveChanges();
-
-
-                return Content("اطلاعات وارد شد");
-
+                    throw;
+                }
             }
-            else
-            {
-                return Content("An Error Has occoured");
+            else {
+                return Content("صحیح نمیباشد");
             }
-
         }
 
     }
