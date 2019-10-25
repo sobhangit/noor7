@@ -46,10 +46,17 @@
                 <h5 class="text-center">
                     دفترچه راهنما
                 </h5>
-                <button class="btn btn-light">
-                    @Html.ActionLink("افزودن درس جدید",
-"AddCourse")
-                </button>
+                @using (Html.BeginForm("Index", "NotebookManagment"))
+                {
+                    <form>
+
+                        <input type="text" name="className" placeholder="کلاس" />
+                        <input type="text" name="notebookDate" placeholder="تاریخ" />
+                        <input type="text" name="numberOfDays" placeholder="تعداد روزهای هفته" />
+                        <input type="submit" name="ایجاد دفترچه" />
+
+                    </form>
+                }
             </div>
         </div>
     </div>
@@ -98,21 +105,21 @@
                 </h5>
                 @using (Html.BeginForm("Index", "ExamManagment"))
                 {
-            <form>
+                    <form>
 
-                <input type="text" name="course" placeholder="نام درس" />
+                        <input type="text" name="course" placeholder="نام درس" />
 
-                <input type="text" name="finalGrade" placeholder="بارم" />
+                        <input type="text" name="finalGrade" placeholder="بارم" />
 
-                <input type="text" name="examtype" placeholder="نوع امتحان" />
+                        <input type="text" name="examtype" placeholder="نوع امتحان" />
 
-                <input type="text" name="className" placeholder="کلاس" />
+                        <input type="text" name="className" placeholder="کلاس" />
 
-                <input type="text" name="examDate" placeholder="تاریخ" />
+                        <input type="text" name="examDate" placeholder="تاریخ" />
 
-                <input type="submit" name="ایجاد امتحان" />
+                        <input type="submit" name="ایجاد امتحان" />
 
-            </form>
+                    </form>
                 }
             </div>
         </div>

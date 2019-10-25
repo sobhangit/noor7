@@ -97,6 +97,48 @@ function getJsonDataFromExam() {
 
 }
 
+function getJsonDataFromNotebook() {
+
+    // Loop through grabbing everything
+    var notebookData = [];
+    var $headers = $("th");
+    var $rows = $("tbody tr").each(function (index) {
+        $cells = $(this).find("td");
+        notebookData[index] = {};
+        $cells.each(function (cellIndex) {
+            notebookData[index][$($headers[cellIndex]).html()] = $(this).html();
+        });
+    });
+
+    var notebookDate = document.getElementById("notebookDate").innerText;
+    var numberOfDays = document.getElementById("numberOfDays").innerText;
+   
+    // Let's put this in the object like you want and convert to JSON (Note: jQuery will also do this for you on the Ajax request)
+    var jsonObject = {};
+    jsonObject.notebookData = notebookData;
+    jsonObject.notebookDate = notebookDate;
+    jsonObject.numberOfDays = numberOfDays;
+
+    // Get the form data with our (yet to be defined) function.
+
+
+    console.log(JSON.stringify(jsonObject));
+
+    $.ajax({
+        url: "/NotebookManagment/AddNotebook",
+        type: "POST",
+        data: JSON.stringify(jsonObject),
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        error: function (response) {
+            alert(response.responseText);
+        },
+        success: function (response) {
+            alert(JSON.stringify(jsonObject));
+        }
+    });
+
+}
 
 
 /*function ul(index) {
