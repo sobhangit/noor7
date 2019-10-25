@@ -140,6 +140,42 @@ function getJsonDataFromNotebook() {
 
 }
 
+function sendJsonDataForAbsent() {
+
+    var problem = document.getElementById("problem").value;
+    var fromDate = document.getElementById("fromDate").value;
+    var toDate = document.getElementById("toDate").value;
+    var isCertificate = document.getElementById("isCertificate").checked;
+    var isTrue = document.getElementById("isTrue").checked;
+    var studentID = document.getElementById("selectedStudent").value;
+
+    var jsonObject = {};
+
+    jsonObject.studentID = studentID;
+    jsonObject.problem = problem;
+    jsonObject.fromDate = fromDate;
+    jsonObject.toDate = toDate;
+    jsonObject.isCertificate = isCertificate;
+    jsonObject.isTrue = isTrue;
+
+    console.log(JSON.stringify(jsonObject));
+
+
+    $.ajax({
+        url: "/AbsentManagment/AddAbsent",
+        type: "POST",
+        data: JSON.stringify(jsonObject),
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        error: function (response) {
+            alert(response.responseText);
+        },
+        success: function (response) {
+            alert(JSON.stringify(jsonObject));
+        }
+    });
+}
+
 
 /*function ul(index) {
     console.log('click!' + index)

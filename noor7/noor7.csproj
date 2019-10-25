@@ -129,6 +129,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AbsentManagmentController.cs" />
     <Compile Include="Controllers\NotebookManagmentController.cs" />
     <Compile Include="Controllers\ExamManagmentController.cs" />
     <Compile Include="Controllers\PracticeManagmentController.cs" />
@@ -239,9 +240,9 @@
     <Content Include="Views\CoursesManagment\Index.cshtml" />
     <Content Include="Views\DefectManagment\Index.cshtml" />
     <Content Include="Views\PracticeManagment\Index.cshtml" />
-    <Content Include="Views\PracticeManagment\AddPractice.cshtml" />
     <Content Include="Views\ExamManagment\Index.cshtml" />
     <Content Include="Views\NotebookManagment\Index.cshtml" />
+    <Content Include="Views\AbsentManagment\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201910230522103_dbcreateOnline.resx">

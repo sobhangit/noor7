@@ -1,0 +1,58 @@
+﻿
+
+
+    <div>
+
+        @using (Html.BeginForm("AddAbsent", "AbsentManagment"))
+        {
+
+
+            <div class="row" style="width:90%;margin:0 auto; padding:5px;">
+
+
+                <form class="form-inline">
+                    <input id="selectedStudent" list="search-report" class="form-control col-md-2" placeholder="نام و نام خانوادگی">
+                    <datalist id="search-report">
+
+                        @foreach (var item in ViewBag.students)
+                        {
+                            <option value="@item.Id">@item.FirstName @item.LastName @item.Class</option>
+                        }
+
+
+                    </datalist>
+
+                    <input id="problem" class="form-control col-md-3" placeholder="مشکل">
+                    <input id="fromDate" class="form-control col-md-1" placeholder="از تاریخ">
+                    <input id="toDate" class="form-control col-md-1" placeholder="تا تاریخ">
+                    <div class="form-group col-md-2">
+                        <label for="isCertificate">گواهی :</label>
+                        <input name="isCertificate" type="checkbox" id="isCertificate" class="form-control" value="گواهی">
+                    </div>
+
+                    <div class="form-group col-md-2">
+                        <label for="isTrue">موجه :</label>
+                        <input name="isTrue" type="checkbox" id="isTrue" class="form-control" value="موجه">
+                    </div>
+
+
+
+                </form>
+                <input type="submit" class="btn btn-success" value="ثبت" onclick="sendJsonDataForAbsent();">
+            </div> 
+
+
+
+
+
+        }
+
+</div>
+
+
+
+<div style="position:absolute;bottom:70px">
+    @Html.ActionLink("بازگشت به پنل کاربری", "Index", "Home")
+</div>
+
+

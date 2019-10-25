@@ -41,8 +41,6 @@ namespace noor7.Controllers
             return View();
         }
 
-
-
         public class Rootobject
         {
             public Notebookdata[] notebookData { get; set; }

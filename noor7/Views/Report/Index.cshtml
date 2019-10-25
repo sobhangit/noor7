@@ -9,7 +9,7 @@
 <div class="dont-print row d-flex justify-content-center">
     <div class="report-action col-md-6">
         <div class="input-group">
-            <input list="search-report" class="form-control width100 col-md-4" placeholder="نام و نام خانوادگی">
+            <input id="selectedStudent" list="search-report" class="form-control width100 col-md-4" placeholder="نام و نام خانوادگی">
             <datalist id="search-report">
                 <option value="علی کریمی">الف</option>
                 <option value="علی کریمی">ب</option>
@@ -889,4 +889,8 @@
 
     </div>
 
-   
+   <script type="text/javascript">
+       $("#selectedStudent").on('input',function(e){
+         alert($(this).val());
+       });
+   </script>
