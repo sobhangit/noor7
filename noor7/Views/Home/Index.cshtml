@@ -96,10 +96,24 @@
                 <h5 class="text-center">
                     امتحان
                 </h5>
-                <button class="btn btn-light">
-                    @Html.ActionLink("افزودن درس جدید",
-"AddCourse")
-                </button>
+                @using (Html.BeginForm("Index", "ExamManagment"))
+                {
+            <form>
+
+                <input type="text" name="course" placeholder="نام درس" />
+
+                <input type="text" name="finalGrade" placeholder="بارم" />
+
+                <input type="text" name="examtype" placeholder="نوع امتحان" />
+
+                <input type="text" name="className" placeholder="کلاس" />
+
+                <input type="text" name="examDate" placeholder="تاریخ" />
+
+                <input type="submit" name="ایجاد امتحان" />
+
+            </form>
+                }
             </div>
         </div>
     </div>
@@ -126,7 +140,7 @@
             </div>
             <div class="flip-card-back">
                 <h5 class="text-center">
-                    تمرین
+                    تکلیف
                 </h5>
                 
 

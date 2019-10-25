@@ -8,29 +8,29 @@ using System.Web.Mvc;
 
 namespace noor7.Controllers
 {
-    public class PracticeManagmentController : Controller
+    public class ExamManagmentController : Controller
     {
 
         private readonly SchoolContext _context;
 
-        public PracticeManagmentController()
+        public ExamManagmentController()
         {
             _context = new SchoolContext();
         }
 
-        public ActionResult Index(string course, string parcticeValue, string className, string pDate)
+        public ActionResult Index(string course, string finalGrade, string examtype, string className, string examDate)
         {
 
-
-            if (!string.IsNullOrEmpty(course) && !string.IsNullOrEmpty(parcticeValue) && !string.IsNullOrEmpty(className) && !string.IsNullOrEmpty(pDate))
+            if (!string.IsNullOrEmpty(course) && !string.IsNullOrEmpty(finalGrade) && !string.IsNullOrEmpty(examtype) && !string.IsNullOrEmpty(className) && !string.IsNullOrEmpty(examDate))
             {
 
                 var studentContext = _context.Students.Where(s => s.Class == className).ToList();//دریافت دانش اموزان بر اساس نام کلاس
 
                 ViewBag.course = course;
-                ViewBag.parcticeValue = parcticeValue;
+                ViewBag.finalGrade = finalGrade;
+                ViewBag.examtype = examtype;
                 ViewBag.className = className;
-                ViewBag.pDate = pDate;
+                ViewBag.examDate = examDate;
 
                 ViewBag.vv = studentContext;
 
@@ -42,52 +42,56 @@ namespace noor7.Controllers
 
         public class Rootobject
         {
-            public Practicedata[] practiceData { get; set; }
+            public Examdata[] examData { get; set; }
             public string courseName { get; set; }
-            public string practiceDate { get; set; }
+            public string finalGrade { get; set; }
+            public string examType { get; set; }
+            public string examDate { get; set; }
         }
 
-        public class Practicedata
+        public class Examdata
         {
             public string StudentId { get; set; }
             public string StudentName { get; set; }
-            public string Value { get; set; }
-            public string PassedValue { get; set; }
+            public string Grade { get; set; }
         }
 
+        
         [HttpPost]
-        public ActionResult AddPractice(Rootobject jsonObject)
+        public ActionResult AddExam(Rootobject jsonObject)
         {
 
             if (jsonObject != null)
             {
-
-                var practiceContext = _context.Practices;
                 var courseContext = _context.Courses.ToList();
 
                 var courseName = jsonObject.courseName;
-                var practiceDate = jsonObject.practiceDate;
-                var Data = jsonObject.practiceData;
+                var examType = jsonObject.examType;
+                var examDate = jsonObject.examDate;
+                var finalGrade = jsonObject.finalGrade;
+                var Data = jsonObject.examData;
+                
 
-                var practice = new List<Practice>();
+                var exam = new List<Exam>();
 
                 for (int i = 0; i < Data.Length; i++)
                 {
 
                     var stuID = Convert.ToInt32(Data[i].StudentId);
                     var courseID = courseContext.Where(s => s.StudentID == stuID && s.Title == courseName).Select(s => s.ID).Single();
-                   
+
                     //پرکردن ارایه از تمرین ها
-                    practice.Add(new Practice
+                    exam.Add(new Exam
                     {
-                        CourseID = Convert.ToInt32(courseID),
-                        Numbers = Convert.ToInt32(Data[i].Value),
-                        PassedNumbers = Convert.ToInt32(Data[i].PassedValue),
-                        PracticeDate = Convert.ToDateTime(practiceDate)
-                    });
+                        CourseID = courseID,
+                        Grade = Convert.ToInt32(Data[i].Grade),
+                        FinalGrade = Convert.ToInt32(finalGrade),
+                        ExamDate = Convert.ToDateTime(examDate),
+                        ExamType = (Enums.ExamType)Enum.Parse(typeof(Enums.ExamType), examType, true)
+                });
                 }
 
-                _context.Practices.AddRange(practice);
+                _context.Exams.AddRange(exam);
                 _context.SaveChanges();
 
 
@@ -105,7 +109,7 @@ namespace noor7.Controllers
 
 
 
-        
+
 
 
 

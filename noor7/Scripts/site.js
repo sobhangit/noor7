@@ -3,11 +3,7 @@
 
 // Write your JavaScript code.
 
-/*function sendJsonToController(myObj) {
-
-}*/
-
-function getJsonData() {
+function getJsonDataFromPractice() {
 
     // Loop through grabbing everything
     var practiceData = [];
@@ -22,7 +18,7 @@ function getJsonData() {
 
     var courseName = document.getElementById("courseName").innerText;
     var practiceDate = document.getElementById("practiceDate").innerText;
-
+   
 
     //alert(practiceInfo);
 
@@ -31,13 +27,9 @@ function getJsonData() {
     jsonObject.practiceData = practiceData;
     jsonObject.courseName = courseName;
     jsonObject.practiceDate = practiceDate;
-    //jsonObject.other = getJsonData(practiceInfo);
-
-
-    
 
     // Get the form data with our (yet to be defined) function.
-    
+
 
     console.log(JSON.stringify(jsonObject));
 
@@ -55,13 +47,59 @@ function getJsonData() {
         }
     });
 
-/*    sendJsonToController(myObj)
-*/
+}
+
+function getJsonDataFromExam() {
+
+    // Loop through grabbing everything
+    var examData = [];
+    var $headers = $("th");
+    var $rows = $("tbody tr").each(function (index) {
+        $cells = $(this).find("td");
+        examData[index] = {};
+        $cells.each(function (cellIndex) {
+            examData[index][$($headers[cellIndex]).html()] = $(this).html();
+        });
+    });
+
+    var courseName = document.getElementById("courseName").innerText;
+    var finalGrade = document.getElementById("finalGrade").innerText;
+    var examType = document.getElementById("examType").innerText;
+    var examDate = document.getElementById("examDate").innerText;
+
+
+    // Let's put this in the object like you want and convert to JSON (Note: jQuery will also do this for you on the Ajax request)
+    var jsonObject = {};
+    jsonObject.examData = examData;
+    jsonObject.courseName = courseName;
+    jsonObject.finalGrade = finalGrade;
+    jsonObject.examType = examType;
+    jsonObject.examDate = examDate;
+
+    // Get the form data with our (yet to be defined) function.
+    
+
+    console.log(JSON.stringify(jsonObject));
+
+    $.ajax({
+        url: "/ExamManagment/AddExam",
+        type: "POST",
+        data: JSON.stringify(jsonObject),
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        error: function (response) {
+            alert(response.responseText);
+        },
+        success: function (response) {
+            alert(JSON.stringify(jsonObject));
+        }
+    });
+
 }
 
 
 
-function ul(index) {
+/*function ul(index) {
     console.log('click!' + index)
 
     var underlines = document.querySelectorAll(".underline");
@@ -69,7 +107,7 @@ function ul(index) {
     for (var i = 0; i < underlines.length; i++) {
         underlines[i].style.transform = 'translate3d(' + index * -100 + '%,0,0)';
     }
-}
+}*/
 
 new Chart(document.getElementById("line-chart"), {
     type: 'line',

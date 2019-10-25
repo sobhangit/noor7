@@ -126,6 +126,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\ExamManagmentController.cs" />
     <Compile Include="Controllers\PracticeManagmentController.cs" />
     <Compile Include="Controllers\CoursesManagmentController.cs" />
     <Compile Include="Controllers\DefectManagementController.cs" />
@@ -235,6 +236,7 @@
     <Content Include="Views\DefectManagment\Index.cshtml" />
     <Content Include="Views\PracticeManagment\Index.cshtml" />
     <Content Include="Views\PracticeManagment\AddPractice.cshtml" />
+    <Content Include="Views\ExamManagment\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201910230522103_dbcreateOnline.resx">

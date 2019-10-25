@@ -1,55 +1,20 @@
 ﻿
-@*
-    
-
-@using (Html.BeginForm("CreatePractice","PracticeManagment"))
-{
-    <form>
-        <div class="form-row">
-            <div class="form-group col-md-3">
-                <label for="name">نام درس : </label>
-                <br />
-                <input type="text" name="course" />
-            </div>
-            <div class="form-group col-md-3">
-                <label for="name">تعداد تمرین : </label>
-                <br />
-                <input type="text" name="parcticeValue" />
-            </div>
-            <div class="form-group col-md-3">
-                <label for="name">کلاس : </label>
-                <br />
-                <input type="text" name="className" />
-            </div>
-            <div class="form-group col-md-3">
-                <label for="name">تاریخ : </label>
-                <br />
-                <input type="text" name="pDate" />
-            </div>
-            <input type="submit" name="create" />
-
-        </div>
-    </form>
-}
-
-*@
-
-
     <div>
 
         <div class="row">
             <div class="practiceInfo">
                 <span>درس : <span id="courseName">@ViewBag.course</span> </span>
-                <span>تعداد تمرین : @ViewBag.parcticeValue</span>
+                <span>بارم : <span id="finalGrade">@ViewBag.finalGrade</span> </span>
+                <span>نوع : <span id="examType">@ViewBag.examtype</span> </span>
                 <span>کلاس : @ViewBag.className</span>
-                <span>تاریخ : <span id="practiceDate">@ViewBag.pDate</span> </span>
+                <span>تاریخ : <span id="examDate">@ViewBag.examDate</span> </span>
             </div>
 
         </div>
 
 
 
-        @using (Html.BeginForm("AddPractice", "PracticeManagment"))
+        @using (Html.BeginForm("AddExam", "ExamManagment"))
         {
    
 
@@ -68,8 +33,7 @@
                                 <tr>
                                     <th class="text-center">StudentId</th>
                                     <th class="text-center">StudentName</th>
-                                    <th class="text-center">Value</th>
-                                    <th class="text-center">PassedValue</th>
+                                    <th class="text-center">Grade</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -79,8 +43,7 @@
                                     <tr>
                                         <td class="a3 pt-3-half" name="StudentId" contenteditable="true">@item.Id</td>
                                         <td class="pt-3-half" name="StudentName" contenteditable="true">@item.FirstName @item.LastName</td>
-                                        <td class="pt-3-half" name="Value" contenteditable="true">@ViewBag.parcticeValue</td>
-                                        <td class="pt-3-half" name="PassedValue" contenteditable="true">@ViewBag.parcticeValue</td>
+                                        <td class="pt-3-half" name="PassedValue" contenteditable="true">@ViewBag.finalGrade</td>
                                     </tr>
                                 }
                                 
@@ -90,7 +53,7 @@
                 </div>
             </div>
 
-            <button type="button" onclick="getJsonDataFromPractice();">ارسال</button>
+            <button type="button" onclick="getJsonDataFromExam();">ارسال</button>
    
             
         }
@@ -105,24 +68,24 @@
 <script>
 
 
- const $tableID = $('#table');
+    const $tableID = $('#table');
  const $BTN = $('#export-btn');
  const $EXPORT = $('#export');
 
  const newTr = `
 <tr class="hide">
-    <td class="pt-3-half" contenteditable="true">Example</td>
-    <td class="pt-3-half" contenteditable="true">Example</td>
-    <td class="pt-3-half" contenteditable="true">Example</td>
-    <td class="pt-3-half" contenteditable="true">Example</td>
-    <td class="pt-3-half" contenteditable="true">Example</td>
-    <td class="pt-3-half">
+  <td class="pt-3-half" contenteditable="true">Example</td>
+  <td class="pt-3-half" contenteditable="true">Example</td>
+  <td class="pt-3-half" contenteditable="true">Example</td>
+  <td class="pt-3-half" contenteditable="true">Example</td>
+  <td class="pt-3-half" contenteditable="true">Example</td>
+  <td class="pt-3-half">
     <span class="table-up"><a href="#!" class="indigo-text"><i class="fas fa-long-arrow-alt-up" aria-hidden="true"></i></a></span>
     <span class="table-down"><a href="#!" class="indigo-text"><i class="fas fa-long-arrow-alt-down" aria-hidden="true"></i></a></span>
-    </td>
-    <td>
+  </td>
+  <td>
     <span class="table-remove"><button type="button" class="btn btn-danger btn-rounded btn-sm my-0 waves-effect waves-light">Remove</button></span>
-    </td>
+  </td>
 </tr>`;
 
  $('.table-add').on('click', 'i', () => {
