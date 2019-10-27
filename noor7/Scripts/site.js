@@ -241,6 +241,35 @@ function sendJsonDataForLate() {
         }
     });
 }
+
+function sendJsonDataToReport() {
+
+    var studentID = document.getElementById("selectedStudent").value;
+    
+    var jsonObject = {};
+
+    jsonObject.studentID = studentID;
+
+    console.log(JSON.stringify(jsonObject));
+
+
+    $.ajax({
+        url: "/Report/CreateReport",
+        type: "POST",
+        data: JSON.stringify(jsonObject),
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        error: function (response) {
+            alert(response.responseText);
+        },
+        success: function (response) {
+            alert(JSON.stringify(jsonObject));
+        }
+    });
+}
+
+
+
 /*function ul(index) {
     console.log('click!' + index)
 

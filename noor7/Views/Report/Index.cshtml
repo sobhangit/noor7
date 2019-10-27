@@ -11,19 +11,19 @@
         <div class="input-group">
             <input id="selectedStudent" list="search-report" class="form-control width100 col-md-4" placeholder="نام و نام خانوادگی">
             <datalist id="search-report">
-                <option value="علی کریمی">الف</option>
-                <option value="علی کریمی">ب</option>
+                @foreach (var item in ViewBag.vv)
+                {
+                    <option value="@item.Id">@item.FirstName @item.LastName @item.Class</option>
+                }
             </datalist>
 
             <input list="month-report" class="form-control width100 col-md-2" placeholder="ماه">
             <datalist id="month-report">
                 <option value="مهر"></option>
-                <option value="آبان"></option>
             </datalist>
 
             <span class="input-group-btn col-md-4 text-center">
-                <button type="button" class="btn btn-primary" onclick="convertCanvasToImgElement()">نمایش</button>
-                <button type="button" class="btn btn-success" onclick="Export2Doc();">چاپ</button>
+                <button type="button" class="btn btn-primary" onclick="sendJsonDataToReport();">نمایش</button>
             </span>
         </div>
     </div>
@@ -889,8 +889,4 @@
 
     </div>
 
-   <script type="text/javascript">
-       $("#selectedStudent").on('input',function(e){
-         alert($(this).val());
-       });
-   </script>
+   

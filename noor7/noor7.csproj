@@ -142,6 +142,9 @@
     <Compile Include="Dtos\Absent\AbsentClassDto.cs" />
     <Compile Include="Dtos\Defect\DefectClassDto.cs" />
     <Compile Include="Dtos\Late\LateClassDto.cs" />
+    <Compile Include="Dtos\Report\forTableReportDto.cs" />
+    <Compile Include="Dtos\Report\ReportDto.cs" />
+    <Compile Include="Dtos\Report\studentForReportDto.cs" />
     <Compile Include="Enums\ExamType.cs" />
     <Compile Include="Enums\DefectType.cs" />
     <Compile Include="Global.asax.cs">
@@ -248,6 +251,7 @@
     <Content Include="Views\AbsentManagment\Index.cshtml" />
     <Content Include="Views\DefectManagment\Index.cshtml" />
     <Content Include="Views\LateManagment\Index.cshtml" />
+    <Content Include="Views\Report\GetTableReport.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201910230522103_dbcreateOnline.resx">
