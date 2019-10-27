@@ -6,6 +6,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Newtonsoft.Json;
+using MD.PersianDateTime;
 
 namespace noor7.Controllers
 {
@@ -18,21 +19,8 @@ namespace noor7.Controllers
             _context = new SchoolContext();
         }
 
-        public ActionResult Index(List<ReportDto> objForTable)
+        public ActionResult Index()
         {
-
-            if (objForTable != null)
-            {
-                // The problem with this is it keeps redirecting me to SwitchMember function
-                // instead of the Index page
-
-
-
-
-                return View(objForTable);
-
-
-            }
 
             var students = _context.Students.ToList();
             ViewBag.vv = students;
@@ -70,15 +58,36 @@ namespace noor7.Controllers
                 
             }
 
-            var objForTable = practiceReportForStudent(practiceForSelectedStudent,studentForReport);
+            var examsForPrint = new List<ExamForReportDto>();
 
-            var jsonObj = JsonConvert.SerializeObject(objForTable);
+            foreach (var item in examForSelectedStudent)
+            {
+                var persianDateTime = new PersianDateTime(item.ExamDate);
 
+                examsForPrint.Add(
 
+                    new ExamForReportDto
+                    {
 
+                        CourseID = item.CourseID,
+                        Grade = item.Grade,
+                        FinalGrade = item.FinalGrade,
+                        ExamType = item.ExamType,
+                        ExamDate = persianDateTime
 
-            return RedirectToAction("GetTableReport",objForTable);
+                    }     
+                    
+               ) ;
+            }
+
+            var objForTable = practiceReportForStudent(practiceForSelectedStudent, studentForReport);
+
+            var jsonObj = JsonConvert.SerializeObject(new forTableReportDto { ReportDtos = objForTable , Exams = examsForPrint });
+
+            return Json(new { success = true, responseText = jsonObj }, JsonRequestBehavior.AllowGet);
         }
+
+        
 
         public List<ReportDto> practiceReportForStudent(List<Practice> practiceForSelectedStudent, studentForReportDto studentForReport)
         {
@@ -124,7 +133,9 @@ namespace noor7.Controllers
 
                     reportList.Add(new ReportDto
                     {
+                        Id = counter,
                         CourseName = courseName,
+                        CourseId = beforeId,
                         PercentOfWork = studentpersent,
                         PercentOfClass = classpersent,
                         SeeNumbers = checkCount
@@ -156,13 +167,13 @@ namespace noor7.Controllers
 
                     reportList.Add(new ReportDto
                     {
+                        Id = counter,
                         CourseName = courseName,
+                        CourseId = practiceForSelectedStudent.Last().CourseID,
                         PercentOfWork = studentpersent,
                         PercentOfClass = classpersent,
                         SeeNumbers = checkCount
                     });
-
-                   
                 }
                 else
                 {

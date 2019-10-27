@@ -260,10 +260,12 @@ function sendJsonDataToReport() {
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         error: function (response) {
-            alert(response.responseText);
+            alert(response);
         },
         success: function (response) {
-            alert(JSON.stringify(jsonObject));
+            if(response.success){ 
+                console.log(response.responseText);
+            }
         }
     });
 }

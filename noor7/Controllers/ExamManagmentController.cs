@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using MD.PersianDateTime;
+using Newtonsoft.Json;
 using noor7.Models;
 using System;
 using System.Collections.Generic;
@@ -80,13 +81,16 @@ namespace noor7.Controllers
                     var stuID = Convert.ToInt32(Data[i].StudentId);
                     var courseID = courseContext.Where(s => s.StudentID == stuID && s.Title == courseName).Select(s => s.ID).Single();
 
+                    var persianDateTime = PersianDateTime.Parse(examDate);
+                    
+
                     //پرکردن ارایه از تمرین ها
                     exam.Add(new Exam
                     {
                         CourseID = courseID,
                         Grade = Convert.ToInt32(Data[i].Grade),
                         FinalGrade = Convert.ToInt32(finalGrade),
-                        ExamDate = Convert.ToDateTime(examDate),
+                        ExamDate = persianDateTime.ToDateTime(),
                         ExamType = (Enums.ExamType)Enum.Parse(typeof(Enums.ExamType), examType, true)
                 });
                 }
