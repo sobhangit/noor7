@@ -72,8 +72,8 @@ namespace noor7.Controllers
                         CourseID = item.CourseID,
                         Grade = item.Grade,
                         FinalGrade = item.FinalGrade,
-                        ExamType = item.ExamType,
-                        ExamDate = persianDateTime
+                        ExamType = item.ExamType.ToString(),
+                        ExamDate = persianDateTime.ToString("yy/MM/dd")
 
                     }     
                     

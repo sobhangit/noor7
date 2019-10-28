@@ -14,8 +14,8 @@ namespace noor7.Dtos.Report
         
         public int FinalGrade { get; set; }
         
-        public DateTime ExamDate { get; set; }
+        public String ExamDate { get; set; }
         
-        public ExamType ExamType { get; set; }
+        public String ExamType { get; set; }
     }
 }
