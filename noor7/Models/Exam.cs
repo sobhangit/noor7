@@ -11,7 +11,7 @@ namespace noor7.Models
         [Required]
         public int CourseID { get; set; }
         [Required]
-        public int Grade { get; set; }
+        public float Grade { get; set; }
         [Required]
         public int FinalGrade { get; set; }
         [Required]

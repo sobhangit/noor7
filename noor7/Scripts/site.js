@@ -272,25 +272,28 @@ function sendJsonDataToReport() {
                 console.log(ReportDtos);
                 console.log(Exams);
                 
-                var ExamList = new Array(3);  
-
+                var ExamList = [];  
+                var examTemp = []
                 var noValue = " ";
                 var count = 0;
 
                 for (i = 0; i < ReportDtos.length; i++) {
                 
                     count++;
-                  
+
                     for(j = 0; j < Exams.length; j++){
-                        
+
                         if(Exams[j].CourseID == ReportDtos[i].CourseId){
-
-                            ExamList[j] = Exams[j];
+                            examTemp.push(Exams[j]);
                         }
+                        
+                    }
 
+                    for(m = 0; m < examTemp.length; m++){
+                        ExamList[m] = examTemp[m];
                     }
                     
-                    
+                    examTemp = [];
                     
                     $("#showContent").append(
                         "<tbody>"+
@@ -352,7 +355,6 @@ function sendJsonDataToReport() {
                                 "<td>"+((typeof ExamList[2] == 'undefined' || typeof ExamList[2] == {}) ? " " : ExamList[2].FinalGrade )+"</td>"+
                                 "<td>"+((typeof ExamList[2] == 'undefined' || typeof ExamList[2] == {}) ? " " : ExamList[2].ExamDate )+"</td>"+
 
-
                             "</tr>"+
           
                         "</tbody>"
@@ -369,7 +371,9 @@ function sendJsonDataToReport() {
 
                 }
 
-                
+                $('td').html(function(i, html){
+                  return html.replace("undefined", ' '); 
+                });
 
                 //console.log(ReportDtos.CourseName[i]);
                 

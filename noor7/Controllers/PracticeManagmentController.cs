@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using MD.PersianDateTime;
+using Newtonsoft.Json;
 using noor7.Models;
 using System;
 using System.Collections.Generic;
@@ -67,7 +68,7 @@ namespace noor7.Controllers
                 var courseContext = _context.Courses.ToList();
 
                 var courseName = jsonObject.courseName;
-                var practiceDate = jsonObject.practiceDate;
+                var persianDate = PersianDateTime.Parse(jsonObject.practiceDate);
                 var Data = jsonObject.practiceData;
 
                 var practice = new List<Practice>();
@@ -84,7 +85,7 @@ namespace noor7.Controllers
                         CourseID = Convert.ToInt32(courseID),
                         Numbers = Convert.ToInt32(Data[i].Value),
                         PassedNumbers = Convert.ToInt32(Data[i].PassedValue),
-                        PracticeDate = Convert.ToDateTime(practiceDate)
+                        PracticeDate = persianDate.ToDateTime()
                     });
                 }
 

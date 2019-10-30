@@ -61,6 +61,8 @@ namespace noor7.Controllers
         [HttpPost]
         public ActionResult AddExam(Rootobject jsonObject)
         {
+            var persianDate = PersianDateTime.Parse(jsonObject.examDate);
+
 
             if (jsonObject != null)
             {
@@ -68,7 +70,7 @@ namespace noor7.Controllers
 
                 var courseName = jsonObject.courseName;
                 var examType = jsonObject.examType;
-                var examDate = jsonObject.examDate;
+                var examDate = persianDate.ToDateTime();
                 var finalGrade = jsonObject.finalGrade;
                 var Data = jsonObject.examData;
                 
@@ -81,7 +83,6 @@ namespace noor7.Controllers
                     var stuID = Convert.ToInt32(Data[i].StudentId);
                     var courseID = courseContext.Where(s => s.StudentID == stuID && s.Title == courseName).Select(s => s.ID).Single();
 
-                    var persianDateTime = PersianDateTime.Parse(examDate);
                     
 
                     //پرکردن ارایه از تمرین ها
@@ -90,7 +91,7 @@ namespace noor7.Controllers
                         CourseID = courseID,
                         Grade = Convert.ToInt32(Data[i].Grade),
                         FinalGrade = Convert.ToInt32(finalGrade),
-                        ExamDate = persianDateTime.ToDateTime(),
+                        ExamDate = persianDate.ToDateTime(),
                         ExamType = (Enums.ExamType)Enum.Parse(typeof(Enums.ExamType), examType, true)
                 });
                 }

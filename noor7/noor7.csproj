@@ -160,6 +160,10 @@
     <Compile Include="Migrations\201910240727354_offline database.Designer.cs">
       <DependentUpon>201910240727354_offline database.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201910300508414_improvment.cs" />
+    <Compile Include="Migrations\201910300508414_improvment.Designer.cs">
+      <DependentUpon>201910300508414_improvment.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Absent.cs" />
     <Compile Include="Models\Course.cs" />
@@ -263,6 +267,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201910240727354_offline database.resx">
       <DependentUpon>201910240727354_offline database.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201910300508414_improvment.resx">
+      <DependentUpon>201910300508414_improvment.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

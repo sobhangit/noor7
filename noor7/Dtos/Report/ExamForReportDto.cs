@@ -10,7 +10,7 @@ namespace noor7.Dtos.Report
     {
         public int CourseID { get; set; }
        
-        public int Grade { get; set; }
+        public float Grade { get; set; }
         
         public int FinalGrade { get; set; }
         
