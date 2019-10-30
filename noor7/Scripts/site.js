@@ -242,6 +242,11 @@ function sendJsonDataForLate() {
     });
 }
 
+
+
+
+//////////// For Report
+
 function sendJsonDataToReport() {
 
     var studentID = document.getElementById("selectedStudent").value;
@@ -266,25 +271,40 @@ function sendJsonDataToReport() {
             if(response.success){ 
 
                 var jsonObj = JSON.parse(response.responseText)
+                var CourseForReportDtos = jsonObj["CourseForReportDtos"];
                 var ReportDtos = jsonObj["ReportDtos"];
                 var Exams =  jsonObj["Exams"];
-                
-                console.log(ReportDtos);
-                console.log(Exams);
-                
+
                 var ExamList = [];  
-                var examTemp = []
+                var PracticeList = [];
+
+                var examTemp = [];
+                
                 var noValue = " ";
                 var count = 0;
 
-                for (i = 0; i < ReportDtos.length; i++) {
-                
-                    count++;
+                var checker1 = false;
+                var checker2 = false;
+
+                for (i = 0; i < CourseForReportDtos.length; i++) {
+                    
+
+                    var cid =  CourseForReportDtos[i].CourseId;
+
+                    for(j = 0; j < ReportDtos.length; j++){
+
+                        if(ReportDtos[j].CourseId == cid){
+                            PracticeList = ReportDtos[j];
+                            checker1 = true;
+                        }
+                        
+                    }
 
                     for(j = 0; j < Exams.length; j++){
 
-                        if(Exams[j].CourseID == ReportDtos[i].CourseId){
+                        if(Exams[j].CourseID == cid){
                             examTemp.push(Exams[j]);
+                            checker2 = true;
                         }
                         
                     }
@@ -292,24 +312,30 @@ function sendJsonDataToReport() {
                     for(m = 0; m < examTemp.length; m++){
                         ExamList[m] = examTemp[m];
                     }
-                    
+
                     examTemp = [];
-                    
-                    $("#showContent").append(
+
+                    console.log(PracticeList);
+
+                    if(checker1 || checker2){
+                        count++;
+                        
+                        
+                        $("#showContent").append(
                         "<tbody>"+
 
                             "<tr class='first-table-row'>" +
-                                "<td rowspan='4' class='id'>"+ ReportDtos[i].Id +"</td>" +
-                                "<td colspan='4' class='course' rowspan='4'>"+ ReportDtos[i].CourseName +"</td>" +
+                                "<td rowspan='4' class='id'>"+ count +"</td>" +
+                                "<td colspan='4' class='course' rowspan='4'>"+ CourseForReportDtos[i].CourseName +"</td>" +
                                 "<td colspan='4'>انجام تکالیف</td>"+
                                 "<td colspan='4'>دفعات بازدید</td>"+
                                 "<td colspan='4'>میانگین کلاس</td>"+
                             "</tr>"+
 
                             "<tr>"+
-                                "<td colspan='4'>"+ReportDtos[i].PercentOfWork+" ٪ "+"</td>"+
-                                "<td colspan='4'>"+ReportDtos[i].SeeNumbers+" بار "+"</td>"+
-                                "<td colspan='4'>"+ReportDtos[i].PercentOfClass+" ٪ "+"</td>"+
+                                "<td colspan='4'>"+((typeof PracticeList == 'undefined') ? ' ' : PracticeList.PercentOfWork )+"</td>"+
+                                "<td colspan='4'>"+((typeof PracticeList == 'undefined') ? ' ' : PracticeList.SeeNumbers )+"</td>"+
+                                "<td colspan='4'>"+((typeof PracticeList == 'undefined') ? ' ' : PracticeList.PercentOfClass )+"</td>"+
                             "</tr>"+
 
                             "<tr class='exam-status-title'>"+
@@ -360,14 +386,21 @@ function sendJsonDataToReport() {
                         "</tbody>"
                         
                     );
+                    }
+
+
+                    checker1 = false;
+                    checker2 = false;
+                    
+                    PracticeList = {};
                         
-                        for(t = 0; t < Exams.length; t++){
+                    for(t = 0; t < Exams.length; t++){
 
-                            if(typeof ExamList[t] != 'undefined'){
-                                ExamList[t] = {};
-                            }
-
+                        if(typeof ExamList[t] != 'undefined'){
+                            ExamList[t] = {};
                         }
+
+                    }
 
                 }
 

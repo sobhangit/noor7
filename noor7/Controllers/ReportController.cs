@@ -148,8 +148,6 @@ namespace noor7.Controllers
 
                     reportList.Add(new ReportDto
                     {
-                        Id = counter,
-                        CourseName = courseName,
                         CourseId = beforeId,
                         PercentOfWork = studentpersent,
                         PercentOfClass = classpersent,
@@ -182,8 +180,6 @@ namespace noor7.Controllers
 
                     reportList.Add(new ReportDto
                     {
-                        Id = counter,
-                        CourseName = courseName,
                         CourseId = practiceForSelectedStudent.Last().CourseID,
                         PercentOfWork = studentpersent,
                         PercentOfClass = classpersent,

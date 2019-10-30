@@ -12,8 +12,6 @@ namespace noor7.Dtos.Report
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id { get; set; }
-        public string CourseName { get; set; }
         public int CourseId { get; set; }
         public int PercentOfWork { get; set; }
         public int SeeNumbers { get; set; }
