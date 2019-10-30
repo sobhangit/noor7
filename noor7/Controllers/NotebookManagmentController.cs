@@ -99,12 +99,12 @@ namespace noor7.Controllers
                 {
 
                     var stuID = Convert.ToInt32(notebookData[i].StudentId);
-                    var grade = Convert.ToInt32(notebookData[i].Grade) * ratio;
+                    var grade = Convert.ToInt32(notebookData[i].Grade) * (float)ratio;
                     //پرکردن ارایه از تمرین ها
                     notebooks.Add(new Notebook
                     {
                         StudentID = stuID,
-                        Grade = Convert.ToInt32(grade),
+                        Grade = grade,
                         NoteBookDate = englishTime
                     });
                 }

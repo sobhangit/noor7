@@ -250,13 +250,14 @@ function sendJsonDataForLate() {
 function sendJsonDataToReport() {
 
     var studentID = document.getElementById("selectedStudent").value;
-    
+    var selectedDate  = document.getElementById("selectedStudent").value;
     var jsonObject = {};
 
     jsonObject.studentID = studentID;
+    //jsonObject.selectedDate = selectedDate;
 
     console.log(JSON.stringify(jsonObject));
-
+ 
 
     $.ajax({
         url: "/Report/CreateReport",
@@ -269,11 +270,15 @@ function sendJsonDataToReport() {
         },
         success: function (response) {
             if(response.success){ 
+                
+                
+                console.log(response.responseText);
 
                 var jsonObj = JSON.parse(response.responseText)
                 var CourseForReportDtos = jsonObj["CourseForReportDtos"];
                 var ReportDtos = jsonObj["ReportDtos"];
                 var Exams =  jsonObj["Exams"];
+                var GradeOfNotebook = jsonObj["GradeOfNotebook"];
 
                 var ExamList = [];  
                 var PracticeList = [];
@@ -410,14 +415,33 @@ function sendJsonDataToReport() {
 
                 //console.log(ReportDtos.CourseName[i]);
                 
+                //Chart Updating
 
+                var labels = ['هفته اول', 'هفته دوم', 'هفته سوم', 'هفته چهارم', 'هفته پنجم'];
+                addData(labels,GradeOfNotebook);
 
             }
         }
     });
 }
 
+function addData(labels,data) {
 
+    var sumOfData = 0 ;
+
+    for(m = 0; m < data.length; m++){
+        notebookForWeek.data.labels[m] = labels[m];
+        notebookForWeek.data.datasets[0].data[m] = data[m];
+
+        sumOfData += data[m];
+    }
+
+
+    notebookForMonth.data.datasets[0].data[0] = sumOfData/data.length;
+    
+    notebookForMonth.update();
+    notebookForWeek.update();
+}
 
 /*function ul(index) {
     console.log('click!' + index)
@@ -429,12 +453,12 @@ function sendJsonDataToReport() {
     }
 }*/
 
-new Chart(document.getElementById("line-chart"), {
+var notebookForWeek = new Chart(document.getElementById("line-chart"), {
     type: 'line',
     data: {
         labels: ['هفته اول', 'هفته دوم', 'هفته سوم', 'هفته چهارم', 'هفته پنجم',],
         datasets: [{
-            data: [12, 8, 5, 9, 3],
+            data: [0, 0, 0, 0, 0],
             borderColor: "#22de84",
             fill: true
         }
@@ -445,18 +469,19 @@ new Chart(document.getElementById("line-chart"), {
         title: {
             display: true,
             fontSize: 25,
-            text: 'نمودار بازدید تکلیف'
+            FontFamily:'tanha',
+            text: 'نمودار دفترچه راهنما'
         }
     }
 
 });
 
-new Chart(document.getElementById("line-chart1"), {
+var notebookForMonth = new Chart(document.getElementById("line-chart1"), {
     type: 'line',
     data: {
         labels: ["مهر", "ابان", "آذر", "دی", "بهمن", "اسفند", "فروردین", "اردیبهشت"],
         datasets: [{
-            data: [12, 2],
+            data: [0],
             borderColor: "#22de84",
             fill: true
         }
@@ -466,13 +491,13 @@ new Chart(document.getElementById("line-chart1"), {
         legend: { display: false },
         title: {
             display: true,
-            text: 'میانگین بازدید تکلیف'
+            text: 'میانگین دفترچه راهنما'
         }
     }
 
 });
 
-new Chart(document.getElementById("bar-chart"), {
+var didnotDoPolicy = new Chart(document.getElementById("bar-chart"), {
     type: 'bar',
     data: {
         labels: ["مهر", "ابان", "آذر", "دی", "بهمن", "اسفند", "فروردین", "اردیبهشت"],
@@ -487,7 +512,7 @@ new Chart(document.getElementById("bar-chart"), {
         legend: { display: false },
         title: {
             display: true,
-            text: 'نمودار رعایت مقررات و وظایف'
+            text: 'نمودار عدم رعایت مقررات و وظایف'
         }
     }
 });

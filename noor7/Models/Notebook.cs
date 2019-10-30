@@ -8,7 +8,7 @@ namespace noor7.Models
         public int ID { get; set; }
         public int StudentID { get; set; }
         [Required]
-        public int Grade { get; set; }
+        public float Grade { get; set; }
         [Required]
         public DateTime NoteBookDate { get; set; }
         public  Student Student { get; set; }

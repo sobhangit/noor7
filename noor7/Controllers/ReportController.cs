@@ -97,13 +97,24 @@ namespace noor7.Controllers
                 
             }
 
-            var jsonObj = JsonConvert.SerializeObject(new forTableReportDto { CourseForReportDtos = courseForSelected, ReportDtos = objForTable , Exams = examsForPrint });
+            var gradeOfNotebook = notebookForStudent(studentForReport);
+
+
+
+            var jsonObj = JsonConvert.SerializeObject(new forTableReportDto { CourseForReportDtos = courseForSelected, ReportDtos = objForTable , Exams = examsForPrint, GradeOfNotebook = gradeOfNotebook });
 
             return Json(new { success = true, responseText = jsonObj }, JsonRequestBehavior.AllowGet);
         }
 
-        
+        public List<float> notebookForStudent(studentForReportDto studentForReport) {
 
+            var stdID = Convert.ToInt32(studentForReport.studentID);
+            var gradeOfNotebook = new List<float>();
+
+            gradeOfNotebook = _context.Notebooks.Where(s => s.StudentID == stdID).Select(s => s.Grade).ToList();
+
+            return gradeOfNotebook;
+        }
         public List<ReportDto> practiceReportForStudent(List<Practice> practiceForSelectedStudent, studentForReportDto studentForReport)
         {
             List<ReportDto> reportList = new List<ReportDto>();

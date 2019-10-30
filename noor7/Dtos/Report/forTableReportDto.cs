@@ -11,6 +11,7 @@ namespace noor7.Dtos.Report
         public List<CourseForReportDto> CourseForReportDtos { get; set; }
         public List<ReportDto> ReportDtos { get; set; }
         public List<ExamForReportDto> Exams { get; set; }
+        public List<float> GradeOfNotebook { get; set; }
 
     }
 }
