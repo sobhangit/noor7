@@ -143,6 +143,7 @@
     <Compile Include="Dtos\Absent\AbsentClassDto.cs" />
     <Compile Include="Dtos\Defect\DefectClassDto.cs" />
     <Compile Include="Dtos\Late\LateClassDto.cs" />
+    <Compile Include="Dtos\Report\CourseForReportDto.cs" />
     <Compile Include="Dtos\Report\ExamForReportDto.cs" />
     <Compile Include="Dtos\Report\forTableReportDto.cs" />
     <Compile Include="Dtos\Report\ReportDto.cs" />

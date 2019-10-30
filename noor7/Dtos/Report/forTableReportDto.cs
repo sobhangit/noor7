@@ -8,7 +8,9 @@ namespace noor7.Dtos.Report
 {
     public class forTableReportDto
     {
+        public List<CourseForReportDto> CourseForReportDtos { get; set; }
         public List<ReportDto> ReportDtos { get; set; }
         public List<ExamForReportDto> Exams { get; set; }
+
     }
 }

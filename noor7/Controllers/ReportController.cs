@@ -31,9 +31,7 @@ namespace noor7.Controllers
         
         public ActionResult CreateReport(studentForReportDto studentForReport) {
 
-            var stdID = Convert.ToInt32(studentForReport.studentID);
-
-            var courseListForSelectedStudent = _context.Courses.Where(s => s.StudentID == stdID ).ToList();
+            var courseListForSelectedStudent = courseForSelectecStudent(studentForReport);
 
             var practiceForSelectedStudent = new List<Practice>();
             var examForSelectedStudent = new List<Exam>();
@@ -82,7 +80,24 @@ namespace noor7.Controllers
 
             var objForTable = practiceReportForStudent(practiceForSelectedStudent, studentForReport);
 
-            var jsonObj = JsonConvert.SerializeObject(new forTableReportDto { ReportDtos = objForTable , Exams = examsForPrint });
+            var courseForSelected = new List<CourseForReportDto>();
+
+            foreach (var item in courseListForSelectedStudent)
+            {
+
+                courseForSelected.Add(
+
+                    new CourseForReportDto
+                    {
+                        CourseId = item.ID,
+                        CourseName = item.Title
+                    }
+                    
+                );
+                
+            }
+
+            var jsonObj = JsonConvert.SerializeObject(new forTableReportDto { CourseForReportDtos = courseForSelected, ReportDtos = objForTable , Exams = examsForPrint });
 
             return Json(new { success = true, responseText = jsonObj }, JsonRequestBehavior.AllowGet);
         }
@@ -373,6 +388,13 @@ namespace noor7.Controllers
         {
             return (passedNumbers * 100)/ numbers; 
         }
+
+        public List<Course> courseForSelectecStudent(studentForReportDto studentForReport) {
+
+            var stdID = Convert.ToInt32(studentForReport.studentID);
+
+            return _context.Courses.Where(s => s.StudentID == stdID).ToList(); ;
+        } 
 
     }
 }

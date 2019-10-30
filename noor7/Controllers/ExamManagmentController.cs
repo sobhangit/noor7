@@ -89,7 +89,7 @@ namespace noor7.Controllers
                     exam.Add(new Exam
                     {
                         CourseID = courseID,
-                        Grade = Convert.ToInt32(Data[i].Grade),
+                        Grade = float.Parse(Data[i].Grade),
                         FinalGrade = Convert.ToInt32(finalGrade),
                         ExamDate = persianDate.ToDateTime(),
                         ExamType = (Enums.ExamType)Enum.Parse(typeof(Enums.ExamType), examType, true)
