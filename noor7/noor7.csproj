@@ -153,21 +153,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201910230522103_dbcreateOnline.cs" />
-    <Compile Include="Migrations\201910230522103_dbcreateOnline.Designer.cs">
-      <DependentUpon>201910230522103_dbcreateOnline.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201910240727354_offline database.cs" />
-    <Compile Include="Migrations\201910240727354_offline database.Designer.cs">
-      <DependentUpon>201910240727354_offline database.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201910300508414_improvment.cs" />
-    <Compile Include="Migrations\201910300508414_improvment.Designer.cs">
-      <DependentUpon>201910300508414_improvment.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201910300938299_databaseImprove.cs" />
-    <Compile Include="Migrations\201910300938299_databaseImprove.Designer.cs">
-      <DependentUpon>201910300938299_databaseImprove.cs</DependentUpon>
+    <Compile Include="Migrations\201911020440173_inTheNameOfGod.cs" />
+    <Compile Include="Migrations\201911020440173_inTheNameOfGod.Designer.cs">
+      <DependentUpon>201911020440173_inTheNameOfGod.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Absent.cs" />
@@ -267,17 +255,8 @@
     <Content Include="Views\Result\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201910230522103_dbcreateOnline.resx">
-      <DependentUpon>201910230522103_dbcreateOnline.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201910240727354_offline database.resx">
-      <DependentUpon>201910240727354_offline database.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201910300508414_improvment.resx">
-      <DependentUpon>201910300508414_improvment.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201910300938299_databaseImprove.resx">
-      <DependentUpon>201910300938299_databaseImprove.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201911020440173_inTheNameOfGod.resx">
+      <DependentUpon>201911020440173_inTheNameOfGod.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

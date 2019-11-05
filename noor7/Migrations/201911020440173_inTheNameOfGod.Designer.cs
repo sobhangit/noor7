@@ -7,13 +7,13 @@ namespace noor7.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class dbcreateOnline : IMigrationMetadata
+    public sealed partial class inTheNameOfGod : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(dbcreateOnline));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(inTheNameOfGod));
         
         string IMigrationMetadata.Id
         {
-            get { return "201910230522103_dbcreateOnline"; }
+            get { return "201911020440173_inTheNameOfGod"; }
         }
         
         string IMigrationMetadata.Source

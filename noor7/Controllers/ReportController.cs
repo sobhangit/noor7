@@ -32,9 +32,11 @@ namespace noor7.Controllers
         public ActionResult CreateReport(studentForReportDto studentForReport) {
 
             var courseListForSelectedStudent = courseForSelectecStudent(studentForReport);
+            var totalPolicy = policy(studentForReport);
 
             var practiceForSelectedStudent = new List<Practice>();
             var examForSelectedStudent = new List<Exam>();
+
 
             foreach (var item in courseListForSelectedStudent)
             {
@@ -101,7 +103,7 @@ namespace noor7.Controllers
 
 
 
-            var jsonObj = JsonConvert.SerializeObject(new forTableReportDto { CourseForReportDtos = courseForSelected, ReportDtos = objForTable , Exams = examsForPrint, GradeOfNotebook = gradeOfNotebook });
+            var jsonObj = JsonConvert.SerializeObject(new forTableReportDto { CourseForReportDtos = courseForSelected, ReportDtos = objForTable , Exams = examsForPrint, GradeOfNotebook = gradeOfNotebook, Totalpolicy = totalPolicy });
 
             return Json(new { success = true, responseText = jsonObj }, JsonRequestBehavior.AllowGet);
         }
@@ -389,6 +391,26 @@ namespace noor7.Controllers
 
 
             return courseAndPercent;
+        }
+
+        public Dictionary<string,int> policy(studentForReportDto studentForReport) {
+
+            var stdID = Convert.ToInt32(studentForReport.studentID);
+
+            var totalPolicy = new Dictionary<string, int>();
+
+            var naqsElmi = _context.Defects.Where(s => s.Type == Enums.DefectType.علمی && s.StudentID == stdID).Count();
+            totalPolicy.Add("elmi", naqsElmi);
+
+            var naqsEnzebati = _context.Defects.Where(s => s.Type == Enums.DefectType.انضباطی && s.StudentID == stdID).Count();
+            var late = _context.Lates.Where(s => s.StudentID == stdID && s.IsTrue == false).Count();
+            var absent = _context.Absents.Where(s => s.StudentID == stdID && s.IsTrue == false).Count();
+
+            var total = naqsEnzebati + late + absent;
+            totalPolicy.Add("total", total);
+
+
+            return totalPolicy;
         }
 
         public int calCulatePercentOfCourse(int numbers, int passedNumbers)

@@ -279,6 +279,7 @@ function sendJsonDataToReport() {
                 var ReportDtos = jsonObj["ReportDtos"];
                 var Exams =  jsonObj["Exams"];
                 var GradeOfNotebook = jsonObj["GradeOfNotebook"];
+                var Totalpolicy = jsonObj["Totalpolicy"];
 
                 var ExamList = [];  
                 var PracticeList = [];
@@ -340,14 +341,14 @@ function sendJsonDataToReport() {
                             "<tr>"+
                                 "<td colspan='4'>"+((typeof PracticeList == 'undefined') ? ' ' : PracticeList.PercentOfWork )+"</td>"+
                                 "<td colspan='4'>"+((typeof PracticeList == 'undefined') ? ' ' : PracticeList.SeeNumbers )+"</td>"+
-                                "<td colspan='4'>"+((typeof PracticeList == 'undefined') ? ' ' : PracticeList.PercentOfClass )+"</td>"+
+                                "<td colspan='4'>"+((typeof PracticeList == 'undefined') ? ' ' : " " )+"</td>"+
                             "</tr>"+
 
                             "<tr class='exam-status-title'>"+
 
                                 "<td class='exam-status1'>"+
                                     "<span>بارم</span>"+
-                                    "<span class='exam-type'>"+((typeof ExamList[0] == 'undefined') ? ' ' : ExamList[0].ExamType )+"</span>"+
+                                    "<span class='exam-type'>"+((typeof ExamList[0] == 'undefined') ? ' ' : " " )+"</span>"+
                                 "</td>"+
                                 "<td><span>نمره</span></td>"+
                                 "<td><span>میانگین</span></td>"+
@@ -355,7 +356,7 @@ function sendJsonDataToReport() {
 
                                 "<td class='exam-status1'>"+
                                     "<span>بارم</span>"+
-                                    "<span class='exam-type'>"+((typeof ExamList[1] == 'undefined') ? ' ' : ExamList[1].ExamType )+"</span>"+
+                                    "<span class='exam-type'>"+((typeof ExamList[1] == 'undefined') ? ' ' : " " )+"</span>"+
                                 "</td>"+
                                 "<td><span>نمره</span></td>"+
                                 "<td><span>میانگین</span></td>"+
@@ -363,7 +364,7 @@ function sendJsonDataToReport() {
                             
                                 "<td class='exam-status1'>"+
                                     "<span>بارم</span>"+
-                                    "<span class='exam-type'>"+((typeof ExamList[2] == 'undefined') ? ' ' : ExamList[2].ExamType )+"</span>"+
+                                    "<span class='exam-type'>"+((typeof ExamList[2] == 'undefined') ? ' ' : " " )+"</span>"+
                                 "</td>"+
                                 "<td><span>نمره</span></td>"+
                                 "<td><span>میانگین</span></td>"+
@@ -375,15 +376,15 @@ function sendJsonDataToReport() {
 
                                 "<td>"+((typeof ExamList[0] == 'undefined') ? noValue : ExamList[0].FinalGrade )+"</td>"+
                                 "<td>"+((typeof ExamList[0] == 'undefined') ? noValue : ExamList[0].Grade )+"</td>"+
-                                "<td>"+((typeof ExamList[0] == 'undefined') ? noValue : ExamList[0].FinalGrade )+"</td>"+
+                                "<td>"+((typeof ExamList[0] == 'undefined') ? noValue : " " )+"</td>"+
                                 "<td>"+((typeof ExamList[0] == 'undefined') ? noValue : ExamList[0].ExamDate )+"</td>"+
                                 "<td>"+((typeof ExamList[1] == 'undefined') ? noValue : ExamList[1].FinalGrade )+"</td>"+
                                 "<td>"+((typeof ExamList[1] == 'undefined') ? noValue : ExamList[1].Grade )+"</td>"+
-                                "<td>"+((typeof ExamList[1] == 'undefined') ? noValue : ExamList[1].FinalGrade )+"</td>"+
+                                "<td>"+((typeof ExamList[1] == 'undefined') ? noValue : " " )+"</td>"+
                                 "<td>"+((typeof ExamList[1] == 'undefined') ? noValue : ExamList[1].ExamDate )+"</td>"+
                                 "<td>"+((typeof ExamList[2] == 'undefined' || typeof ExamList[2] == {}) ? " " : ExamList[2].FinalGrade )+"</td>"+
                                 "<td>"+((typeof ExamList[2] == 'undefined' || typeof ExamList[2] == {}) ? " " : ExamList[2].Grade )+"</td>"+
-                                "<td>"+((typeof ExamList[2] == 'undefined' || typeof ExamList[2] == {}) ? " " : ExamList[2].FinalGrade )+"</td>"+
+                                "<td>"+((typeof ExamList[2] == 'undefined' || typeof ExamList[2] == {}) ? " " : " " )+"</td>"+
                                 "<td>"+((typeof ExamList[2] == 'undefined' || typeof ExamList[2] == {}) ? " " : ExamList[2].ExamDate )+"</td>"+
 
                             "</tr>"+
@@ -418,16 +419,23 @@ function sendJsonDataToReport() {
                 //Chart Updating
 
                 var labels = ['هفته اول', 'هفته دوم', 'هفته سوم', 'هفته چهارم', 'هفته پنجم'];
-                addData(labels,GradeOfNotebook);
+                addData(labels,GradeOfNotebook,Totalpolicy);
 
+                var e = "-" + Totalpolicy.elmi
+                var t = "-" + Totalpolicy.total
+
+                var policy = [e,t];
+                console.log(e);
             }
         }
     });
 }
 
-function addData(labels,data) {
+function addData(labels,data,Totalpolicy) {
 
     var sumOfData = 0 ;
+
+    
 
     for(m = 0; m < data.length; m++){
         notebookForWeek.data.labels[m] = labels[m];
@@ -436,9 +444,13 @@ function addData(labels,data) {
         sumOfData += data[m];
     }
 
+    notebookForMonth.data.datasets[0].data[0] = sumOfData/data.length
 
-    notebookForMonth.data.datasets[0].data[0] = sumOfData/data.length;
+
+    didnotDoPolicy.data.datasets[0].data[1] = Totalpolicy.total * -1;
+    didnotDoPolicy.data.datasets[0].data[2] = Totalpolicy.elmi * -1;
     
+    didnotDoPolicy.update();
     notebookForMonth.update();
     notebookForWeek.update();
 }
@@ -500,11 +512,11 @@ var notebookForMonth = new Chart(document.getElementById("line-chart1"), {
 var didnotDoPolicy = new Chart(document.getElementById("bar-chart"), {
     type: 'bar',
     data: {
-        labels: ["مهر", "ابان", "آذر", "دی", "بهمن", "اسفند", "فروردین", "اردیبهشت"],
+        labels: [" ","انضباطی", "علمی",""],
         datasets: [
             {
-                backgroundColor: ["#eb0c0c", "#eb0c0c", "#eb0c0c", "#eb0c0c", "#eb0c0c", "#eb0c0c", "#eb0c0c", "#eb0c0c", "#eb0c0c"],
-                data: [-11, 0, 0, 0, 0, 0, 0, 0]
+                backgroundColor: ["#fff", "#000","#000",""],
+                data: [-12,0,0,0]
             }
         ]
     },
@@ -512,7 +524,41 @@ var didnotDoPolicy = new Chart(document.getElementById("bar-chart"), {
         legend: { display: false },
         title: {
             display: true,
-            text: 'نمودار عدم رعایت مقررات و وظایف'
+            text: 'نمودار نقاص عملکرد علمی - انضباطی'
         }
     }
 });
+
+function tableprint(){
+
+    var d = document.getElementById("charPrint");
+    d.className += " dont-print";
+
+    var m = document.getElementById("tblPrint");
+    m.classList.remove("dont-print");
+
+    var x = document.getElementById("selectedStudent").value;
+    console.log(x);
+
+    var selectedStudent = x-1;
+
+    var v = document.getElementById("search-report").options.item(selectedStudent).innerText;
+    console.log(v);
+
+    var t = document.getElementById("nameOfStudent").innerText = "کارنامه ماهیانه " + v + " - پایه هفتم";
+    console.log(t);
+
+    
+}
+
+function chartprint(){
+
+    var d = document.getElementById("tblPrint");
+    d.className += " dont-print";
+
+
+    var m = document.getElementById("charPrint");
+    m.classList.remove("dont-print");
+
+    
+}

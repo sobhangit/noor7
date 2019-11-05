@@ -8,38 +8,31 @@
     }
 
     @page{
-        margin-right: 2cm !important;
+        margin:2cm !important;
     }
     
     header,.dont-print,footer{
         display: none !important;
     }
 
-    .report-view div {
-        page-break-after: always !important;
+    #nameOfStudent {
+        display:inline-block;
+        text-align:center !important;
+        margin-top:5px !important;
+        margin-bottom:0 !important;
     }
 
     .report-view-table {
-        width: 100%;
-        height: 100%;
-        page-break-after: always !important;
+        margin-top:5px !important;
+        height: 100% !important;
     }
 
-    .report-view-chart  {
-        margin: 0 !important;
-        margin-right: 150px !important;
-        position: relative;
-        height: auto !important;
-        page-break-inside:avoid !important;
+    .report-view-chart {
+        height: 100% !important;
     }
 
-    .report-view-chart .row .col-md-7 {
-        margin: 5px 10% !important;
-    }
-
-    table {
-        background-color: lightgray;
-        border:2px solid #000;
+    .forPrint {
+        display: block !important;
     }
 
    
