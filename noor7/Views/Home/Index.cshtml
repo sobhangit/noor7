@@ -105,21 +105,23 @@
                 </h5>
                 @using (Html.BeginForm("Index", "ExamManagment"))
                 {
-                    <form>
+            <form>
 
-                        <input type="text" name="course" placeholder="نام درس" />
+                <input type="text" name="course" placeholder="نام درس" />
 
-                        <input type="text" name="finalGrade" placeholder="بارم" />
+                <input type="text" name="finalGrade" placeholder="بارم" />
 
-                        <input type="text" name="examtype" placeholder="نوع امتحان" />
+                <input type="text" name="examtype" placeholder="نوع امتحان" />
 
-                        <input type="text" name="className" placeholder="کلاس" />
+                <input type="text" name="className" placeholder="کلاس" />
 
-                        <input type="text" name="examDate" placeholder="تاریخ" />
+                <input type="text" name="examDate" placeholder="تاریخ" />
 
-                        <input type="submit" name="ایجاد امتحان" />
+                <input type="text" name="teacherAdvice" placeholder="توصیه شده" />
 
-                    </form>
+                <input type="submit" name="ایجاد امتحان" />
+
+            </form>
                 }
             </div>
         </div>
@@ -153,19 +155,22 @@
 
                 @using (Html.BeginForm("Index", "PracticeManagment"))
                 {
-                    <form>
-                        
-                            <input type="text" name="course" placeholder="نام درس"/>
-                            
-                            <input type="text" name="parcticeValue" placeholder="نعداد" />
-                            
-                            <input type="text" name="className" placeholder="کلاس" />
-                          
-                            <input type="text" name="pDate" placeholder="تاریخ" />
-                           
-                            <input type="submit" name="create" />
-                        
-                    </form>
+                <form>
+
+                    <input type="text" name="course" placeholder="نام درس" />
+
+                    <input type="text" name="parcticeValue" placeholder="نعداد" />
+
+                    <input type="text" name="className" placeholder="کلاس" />
+
+                    <input type="text" name="pDate" placeholder="تاریخ" />
+
+                    <input type="text" name="teacherAdvice" placeholder="توصیه شده" />
+
+
+                    <input type="submit" name="create" />
+
+                </form>
                 }
             </div>
         </div>

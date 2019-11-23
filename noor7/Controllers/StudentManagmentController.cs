@@ -1,5 +1,8 @@
-﻿using noor7.Models;
+﻿using Newtonsoft.Json;
+using noor7.Dtos.Student;
+using noor7.Models;
 using System;
+using System.Linq;
 using System.Web.Mvc;
 
 namespace noor7.Controllers
@@ -14,6 +17,9 @@ namespace noor7.Controllers
         // GET: StudentManagment
         public ActionResult Index()
         {
+            var students = _context.Students.ToList();
+            ViewBag.students = students;
+
             return View();
         }
 
@@ -42,6 +48,45 @@ namespace noor7.Controllers
                 throw;
             }
             return RedirectToAction("Index", "StudentManagment");
+        }
+
+        public ActionResult RemoveStudent(RemoveStudentDto studentDto) {
+
+            var stdID = Convert.ToInt32(studentDto.studentID.ToString());
+
+            _context.Students.Where(s => s.Id == stdID).First().Exit = true;
+
+            var courseIdForSelectedStudent = _context.Courses.Where(s => s.StudentID == stdID).ToList();
+
+            try
+            {
+                foreach (var item in courseIdForSelectedStudent)
+                {
+                    _context.Exams.Remove(_context.Exams.Where(s => s.CourseID == item.ID).SingleOrDefault());
+                    _context.Practices.Remove(_context.Practices.Where(s => s.CourseID == item.ID).SingleOrDefault());
+                }
+
+                _context.Courses.Remove(_context.Courses.Where(s => s.StudentID == stdID).SingleOrDefault());
+                _context.Defects.Remove(_context.Defects.Where(s => s.StudentID == stdID).SingleOrDefault());
+                _context.Speaks.Remove(_context.Speaks.Where(s => s.StudentID == stdID).SingleOrDefault());
+                _context.Absents.Remove(_context.Absents.Where(s => s.StudentID == stdID).SingleOrDefault());
+                _context.Lates.Remove(_context.Lates.Where(s => s.StudentID == stdID).SingleOrDefault());
+                _context.Absents.Remove(_context.Absents.Where(s => s.StudentID == stdID).SingleOrDefault());
+                _context.Notebooks.Remove(_context.Notebooks.Where(s => s.StudentID == stdID).SingleOrDefault());
+                _context.SaveChanges();
+
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            
+
+            
+            return Json(new { success = true, responseText = "اطلاعات دانش آموز انتخاب شده پاک شد" }, JsonRequestBehavior.AllowGet);
+
         }
     }
 }

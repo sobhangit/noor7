@@ -19,6 +19,7 @@ namespace noor7.Models
         [Required]
         public ExamType ExamType { get; set; }
         [Required]
+        public float TeacherAdvice { get; set; }
         public Course Course { get; set; }
 
     }

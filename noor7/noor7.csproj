@@ -148,8 +148,10 @@
     <Compile Include="Dtos\Report\forTableReportDto.cs" />
     <Compile Include="Dtos\Report\ReportDto.cs" />
     <Compile Include="Dtos\Report\studentForReportDto.cs" />
+    <Compile Include="Dtos\Student\RemoveStudentDto.cs" />
     <Compile Include="Enums\ExamType.cs" />
     <Compile Include="Enums\DefectType.cs" />
+    <Compile Include="Enums\JobType.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -157,11 +159,20 @@
     <Compile Include="Migrations\201911020440173_inTheNameOfGod.Designer.cs">
       <DependentUpon>201911020440173_inTheNameOfGod.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201911230451076_newModelsAdd.cs" />
+    <Compile Include="Migrations\201911230451076_newModelsAdd.Designer.cs">
+      <DependentUpon>201911230451076_newModelsAdd.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201911230656114_examUpdate.cs" />
+    <Compile Include="Migrations\201911230656114_examUpdate.Designer.cs">
+      <DependentUpon>201911230656114_examUpdate.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Absent.cs" />
     <Compile Include="Models\Course.cs" />
     <Compile Include="Models\Defect.cs" />
     <Compile Include="Models\Exam.cs" />
+    <Compile Include="Models\Job.cs" />
     <Compile Include="Models\Late.cs" />
     <Compile Include="Models\Notebook.cs" />
     <Compile Include="Models\Practice.cs" />
@@ -257,6 +268,12 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201911020440173_inTheNameOfGod.resx">
       <DependentUpon>201911020440173_inTheNameOfGod.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201911230451076_newModelsAdd.resx">
+      <DependentUpon>201911230451076_newModelsAdd.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201911230656114_examUpdate.resx">
+      <DependentUpon>201911230656114_examUpdate.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -19,7 +19,7 @@ namespace noor7.Models
         public int InSchoolFrom { get; set; }
         [Required]
         public string Class { get; set; }
-        public int? Code { get; set; }
+        public long? Code { get; set; }
         [Required]
         public int? ClassListNumber { get; set; }
         public bool? Exit { get; set; }
@@ -29,7 +29,8 @@ namespace noor7.Models
         public  ICollection<Defect> Defects { get; set; }
         public  ICollection<Absent> Absents { get; set; }
         public  ICollection<Late> Lates { get; set; }
-        public  ICollection<Speak> Speaks { get; set; } 
+        public  ICollection<Speak> Speaks { get; set; }
+        public  ICollection<Job> Jobs { get; set; }
 
 
     }

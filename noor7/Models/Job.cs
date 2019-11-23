@@ -1,19 +1,22 @@
-﻿using System;
+﻿using noor7.Enums;
+using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Web;
 
 namespace noor7.Models
 {
-    public class Speak
+    public class Job
     {
         public int ID { get; set; }
         public int StudentID { get; set; }
         [Required]
-        public string Problem { get; set; }
+        public int Cycle { get; set; }
         [Required]
-        public string Result { get; set; }
+        public JobType JobType { get; set; }
         [Required]
-        public DateTime SpeakDate { get; set; }
-        public DateTime? NextSpeak { get; set; }
+        public int Grade { get; set; }
         public Student Student { get; set; }
     }
 }

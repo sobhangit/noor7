@@ -13,6 +13,8 @@ namespace noor7.Models
         public int PassedNumbers { get; set; }
         [Required]
         public DateTime PracticeDate { get; set; }
+        [Required]
+        public int TeacherAdvice { get; set; }
         public  Course Course { get; set; }
     }
 }

@@ -17,12 +17,13 @@ namespace noor7.Controllers
         public ExamManagmentController()
         {
             _context = new SchoolContext();
+            
         }
 
-        public ActionResult Index(string course, string finalGrade, string examtype, string className, string examDate)
+        public ActionResult Index(string course, string finalGrade, string examtype, string className, string examDate, string teacherAdvice)
         {
 
-            if (!string.IsNullOrEmpty(course) && !string.IsNullOrEmpty(finalGrade) && !string.IsNullOrEmpty(examtype) && !string.IsNullOrEmpty(className) && !string.IsNullOrEmpty(examDate))
+            if (!string.IsNullOrEmpty(course) && !string.IsNullOrEmpty(finalGrade) && !string.IsNullOrEmpty(examtype) && !string.IsNullOrEmpty(className) && !string.IsNullOrEmpty(examDate) && !string.IsNullOrEmpty(teacherAdvice))
             {
 
                 var studentContext = _context.Students.Where(s => s.Class == className).ToList();//دریافت دانش اموزان بر اساس نام کلاس
@@ -32,7 +33,7 @@ namespace noor7.Controllers
                 ViewBag.examtype = examtype;
                 ViewBag.className = className;
                 ViewBag.examDate = examDate;
-
+                ViewBag.teacherAdvice = teacherAdvice;
                 ViewBag.vv = studentContext;
 
             }
@@ -48,6 +49,7 @@ namespace noor7.Controllers
             public string finalGrade { get; set; }
             public string examType { get; set; }
             public string examDate { get; set; }
+            public string teacherAdvice { get; set; }
         }
 
         public class Examdata
@@ -84,7 +86,7 @@ namespace noor7.Controllers
                     var courseID = courseContext.Where(s => s.StudentID == stuID && s.Title == courseName).Select(s => s.ID).Single();
 
                     
-
+                   
                     //پرکردن ارایه از تمرین ها
                     exam.Add(new Exam
                     {
@@ -92,8 +94,10 @@ namespace noor7.Controllers
                         Grade = float.Parse(Data[i].Grade),
                         FinalGrade = Convert.ToInt32(finalGrade),
                         ExamDate = persianDate.ToDateTime(),
-                        ExamType = (Enums.ExamType)Enum.Parse(typeof(Enums.ExamType), examType, true)
-                });
+                        ExamType = (Enums.ExamType)Enum.Parse(typeof(Enums.ExamType), examType, true),
+                        TeacherAdvice = float.Parse(jsonObject.teacherAdvice)
+                        
+                    });
                 }
 
                 _context.Exams.AddRange(exam);

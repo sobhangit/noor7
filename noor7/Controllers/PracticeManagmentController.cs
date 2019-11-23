@@ -19,11 +19,11 @@ namespace noor7.Controllers
             _context = new SchoolContext();
         }
 
-        public ActionResult Index(string course, string parcticeValue, string className, string pDate)
+        public ActionResult Index(string course, string parcticeValue, string className, string pDate, string teacherAdvice)
         {
 
 
-            if (!string.IsNullOrEmpty(course) && !string.IsNullOrEmpty(parcticeValue) && !string.IsNullOrEmpty(className) && !string.IsNullOrEmpty(pDate))
+            if (!string.IsNullOrEmpty(course) && !string.IsNullOrEmpty(parcticeValue) && !string.IsNullOrEmpty(className) && !string.IsNullOrEmpty(pDate) && !string.IsNullOrEmpty(teacherAdvice))
             {
 
                 var studentContext = 
@@ -33,6 +33,7 @@ namespace noor7.Controllers
                 ViewBag.parcticeValue = parcticeValue;
                 ViewBag.className = className;
                 ViewBag.pDate = pDate;
+                ViewBag.teacherAdvice = teacherAdvice;
 
                 ViewBag.vv = studentContext;
 
@@ -47,6 +48,8 @@ namespace noor7.Controllers
             public Practicedata[] practiceData { get; set; }
             public string courseName { get; set; }
             public string practiceDate { get; set; }
+            public string teacherAdvice { get; set; }
+
         }
 
         public class Practicedata
@@ -85,7 +88,8 @@ namespace noor7.Controllers
                         CourseID = Convert.ToInt32(courseID),
                         Numbers = Convert.ToInt32(Data[i].Value),
                         PassedNumbers = Convert.ToInt32(Data[i].PassedValue),
-                        PracticeDate = persianDate.ToDateTime()
+                        PracticeDate = persianDate.ToDateTime(),
+                        TeacherAdvice = Convert.ToInt32(jsonObject.teacherAdvice)
                     });
                 }
 

@@ -3,6 +3,32 @@
 
 // Write your JavaScript code.
 
+function removeStudentAndAllData(){
+
+    var studentID = document.getElementById("selectedStudent").value;
+
+    var jsonObject = {};
+
+    jsonObject.studentID = studentID;
+
+    console.log(JSON.stringify(jsonObject));
+
+    $.ajax({
+        url: "/StudentManagment/RemoveStudent",
+        type: "POST",
+        data: JSON.stringify(jsonObject),
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        error: function (response) {
+            alert(response.responseText);
+        },
+        success: function (response) {
+            alert(response.responseText);
+        }
+    });
+
+}
+
 function getJsonDataFromPractice() {
 
     // Loop through grabbing everything
@@ -18,6 +44,7 @@ function getJsonDataFromPractice() {
 
     var courseName = document.getElementById("courseName").innerText;
     var practiceDate = document.getElementById("practiceDate").innerText;
+    var teacherAdvice = document.getElementById("teacherAdvice").innerText;
    
 
     //alert(practiceInfo);
@@ -27,6 +54,7 @@ function getJsonDataFromPractice() {
     jsonObject.practiceData = practiceData;
     jsonObject.courseName = courseName;
     jsonObject.practiceDate = practiceDate;
+    jsonObject.teacherAdvice = teacherAdvice;
 
     // Get the form data with our (yet to be defined) function.
 
@@ -66,8 +94,8 @@ function getJsonDataFromExam() {
     var finalGrade = document.getElementById("finalGrade").innerText;
     var examType = document.getElementById("examType").innerText;
     var examDate = document.getElementById("examDate").innerText;
-
-
+    var teacherAdvice = document.getElementById("teacherAdvice").innerText;
+        
     // Let's put this in the object like you want and convert to JSON (Note: jQuery will also do this for you on the Ajax request)
     var jsonObject = {};
     jsonObject.examData = examData;
@@ -75,6 +103,7 @@ function getJsonDataFromExam() {
     jsonObject.finalGrade = finalGrade;
     jsonObject.examType = examType;
     jsonObject.examDate = examDate;
+    jsonObject.teacherAdvice = teacherAdvice;
 
     // Get the form data with our (yet to be defined) function.
     
@@ -332,16 +361,16 @@ function sendJsonDataToReport() {
 
                             "<tr class='first-table-row'>" +
                                 "<td rowspan='4' class='id'>"+ count +"</td>" +
-                                "<td colspan='4' class='course' rowspan='4'>"+ CourseForReportDtos[i].CourseName +"</td>" +
-                                "<td colspan='4'>انجام تکالیف</td>"+
-                                "<td colspan='4'>دفعات بازدید</td>"+
-                                "<td colspan='4'>میانگین کلاس</td>"+
+                                "<td colspan='4' class='course' rowspan='2'>"+ CourseForReportDtos[i].CourseName +"</td>" +
+                                "<td colspan='2'>انجام تکالیف</td>"+
+                                "<td colspan='2'>دفعات بازدید</td>"+
+                                "<td colspan='2'>توصیه شده</td>"+
                             "</tr>"+
 
                             "<tr>"+
-                                "<td colspan='4'>"+((typeof PracticeList == 'undefined') ? ' ' : PracticeList.PercentOfWork )+"</td>"+
-                                "<td colspan='4'>"+((typeof PracticeList == 'undefined') ? ' ' : PracticeList.SeeNumbers )+"</td>"+
-                                "<td colspan='4'>"+((typeof PracticeList == 'undefined') ? ' ' : " " )+"</td>"+
+                                "<td colspan='2'>"+((typeof PracticeList == 'undefined') ? ' ' : PracticeList.PercentOfWork )+"</td>"+
+                                "<td colspan='2'>"+((typeof PracticeList == 'undefined') ? ' ' : PracticeList.SeeNumbers )+"</td>"+
+                                "<td colspan='2'>"+((typeof PracticeList == 'undefined') ? ' ' : " " )+"</td>"+
                             "</tr>"+
 
                             "<tr class='exam-status-title'>"+
@@ -351,7 +380,8 @@ function sendJsonDataToReport() {
                                     "<span class='exam-type'>"+((typeof ExamList[0] == 'undefined') ? ' ' : " " )+"</span>"+
                                 "</td>"+
                                 "<td><span>نمره</span></td>"+
-                                "<td><span>میانگین</span></td>"+
+                                "<td><span>توصیه شده</span></td>"+
+                                "<td><span>نوع</span></td>"+
                                 "<td><span>تاریخ</span></td>"+
 
                                 "<td class='exam-status1'>"+
@@ -359,16 +389,10 @@ function sendJsonDataToReport() {
                                     "<span class='exam-type'>"+((typeof ExamList[1] == 'undefined') ? ' ' : " " )+"</span>"+
                                 "</td>"+
                                 "<td><span>نمره</span></td>"+
-                                "<td><span>میانگین</span></td>"+
+                                "<td><span>توصیه شده</span></td>"+
+                                "<td><span>نوع</span></td>"+
                                 "<td><span>تاریخ</span></td>"+
                             
-                                "<td class='exam-status1'>"+
-                                    "<span>بارم</span>"+
-                                    "<span class='exam-type'>"+((typeof ExamList[2] == 'undefined') ? ' ' : " " )+"</span>"+
-                                "</td>"+
-                                "<td><span>نمره</span></td>"+
-                                "<td><span>میانگین</span></td>"+
-                                "<td><span>تاریخ</span></td>"+
 
                             "</tr>"+
 
@@ -377,15 +401,13 @@ function sendJsonDataToReport() {
                                 "<td>"+((typeof ExamList[0] == 'undefined') ? noValue : ExamList[0].FinalGrade )+"</td>"+
                                 "<td>"+((typeof ExamList[0] == 'undefined') ? noValue : ExamList[0].Grade )+"</td>"+
                                 "<td>"+((typeof ExamList[0] == 'undefined') ? noValue : " " )+"</td>"+
+                                "<td>"+((typeof ExamList[0] == 'undefined') ? noValue : " " )+"</td>"+
                                 "<td>"+((typeof ExamList[0] == 'undefined') ? noValue : ExamList[0].ExamDate )+"</td>"+
                                 "<td>"+((typeof ExamList[1] == 'undefined') ? noValue : ExamList[1].FinalGrade )+"</td>"+
                                 "<td>"+((typeof ExamList[1] == 'undefined') ? noValue : ExamList[1].Grade )+"</td>"+
                                 "<td>"+((typeof ExamList[1] == 'undefined') ? noValue : " " )+"</td>"+
+                                "<td>"+((typeof ExamList[1] == 'undefined') ? noValue : " " )+"</td>"+
                                 "<td>"+((typeof ExamList[1] == 'undefined') ? noValue : ExamList[1].ExamDate )+"</td>"+
-                                "<td>"+((typeof ExamList[2] == 'undefined' || typeof ExamList[2] == {}) ? " " : ExamList[2].FinalGrade )+"</td>"+
-                                "<td>"+((typeof ExamList[2] == 'undefined' || typeof ExamList[2] == {}) ? " " : ExamList[2].Grade )+"</td>"+
-                                "<td>"+((typeof ExamList[2] == 'undefined' || typeof ExamList[2] == {}) ? " " : " " )+"</td>"+
-                                "<td>"+((typeof ExamList[2] == 'undefined' || typeof ExamList[2] == {}) ? " " : ExamList[2].ExamDate )+"</td>"+
 
                             "</tr>"+
           
