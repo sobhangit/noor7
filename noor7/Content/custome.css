@@ -175,6 +175,7 @@ div.panel-tiles .tile h5 {
 
 .report-view-table table{
     text-align: center;
+    border:6px double solid #000; 
     background-color: #ffffff;
 }
 
@@ -185,7 +186,7 @@ div.panel-tiles .tile h5 {
 .report-view-table table td {
     vertical-align: middle;
     padding:2px;
-    border:2.5px solid #000;
+    border-left:2.5px solid #000 !important;
     position: relative;
 }
 

@@ -354,7 +354,44 @@ function sendJsonDataToReport() {
 
                     if(checker1 || checker2){
                         count++;
+
+                    var absentHelper = [];
+                    if(typeof ExamList[0] != 'undefined' || typeof ExamList[1] != 'undefined')
+                    {
+
+                        if(ExamList[0].Grade == 1.1){
+                            absentHelper[0] = "غایب";
+                            ExamList[0].Grade = 0;
+                        }else{
+                            absentHelper[0] = ExamList[0].Grade;
+                        }
+
+                        if(ExamList[1].Grade == 1.1){
+                            absentHelper[1] = "غایب";
+                            ExamList[1].Grade = 0;
+                        }else{
+                            absentHelper[1] = ExamList[1].Grade;
+                        }
+                    
+                    }
+
+                    var PercentOfWork = '-';
+                    var PercentOfClass = '-';
+                    var SeeNumbers = '-';                
+    
+                    if(typeof PracticeList != 'undefined' && typeof PracticeList != null ){
+        
+                        PercentOfWork = PracticeList.PercentOfWork + "٪";
+                        PercentOfClass = PracticeList.PercentOfClass + "٪";
+                        SeeNumbers = PracticeList.SeeNumbers + " بار";
+                        if(PracticeList.PercentOfWork == undefined){
+                            PercentOfWork = "-";
+                            PercentOfClass = "-";
+                            SeeNumbers = "-";
+                        }
                         
+                        
+                    }
                         
                         $("#showContent").append(
                         
@@ -363,17 +400,17 @@ function sendJsonDataToReport() {
 
                                 "<td class='id'>"+ count +"</td>" +
                                 "<td class='course'>"+ CourseForReportDtos[i].CourseName +"</td>" +
-                                "<td colspan='2' >"+((typeof PracticeList == 'undefined') ? '-' : PracticeList.PercentOfWork )+"</td>"+
-                                "<td colspan='2' >"+((typeof PracticeList == 'undefined') ? '-' : PracticeList.PercentOfClass )+"</td>"+
-                                "<td colspan='2' >"+((typeof PracticeList == 'undefined') ? '-' : PracticeList.SeeNumbers )+"</td>"+
+                                "<td colspan='2' >"+((typeof PracticeList == 'undefined') ? '-' : PercentOfWork )+"</td>"+
+                                "<td colspan='2' >"+((typeof PracticeList == 'undefined') ? '-' : PercentOfClass )+"</td>"+
+                                "<td colspan='2' >"+((typeof PracticeList == 'undefined') ? '-' : SeeNumbers )+"</td>"+
 
                                 "<td>"+((typeof ExamList[0] == 'undefined') ? '-' : ExamList[0].FinalGrade )+"</td>"+
                                 "<td>"+((typeof ExamList[0] == 'undefined') ? '-' : ExamList[0].Grade )+"</td>"+
-                                "<td>"+((typeof ExamList[0] == 'undefined') ? '-' : " " )+"</td>"+
+                                "<td>"+((typeof ExamList[0] == 'undefined') ? '-' : absentHelper[0] )+"</td>"+
                                 "<td>"+((typeof ExamList[0] == 'undefined') ? '-' : ExamList[0].ExamDate )+"</td>"+
                                 "<td>"+((typeof ExamList[1] == 'undefined') ? '-' : ExamList[1].FinalGrade )+"</td>"+
                                 "<td>"+((typeof ExamList[1] == 'undefined') ? '-' : ExamList[1].Grade )+"</td>"+
-                                "<td>"+((typeof ExamList[1] == 'undefined') ? '-' : " " )+"</td>"+
+                                "<td>"+((typeof ExamList[1] == 'undefined') ? '-' : absentHelper[1] )+"</td>"+
                                 "<td>"+((typeof ExamList[1] == 'undefined') ? '-' : ExamList[1].ExamDate )+"</td>"+
 
                             "</tr>"+
@@ -400,7 +437,9 @@ function sendJsonDataToReport() {
                 }
 
                 $('td').html(function(i, html){
-                  return html.replace("undefined", ' '); 
+                  return html.replace("undefined", '-'); 
+                  return html.replace(" ٪", ' '); 
+                  return html.replace("  بار", ' '); 
                 });
 
                 //console.log(ReportDtos.CourseName[i]);
@@ -426,14 +465,14 @@ function addData(labels,data,Totalpolicy) {
 
     
 
-    for(m = 0; m < data.length; m++){
+    for(m = 1; m < data.length; m++){
         notebookForWeek.data.labels[m] = labels[m];
         notebookForWeek.data.datasets[0].data[m] = data[m];
 
         sumOfData += data[m];
     }
 
-    notebookForMonth.data.datasets[0].data[0] = sumOfData/data.length
+    notebookForMonth.data.datasets[0].data[1] = sumOfData/data.length
 
 
     didnotDoPolicy.data.datasets[0].data[1] = Totalpolicy.total * -1;
@@ -457,9 +496,9 @@ function addData(labels,data,Totalpolicy) {
 var notebookForWeek = new Chart(document.getElementById("line-chart"), {
     type: 'line',
     data: {
-        labels: ['هفته اول', 'هفته دوم', 'هفته سوم', 'هفته چهارم', 'هفته پنجم',],
+        labels: [" ",'هفته اول', 'هفته دوم', 'هفته سوم', 'هفته چهارم', 'هفته پنجم',],
         datasets: [{
-            data: [0, 0, 0, 0, 0],
+            data: [18,0, 0, 0, 0, 0],
             borderColor: "#22de84",
             fill: true
         }
@@ -480,9 +519,9 @@ var notebookForWeek = new Chart(document.getElementById("line-chart"), {
 var notebookForMonth = new Chart(document.getElementById("line-chart1"), {
     type: 'line',
     data: {
-        labels: ["مهر", "ابان", "آذر", "دی", "بهمن", "اسفند", "فروردین", "اردیبهشت"],
+        labels: [" ","مهر", "ابان", "آذر", "دی", "بهمن", "اسفند", "فروردین", "اردیبهشت"],
         datasets: [{
-            data: [0],
+            data: [18,0],
             borderColor: "#22de84",
             fill: true
         }
@@ -492,6 +531,8 @@ var notebookForMonth = new Chart(document.getElementById("line-chart1"), {
         legend: { display: false },
         title: {
             display: true,
+            fontSize: 25,
+            FontFamily:'tanha',
             text: 'میانگین دفترچه راهنما'
         }
     }
@@ -513,6 +554,8 @@ var didnotDoPolicy = new Chart(document.getElementById("bar-chart"), {
         legend: { display: false },
         title: {
             display: true,
+            fontSize: 25,
+            FontFamily:'tanha',
             text: 'نمودار نقاص عملکرد علمی - انضباطی'
         }
     }

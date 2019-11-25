@@ -17,5 +17,7 @@ namespace noor7.Dtos.Report
         public String ExamDate { get; set; }
         
         public String ExamType { get; set; }
+
+        public float TeacherAdvice { get; set; }
     }
 }

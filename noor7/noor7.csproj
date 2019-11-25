@@ -167,6 +167,10 @@
     <Compile Include="Migrations\201911230656114_examUpdate.Designer.cs">
       <DependentUpon>201911230656114_examUpdate.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201911250813107_toDateRequired.cs" />
+    <Compile Include="Migrations\201911250813107_toDateRequired.Designer.cs">
+      <DependentUpon>201911250813107_toDateRequired.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Absent.cs" />
     <Compile Include="Models\Course.cs" />
@@ -274,6 +278,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201911230656114_examUpdate.resx">
       <DependentUpon>201911230656114_examUpdate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201911250813107_toDateRequired.resx">
+      <DependentUpon>201911250813107_toDateRequired.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -11,7 +11,7 @@ namespace noor7.Models
         public string Problem { get; set; }
         [Required]
         public DateTime FromDate { get; set; }
-        public DateTime? ToDate { get; set; }
+        public DateTime ToDate { get; set; }
         public bool? IsCertificate { get; set; }
         public bool? IsTrue { get; set; }
 

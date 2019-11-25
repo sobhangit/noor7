@@ -12,6 +12,7 @@ namespace noor7.Controllers
 {
     public class ReportController : Controller
     {
+
         private readonly SchoolContext _context;
 
         public ReportController()
@@ -27,7 +28,6 @@ namespace noor7.Controllers
 
             return View();
         }
-
         
         public ActionResult CreateReport(studentForReportDto studentForReport) {
 
@@ -59,22 +59,82 @@ namespace noor7.Controllers
             }
 
             var examsForPrint = new List<ExamForReportDto>();
-
+            
             foreach (var item in examForSelectedStudent)
             {
                 var persianDateTime = new PersianDateTime(item.ExamDate);
+                float absentControl = item.Grade;
+                if (item.Grade == 0)
+                {
+                    try
+                    {
+                        var stdID = Convert.ToInt32(studentForReport.studentID);
+                        List<Absent> absentForSelectedStudent = _context.Absents.Where(s => s.StudentID == stdID).ToList();
+                        List<DateTime> tempDate = new List<DateTime> { };
+                        if (absentForSelectedStudent != null)
+                        {
+                            
+                            foreach (var date in absentForSelectedStudent)
+                            {
+                                var isGraterThan =  date.ToDate.CompareTo(date.FromDate);
+                                if (isGraterThan == 1)
+                                {
+                                    var distanceOfTwoDate = date.FromDate - date.ToDate;
+                                    int t = (int)distanceOfTwoDate.TotalDays;
+                                    t *= -1;
+                                    tempDate.Add(date.FromDate);
+                                    for (int i = 1; i <= t; i++)
+                                    {
+                                        tempDate.Add(date.FromDate.AddDays(+i));
+                                    }
 
+                                    foreach (var d in tempDate)
+                                    {
+                                        if (d == item.ExamDate)
+                                        {
+                                            absentControl = 1.1F;
+                                        }
+                                    }
+                                }
+                                else
+                                {
+
+                                    if (date.FromDate == item.ExamDate || date.ToDate == item.ExamDate)
+                                    {
+                                        absentControl = 1.1F;
+                                    }
+
+                                }
+                                
+                                
+                            }
+
+                        }
+                        
+                    }
+                    catch (Exception ex)
+                    {
+
+                        throw;
+                    }
+                }
+                else
+                {
+                    absentControl = item.Grade;
+                }
+                
                 examsForPrint.Add(
 
                     new ExamForReportDto
                     {
 
                         CourseID = item.CourseID,
-                        Grade = item.Grade,
+                        Grade = absentControl,
                         FinalGrade = item.FinalGrade,
                         ExamType = item.ExamType.ToString(),
-                        ExamDate = persianDateTime.ToString("yy/MM/dd")
-
+                        ExamDate = persianDateTime.ToString("yy/MM/dd"),
+                        TeacherAdvice = item.TeacherAdvice
+                        
                     }     
                     
                ) ;
@@ -117,6 +177,7 @@ namespace noor7.Controllers
 
             return gradeOfNotebook;
         }
+
         public List<ReportDto> practiceReportForStudent(List<Practice> practiceForSelectedStudent, studentForReportDto studentForReport)
         {
             List<ReportDto> reportList = new List<ReportDto>();
