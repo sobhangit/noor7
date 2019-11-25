@@ -357,57 +357,24 @@ function sendJsonDataToReport() {
                         
                         
                         $("#showContent").append(
-                        "<tbody>"+
+                        
 
-                            "<tr class='first-table-row'>" +
-                                "<td rowspan='4' class='id'>"+ count +"</td>" +
-                                "<td colspan='4' class='course' rowspan='2'>"+ CourseForReportDtos[i].CourseName +"</td>" +
-                                "<td colspan='2'>انجام تکالیف</td>"+
-                                "<td colspan='2'>دفعات بازدید</td>"+
-                                "<td colspan='2'>توصیه شده</td>"+
-                            "</tr>"+
+                            "<tr class='second-table-row'>"+
 
-                            "<tr>"+
-                                "<td colspan='2'>"+((typeof PracticeList == 'undefined') ? ' ' : PracticeList.PercentOfWork )+"</td>"+
-                                "<td colspan='2'>"+((typeof PracticeList == 'undefined') ? ' ' : PracticeList.SeeNumbers )+"</td>"+
-                                "<td colspan='2'>"+((typeof PracticeList == 'undefined') ? ' ' : " " )+"</td>"+
-                            "</tr>"+
+                                "<td class='id'>"+ count +"</td>" +
+                                "<td class='course'>"+ CourseForReportDtos[i].CourseName +"</td>" +
+                                "<td colspan='2' >"+((typeof PracticeList == 'undefined') ? '-' : PracticeList.PercentOfWork )+"</td>"+
+                                "<td colspan='2' >"+((typeof PracticeList == 'undefined') ? '-' : PracticeList.PercentOfClass )+"</td>"+
+                                "<td colspan='2' >"+((typeof PracticeList == 'undefined') ? '-' : PracticeList.SeeNumbers )+"</td>"+
 
-                            "<tr class='exam-status-title'>"+
-
-                                "<td class='exam-status1'>"+
-                                    "<span>بارم</span>"+
-                                    "<span class='exam-type'>"+((typeof ExamList[0] == 'undefined') ? ' ' : " " )+"</span>"+
-                                "</td>"+
-                                "<td><span>نمره</span></td>"+
-                                "<td><span>توصیه شده</span></td>"+
-                                "<td><span>نوع</span></td>"+
-                                "<td><span>تاریخ</span></td>"+
-
-                                "<td class='exam-status1'>"+
-                                    "<span>بارم</span>"+
-                                    "<span class='exam-type'>"+((typeof ExamList[1] == 'undefined') ? ' ' : " " )+"</span>"+
-                                "</td>"+
-                                "<td><span>نمره</span></td>"+
-                                "<td><span>توصیه شده</span></td>"+
-                                "<td><span>نوع</span></td>"+
-                                "<td><span>تاریخ</span></td>"+
-                            
-
-                            "</tr>"+
-
-                            "<tr>"+
-
-                                "<td>"+((typeof ExamList[0] == 'undefined') ? noValue : ExamList[0].FinalGrade )+"</td>"+
-                                "<td>"+((typeof ExamList[0] == 'undefined') ? noValue : ExamList[0].Grade )+"</td>"+
-                                "<td>"+((typeof ExamList[0] == 'undefined') ? noValue : " " )+"</td>"+
-                                "<td>"+((typeof ExamList[0] == 'undefined') ? noValue : " " )+"</td>"+
-                                "<td>"+((typeof ExamList[0] == 'undefined') ? noValue : ExamList[0].ExamDate )+"</td>"+
-                                "<td>"+((typeof ExamList[1] == 'undefined') ? noValue : ExamList[1].FinalGrade )+"</td>"+
-                                "<td>"+((typeof ExamList[1] == 'undefined') ? noValue : ExamList[1].Grade )+"</td>"+
-                                "<td>"+((typeof ExamList[1] == 'undefined') ? noValue : " " )+"</td>"+
-                                "<td>"+((typeof ExamList[1] == 'undefined') ? noValue : " " )+"</td>"+
-                                "<td>"+((typeof ExamList[1] == 'undefined') ? noValue : ExamList[1].ExamDate )+"</td>"+
+                                "<td>"+((typeof ExamList[0] == 'undefined') ? '-' : ExamList[0].FinalGrade )+"</td>"+
+                                "<td>"+((typeof ExamList[0] == 'undefined') ? '-' : ExamList[0].Grade )+"</td>"+
+                                "<td>"+((typeof ExamList[0] == 'undefined') ? '-' : " " )+"</td>"+
+                                "<td>"+((typeof ExamList[0] == 'undefined') ? '-' : ExamList[0].ExamDate )+"</td>"+
+                                "<td>"+((typeof ExamList[1] == 'undefined') ? '-' : ExamList[1].FinalGrade )+"</td>"+
+                                "<td>"+((typeof ExamList[1] == 'undefined') ? '-' : ExamList[1].Grade )+"</td>"+
+                                "<td>"+((typeof ExamList[1] == 'undefined') ? '-' : " " )+"</td>"+
+                                "<td>"+((typeof ExamList[1] == 'undefined') ? '-' : ExamList[1].ExamDate )+"</td>"+
 
                             "</tr>"+
           

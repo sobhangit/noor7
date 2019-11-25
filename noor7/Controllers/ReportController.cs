@@ -125,79 +125,135 @@ namespace noor7.Controllers
             var courseAndPercent = calCulatePercentOfCourseForClass(studentForReport);
 
             int beforeId = 0;
-
             int count = 0;
             int studentpersent = 0;
-            var courseName = " ";
-
             int classpersent = 100;
-
-            int innerCounter = 0;
-            int counter = 0;
             int checkCount = 0;
+            var Advice = 0;
 
             foreach (var item in practiceForSelectedStudent)
             {
                 count++;
 
-                if (beforeId != item.CourseID && beforeId != 0 )
+                if (count == practiceForSelectedStudent.Count)
                 {
-                    counter++;
 
-                    foreach (var cp in courseAndPercent)
+                    if (beforeId != item.CourseID && beforeId != 0)
                     {
-                        innerCounter++;
-                        if (innerCounter == counter)
-                        {
-                            courseName = cp.Key;
-                            classpersent = cp.Value;
 
-                            innerCounter = 0;
-                            break;
+                        studentpersent = studentpersent / checkCount;
+
+                        List<Practice> teacherAdvice = _context.Practices.Where(s => s.CourseID == beforeId).ToList();
+                        if (teacherAdvice.Count > 1)
+                        {
+                            int teCount = 0;
+                            foreach (var te in teacherAdvice)
+                            {
+                                ++teCount;
+
+                                Advice += Convert.ToInt32((te.TeacherAdvice * 100) / te.Numbers);
+                            }
+
+                            Advice = Advice / teCount;
                         }
+                        else
+                        {
+                            Advice = (teacherAdvice.Select(s => s.TeacherAdvice).SingleOrDefault() * 100) / teacherAdvice.Select(s => s.Numbers).SingleOrDefault();
+                        }
+
+                        reportList.Add(new ReportDto
+                        {
+                            CourseId = beforeId,
+                            PercentOfWork = studentpersent,
+                            PercentOfClass = Advice,
+                            SeeNumbers = checkCount
+                        });
+
+                        Advice = 0;
+
+                        checkCount = 0;
+                        checkCount++;
+                        studentpersent = calCulatePercentOfCourse(item.Numbers, item.PassedNumbers);
+
+
+                    }
+
+                    if (beforeId == item.CourseID)
+                    {
+                        studentpersent += calCulatePercentOfCourse(item.Numbers, item.PassedNumbers);
+                    }
+
+                    if (count == 1 || beforeId == item.CourseID)
+                    {
+                        checkCount++;
                     }
 
                     studentpersent = studentpersent / checkCount;
 
-                    reportList.Add(new ReportDto
+                    List<Practice> teacherAdvice1 = _context.Practices.Where(s => s.CourseID == item.CourseID).ToList();
+                    if (teacherAdvice1.Count > 1)
                     {
-                        CourseId = beforeId,
-                        PercentOfWork = studentpersent,
-                        PercentOfClass = classpersent,
-                        SeeNumbers = checkCount
-                    });
-
-                    checkCount = 0;
-                    studentpersent = calCulatePercentOfCourse(item.Numbers, item.PassedNumbers);
-                    checkCount++;
-
-                } else if(count == practiceForSelectedStudent.Count)
-                {
-                    counter++;
-                    checkCount++;
-
-                    foreach (var cp in courseAndPercent)
-                    {
-                        innerCounter++;
-                        if (innerCounter == counter)
+                        int teCount = 0;
+                        foreach (var te in teacherAdvice1)
                         {
-                            courseName = cp.Key;
-                            classpersent = cp.Value;
+                            ++teCount;
 
-                            innerCounter = 0;
-                            break;
+                            Advice += Convert.ToInt32((te.TeacherAdvice * 100) / te.Numbers);
                         }
-                    }
 
-                    studentpersent = studentpersent / checkCount;
+                        Advice = Advice / teCount;
+                    }
+                    else
+                    {
+                        Advice = (teacherAdvice1.Select(s => s.TeacherAdvice).SingleOrDefault() * 100) / teacherAdvice1.Select(s => s.Numbers).SingleOrDefault();
+                    }
 
                     reportList.Add(new ReportDto
                     {
                         CourseId = practiceForSelectedStudent.Last().CourseID,
                         PercentOfWork = studentpersent,
-                        PercentOfClass = classpersent,
+                        PercentOfClass = Advice,
                         SeeNumbers = checkCount
                     });
+
+                    Advice = 0;
+
+                } else if (beforeId != item.CourseID && beforeId != 0)
+                {
+
+                    studentpersent = studentpersent / checkCount;
+                    List<Practice> teacherAdvice = _context.Practices.Where(s => s.CourseID == beforeId).ToList();
+                    if (teacherAdvice.Count > 1) {
+                        int teCount = 0;
+                        foreach (var te in teacherAdvice)
+                        {
+                            ++teCount;
+                            
+                            Advice += Convert.ToInt32((te.TeacherAdvice * 100) / te.Numbers);
+                        }
+
+                        Advice = Advice / teCount;
+                    }
+                    else
+                    {
+                        Advice = (teacherAdvice.Select(s=>s.TeacherAdvice).SingleOrDefault()*100) / teacherAdvice.Select(s => s.Numbers).SingleOrDefault();
+                    }
+
+                    reportList.Add(new ReportDto
+                    {
+                        CourseId = beforeId,
+                        PercentOfWork = studentpersent,
+                        PercentOfClass = Advice,
+                        SeeNumbers = checkCount
+                    });
+
+                    Advice = 0;
+
+                    checkCount = 0;
+                    checkCount++;
+                    studentpersent = calCulatePercentOfCourse(item.Numbers, item.PassedNumbers);
+                    
+
                 }
                 else
                 {
