@@ -71,7 +71,7 @@ namespace noor7.Controllers
                         var stdID = Convert.ToInt32(studentForReport.studentID);
                         List<Absent> absentForSelectedStudent = _context.Absents.Where(s => s.StudentID == stdID).ToList();
                         List<DateTime> tempDate = new List<DateTime> { };
-                        if (absentForSelectedStudent != null)
+                        if (absentForSelectedStudent != null || absentForSelectedStudent.Count != 0)
                         {
                             
                             foreach (var date in absentForSelectedStudent)
@@ -109,6 +109,10 @@ namespace noor7.Controllers
                                 
                             }
 
+                        }
+                        else
+                        {
+                            absentControl = item.Grade;
                         }
                         
                     }

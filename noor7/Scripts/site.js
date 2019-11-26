@@ -356,30 +356,41 @@ function sendJsonDataToReport() {
                         count++;
 
                     var absentHelper = [];
-                    if(typeof ExamList[0] != 'undefined' || typeof ExamList[1] != 'undefined')
+
+                    if(ExamList[0] != undefined)
                     {
 
                         if(ExamList[0].Grade == 1.1){
-                            absentHelper[0] = "غایب";
+                            absentHelper[0] = "غ";
                             ExamList[0].Grade = 0;
                         }else{
                             absentHelper[0] = ExamList[0].Grade;
                         }
 
+                    }else{
+                        console.log(ExamList[1]);
+                    }
+
+                    if(ExamList[1] != undefined)
+                    {
+                        console.log("not undefined");
+                        
                         if(ExamList[1].Grade == 1.1){
-                            absentHelper[1] = "غایب";
+                            absentHelper[1] = "غ";
                             ExamList[1].Grade = 0;
                         }else{
                             absentHelper[1] = ExamList[1].Grade;
                         }
-                    
+                        
+                    }else{
+                        console.log(ExamList[1]);
                     }
 
                     var PercentOfWork = '-';
                     var PercentOfClass = '-';
                     var SeeNumbers = '-';                
     
-                    if(typeof PracticeList != 'undefined' && typeof PracticeList != null ){
+                    if(typeof PracticeList != undefined && typeof PracticeList != null ){
         
                         PercentOfWork = PracticeList.PercentOfWork + "٪";
                         PercentOfClass = PracticeList.PercentOfClass + "٪";
@@ -389,7 +400,6 @@ function sendJsonDataToReport() {
                             PercentOfClass = "-";
                             SeeNumbers = "-";
                         }
-                        
                         
                     }
                         
@@ -405,12 +415,12 @@ function sendJsonDataToReport() {
                                 "<td colspan='2' >"+((typeof PracticeList == 'undefined') ? '-' : SeeNumbers )+"</td>"+
 
                                 "<td>"+((typeof ExamList[0] == 'undefined') ? '-' : ExamList[0].FinalGrade )+"</td>"+
-                                "<td>"+((typeof ExamList[0] == 'undefined') ? '-' : ExamList[0].Grade )+"</td>"+
                                 "<td>"+((typeof ExamList[0] == 'undefined') ? '-' : absentHelper[0] )+"</td>"+
+                                "<td>"+((typeof ExamList[0] == 'undefined') ? '-' : ExamList[0].TeacherAdvice )+"</td>"+
                                 "<td>"+((typeof ExamList[0] == 'undefined') ? '-' : ExamList[0].ExamDate )+"</td>"+
                                 "<td>"+((typeof ExamList[1] == 'undefined') ? '-' : ExamList[1].FinalGrade )+"</td>"+
-                                "<td>"+((typeof ExamList[1] == 'undefined') ? '-' : ExamList[1].Grade )+"</td>"+
                                 "<td>"+((typeof ExamList[1] == 'undefined') ? '-' : absentHelper[1] )+"</td>"+
+                                "<td>"+((typeof ExamList[1] == 'undefined') ? '-' : ExamList[1].TeacherAdvice )+"</td>"+
                                 "<td>"+((typeof ExamList[1] == 'undefined') ? '-' : ExamList[1].ExamDate )+"</td>"+
 
                             "</tr>"+
@@ -465,7 +475,7 @@ function addData(labels,data,Totalpolicy) {
 
     
 
-    for(m = 1; m < data.length; m++){
+    for(m = 0; m < data.length; m++){
         notebookForWeek.data.labels[m] = labels[m];
         notebookForWeek.data.datasets[0].data[m] = data[m];
 
@@ -496,9 +506,9 @@ function addData(labels,data,Totalpolicy) {
 var notebookForWeek = new Chart(document.getElementById("line-chart"), {
     type: 'line',
     data: {
-        labels: [" ",'هفته اول', 'هفته دوم', 'هفته سوم', 'هفته چهارم', 'هفته پنجم',],
+        labels: ["هفته اول", "هفته دوم", "هفته سوم", "هفته چهارم", "هفته پنجم"],
         datasets: [{
-            data: [18,0, 0, 0, 0, 0],
+            data: [0, 0, 0, 0, 0],
             borderColor: "#22de84",
             fill: true
         }
@@ -510,7 +520,7 @@ var notebookForWeek = new Chart(document.getElementById("line-chart"), {
             display: true,
             fontSize: 25,
             FontFamily:'tanha',
-            text: 'نمودار دفترچه راهنما'
+            text: 'نمودار دفترچه راهنما(کمترین امتیاز ۰ و بیشترین امتیاز ۱۸) '
         }
     }
 
@@ -519,7 +529,7 @@ var notebookForWeek = new Chart(document.getElementById("line-chart"), {
 var notebookForMonth = new Chart(document.getElementById("line-chart1"), {
     type: 'line',
     data: {
-        labels: [" ","مهر", "ابان", "آذر", "دی", "بهمن", "اسفند", "فروردین", "اردیبهشت"],
+        labels: [" ","ابان", "آذر", "دی", "بهمن", "اسفند", "فروردین", "اردیبهشت"],
         datasets: [{
             data: [18,0],
             borderColor: "#22de84",
