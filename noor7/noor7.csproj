@@ -152,24 +152,13 @@
     <Compile Include="Enums\ExamType.cs" />
     <Compile Include="Enums\DefectType.cs" />
     <Compile Include="Enums\JobType.cs" />
+    <Compile Include="Enums\Months.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201911020440173_inTheNameOfGod.cs" />
-    <Compile Include="Migrations\201911020440173_inTheNameOfGod.Designer.cs">
-      <DependentUpon>201911020440173_inTheNameOfGod.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201911230451076_newModelsAdd.cs" />
-    <Compile Include="Migrations\201911230451076_newModelsAdd.Designer.cs">
-      <DependentUpon>201911230451076_newModelsAdd.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201911230656114_examUpdate.cs" />
-    <Compile Include="Migrations\201911230656114_examUpdate.Designer.cs">
-      <DependentUpon>201911230656114_examUpdate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201911250813107_toDateRequired.cs" />
-    <Compile Include="Migrations\201911250813107_toDateRequired.Designer.cs">
-      <DependentUpon>201911250813107_toDateRequired.cs</DependentUpon>
+    <Compile Include="Migrations\201911300707509_first.cs" />
+    <Compile Include="Migrations\201911300707509_first.Designer.cs">
+      <DependentUpon>201911300707509_first.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Absent.cs" />
@@ -270,17 +259,8 @@
     <Content Include="Views\Result\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201911020440173_inTheNameOfGod.resx">
-      <DependentUpon>201911020440173_inTheNameOfGod.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201911230451076_newModelsAdd.resx">
-      <DependentUpon>201911230451076_newModelsAdd.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201911230656114_examUpdate.resx">
-      <DependentUpon>201911230656114_examUpdate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201911250813107_toDateRequired.resx">
-      <DependentUpon>201911250813107_toDateRequired.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201911300707509_first.resx">
+      <DependentUpon>201911300707509_first.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

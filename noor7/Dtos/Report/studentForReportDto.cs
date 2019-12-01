@@ -8,6 +8,7 @@ namespace noor7.Dtos.Report
     public class studentForReportDto
     {
         public string studentID { get; set; }
+        public string selectedMonth { get; set; }
     }
 
 }

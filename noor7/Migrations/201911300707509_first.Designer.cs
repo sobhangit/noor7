@@ -7,13 +7,13 @@ namespace noor7.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class examUpdate : IMigrationMetadata
+    public sealed partial class first : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(examUpdate));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(first));
         
         string IMigrationMetadata.Id
         {
-            get { return "201911230656114_examUpdate"; }
+            get { return "201911300707509_first"; }
         }
         
         string IMigrationMetadata.Source

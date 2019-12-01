@@ -6,8 +6,7 @@ namespace noor7.Models
     {
         public SchoolContext()
         {
-            Database.SetInitializer(new MigrateDatabaseToLatestVersion
-                <SchoolContext,Migrations.Configuration>());
+            Database.SetInitializer(new MigrateDatabaseToLatestVersion<SchoolContext,Migrations.Configuration>());
         }
 
         //Set your Table

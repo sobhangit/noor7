@@ -243,7 +243,7 @@ function sendJsonDataForLate() {
     var lateDate = document.getElementById("lateDate").value;
     var howMuch = document.getElementById("howMuch").value;
     var problem = document.getElementById("problem").value;
-    var isTrue = document.getElementById("isTrue").value;
+    var isTrue = document.getElementById("isTrue").checked;
 
     var jsonObject = {};
 
@@ -279,11 +279,11 @@ function sendJsonDataForLate() {
 function sendJsonDataToReport() {
 
     var studentID = document.getElementById("selectedStudent").value;
-    var selectedDate  = document.getElementById("selectedStudent").value;
+    var selectedMonth  = document.getElementById("month").value;
     var jsonObject = {};
 
     jsonObject.studentID = studentID;
-    //jsonObject.selectedDate = selectedDate;
+    jsonObject.selectedMonth = selectedMonth;
 
     console.log(JSON.stringify(jsonObject));
  
@@ -411,16 +411,15 @@ function sendJsonDataToReport() {
                                 "<td class='id'>"+ count +"</td>" +
                                 "<td class='course'>"+ CourseForReportDtos[i].CourseName +"</td>" +
                                 "<td colspan='2' >"+((typeof PracticeList == 'undefined') ? '-' : PercentOfWork )+"</td>"+
-                                "<td colspan='2' >"+((typeof PracticeList == 'undefined') ? '-' : PercentOfClass )+"</td>"+
                                 "<td colspan='2' >"+((typeof PracticeList == 'undefined') ? '-' : SeeNumbers )+"</td>"+
 
                                 "<td>"+((typeof ExamList[0] == 'undefined') ? '-' : ExamList[0].FinalGrade )+"</td>"+
                                 "<td>"+((typeof ExamList[0] == 'undefined') ? '-' : absentHelper[0] )+"</td>"+
-                                "<td>"+((typeof ExamList[0] == 'undefined') ? '-' : ExamList[0].TeacherAdvice )+"</td>"+
+                                "<td>"+((typeof ExamList[0] == 'undefined') ? '-' : ExamList[0].ExamType )+"</td>"+
                                 "<td>"+((typeof ExamList[0] == 'undefined') ? '-' : ExamList[0].ExamDate )+"</td>"+
                                 "<td>"+((typeof ExamList[1] == 'undefined') ? '-' : ExamList[1].FinalGrade )+"</td>"+
                                 "<td>"+((typeof ExamList[1] == 'undefined') ? '-' : absentHelper[1] )+"</td>"+
-                                "<td>"+((typeof ExamList[1] == 'undefined') ? '-' : ExamList[1].TeacherAdvice )+"</td>"+
+                                "<td>"+((typeof ExamList[1] == 'undefined') ? '-' : ExamList[1].ExamType )+"</td>"+
                                 "<td>"+((typeof ExamList[1] == 'undefined') ? '-' : ExamList[1].ExamDate )+"</td>"+
 
                             "</tr>"+
@@ -463,7 +462,8 @@ function sendJsonDataToReport() {
                 var t = "-" + Totalpolicy.total
 
                 var policy = [e,t];
-                console.log(e);
+                console.log("elmi : ",e);
+                console.log("enzebati : ",t);
             }
         }
     });
@@ -582,7 +582,7 @@ function tableprint(){
     var x = document.getElementById("selectedStudent").value;
     console.log(x);
 
-    var selectedStudent = x-1;
+    var selectedStudent = x-2;//x-1
 
     var v = document.getElementById("search-report").options.item(selectedStudent).innerText;
     console.log(v);

@@ -30,7 +30,7 @@ namespace noor7.Controllers
             return View();
         }
 
-
+        
         [HttpPost]
         public ActionResult AddLate(LateClassDto lateDto)
         {

@@ -7,6 +7,7 @@ using System.Web;
 using System.Web.Mvc;
 using Newtonsoft.Json;
 using MD.PersianDateTime;
+using noor7.Enums;
 
 namespace noor7.Controllers
 {
@@ -14,6 +15,9 @@ namespace noor7.Controllers
     {
 
         private readonly SchoolContext _context;
+
+        DateTime fromDateForSelect = new DateTime();
+        DateTime toDateForSelect = new DateTime();
 
         public ReportController()
         {
@@ -31,12 +35,14 @@ namespace noor7.Controllers
         
         public ActionResult CreateReport(studentForReportDto studentForReport) {
 
+            var month = studentForReport.selectedMonth.ToString();
+            calculateDate(month);
+
             var courseListForSelectedStudent = courseForSelectecStudent(studentForReport);
             var totalPolicy = policy(studentForReport);
 
             var practiceForSelectedStudent = new List<Practice>();
             var examForSelectedStudent = new List<Exam>();
-
 
             foreach (var item in courseListForSelectedStudent)
             {
@@ -45,15 +51,22 @@ namespace noor7.Controllers
 
                 foreach (var practice in practice_temp)
                 {
-                    practiceForSelectedStudent.Add(practice);
+                    if (practice.PracticeDate >= fromDateForSelect && practice.PracticeDate <= toDateForSelect)
+                    {
+                        practiceForSelectedStudent.Add(practice);
+                    }
+                    
                 }
 
                 var exam_temp = _context.Exams.Where(s => s.CourseID == itemID).ToList();
 
-
                 foreach (var exam in exam_temp)
                 {
-                    examForSelectedStudent.Add(exam);
+                    if (exam.ExamDate >= fromDateForSelect && exam.ExamDate <= toDateForSelect)
+                    {
+                        examForSelectedStudent.Add(exam);
+                    }
+                    
                 }
                 
             }
@@ -165,8 +178,6 @@ namespace noor7.Controllers
 
             var gradeOfNotebook = notebookForStudent(studentForReport);
 
-
-
             var jsonObj = JsonConvert.SerializeObject(new forTableReportDto { CourseForReportDtos = courseForSelected, ReportDtos = objForTable , Exams = examsForPrint, GradeOfNotebook = gradeOfNotebook, Totalpolicy = totalPolicy });
 
             return Json(new { success = true, responseText = jsonObj }, JsonRequestBehavior.AllowGet);
@@ -176,8 +187,16 @@ namespace noor7.Controllers
 
             var stdID = Convert.ToInt32(studentForReport.studentID);
             var gradeOfNotebook = new List<float>();
+            
+            var notebook = _context.Notebooks.Where(s => s.StudentID == stdID).ToList();
 
-            gradeOfNotebook = _context.Notebooks.Where(s => s.StudentID == stdID).Select(s => s.Grade).ToList();
+            foreach (var item in notebook)
+            {
+                if (item.NoteBookDate >= fromDateForSelect && item.NoteBookDate <= toDateForSelect)
+                {
+                    gradeOfNotebook.Add(item.Grade);
+                }
+            }
 
             return gradeOfNotebook;
         }
@@ -192,7 +211,6 @@ namespace noor7.Controllers
             int beforeId = 0;
             int count = 0;
             int studentpersent = 0;
-            int classpersent = 100;
             int checkCount = 0;
             var Advice = 0;
 
@@ -520,16 +538,83 @@ namespace noor7.Controllers
 
             var totalPolicy = new Dictionary<string, int>();
 
-            var naqsElmi = _context.Defects.Where(s => s.Type == Enums.DefectType.علمی && s.StudentID == stdID).Count();
-            totalPolicy.Add("elmi", naqsElmi);
+            int naqsElmi = 0;
+            int naqsEnzebati = 0;
+            int late = 0;
+            int absent = 0;
 
-            var naqsEnzebati = _context.Defects.Where(s => s.Type == Enums.DefectType.انضباطی && s.StudentID == stdID).Count();
-            var late = _context.Lates.Where(s => s.StudentID == stdID && s.IsTrue == false).Count();
-            var absent = _context.Absents.Where(s => s.StudentID == stdID && s.IsTrue == false).Count();
+            var defectDates = _context.Defects.Where(s => s.Type == Enums.DefectType.علمی && s.StudentID == stdID).Select(s => s.DefaceDate).ToList();
+            var defectDatesE = _context.Defects.Where(s => s.Type == Enums.DefectType.انضباطی && s.StudentID == stdID).Select(s => s.DefaceDate).ToList();
+            var lateDates = _context.Lates.Where(s => s.StudentID == stdID && s.IsTrue == false).Select(s=>s.LateDate).ToList();
+            var absentDates = _context.Absents.Where(s => s.StudentID == stdID && s.IsTrue == false).ToList();
+
+            foreach (var date in defectDates)
+            {
+                if (date >= fromDateForSelect && date <= toDateForSelect )
+                {
+                    naqsElmi += 1;
+                }
+            }
+            foreach (var date in defectDatesE)
+            {
+                if (date >= fromDateForSelect && date <= toDateForSelect)
+                {
+                    naqsEnzebati += 1;
+                }
+            }
+            foreach (var date in lateDates)
+            {
+                if (date >= fromDateForSelect && date <= toDateForSelect)
+                {
+                    late += 1;
+                }
+            }
+            foreach (var date in absentDates)
+            {
+              
+                List<DateTime> tempDate = new List<DateTime> { };
+                if (absentDates != null || absentDates.Count != 0)
+                {
+                    foreach (var absentD in absentDates)
+                    {
+                        var isGraterThan = absentD.ToDate.CompareTo(absentD.FromDate);
+                        if (isGraterThan == 1)
+                        {
+                            var distanceOfTwoDate = absentD.FromDate - absentD.ToDate;
+                            int t = (int)distanceOfTwoDate.TotalDays;
+                            t *= -1;
+                            tempDate.Add(absentD.FromDate);
+                            for (int i = 1; i <= t; i++)
+                            {
+                                tempDate.Add(absentD.FromDate.AddDays(+i));
+                            }
+
+                            foreach (var d in tempDate)
+                            {
+                                if (d >= fromDateForSelect && d <= toDateForSelect )
+                                {
+                                    absent += 1;
+                                }  
+                            }
+                        }
+                        else
+                        {
+                            if (absentD.FromDate >= fromDateForSelect && absentD.ToDate <= toDateForSelect)
+                            {
+                                absent += 1;
+                            }
+                        }
+
+                    }
+
+                }
+
+            }
 
             var total = naqsEnzebati + late + absent;
-            totalPolicy.Add("total", total);
 
+            totalPolicy.Add("elmi", naqsElmi);
+            totalPolicy.Add("total", total);
 
             return totalPolicy;
         }
@@ -544,7 +629,54 @@ namespace noor7.Controllers
             var stdID = Convert.ToInt32(studentForReport.studentID);
 
             return _context.Courses.Where(s => s.StudentID == stdID).ToList(); ;
-        } 
+        }
 
+        private void calculateDate(string month)
+        {
+            
+            var persianMonthNow = new PersianDateTime(DateTime.Now);
+            var year = persianMonthNow.Year;
+
+            switch (month)
+            {
+                case "مهر":
+                    fromDateForSelect = new PersianDateTime(year, 07, 01);
+                    toDateForSelect = new PersianDateTime(year, 07, 30);
+                    break;
+                case "آبان":
+                    fromDateForSelect = new PersianDateTime(year, 08, 01);
+                    toDateForSelect = new PersianDateTime(year, 08, 30);
+                    break;
+                case "آذر":
+                    fromDateForSelect = new PersianDateTime(year, 09, 01);
+                    toDateForSelect = new PersianDateTime(year, 09, 30);
+                    break;
+                case "دی":
+                    fromDateForSelect = new PersianDateTime(year, 10, 01);
+                    toDateForSelect = new PersianDateTime(year, 10, 30);
+                    break;
+                case "بهمن":
+                    fromDateForSelect = new PersianDateTime(year, 11, 01);
+                    toDateForSelect = new PersianDateTime(year, 11, 30);
+                    break;
+                case "اسفند":
+                    fromDateForSelect = new PersianDateTime(year, 12, 01);
+                    toDateForSelect = new PersianDateTime(year, 12, 29);
+                    break;
+                case "فروردین":
+                    fromDateForSelect = new PersianDateTime(year, 01, 01);
+                    toDateForSelect = new PersianDateTime(year, 01, 31);
+                    break;
+                case "اردیبهشت":
+                    fromDateForSelect = new PersianDateTime(year, 02, 01);
+                    toDateForSelect = new PersianDateTime(year, 02, 31);
+                    break;
+                case "خرداد":
+                    fromDateForSelect = new PersianDateTime(year, 03, 01);
+                    toDateForSelect = new PersianDateTime(year, 03, 31);
+                    break;
+            }
+
+        }
     }
 }
