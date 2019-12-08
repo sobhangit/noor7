@@ -19,7 +19,6 @@ namespace noor7.Controllers
         {
             var students = _context.Students.ToList();
             ViewBag.students = students;
-
             return View();
         }
 

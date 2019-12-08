@@ -26,7 +26,6 @@ namespace noor7.Controllers
 
         public ActionResult Index()
         {
-
             var students = _context.Students.ToList();
             ViewBag.vv = students;
 

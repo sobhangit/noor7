@@ -413,14 +413,16 @@ function sendJsonDataToReport() {
                                 "<td colspan='2' >"+((typeof PracticeList == 'undefined') ? '-' : PercentOfWork )+"</td>"+
                                 "<td colspan='2' >"+((typeof PracticeList == 'undefined') ? '-' : SeeNumbers )+"</td>"+
 
+                                "<td>"+((typeof ExamList[0] == 'undefined') ? '-' : ExamList[0].ExamDate )+"</td>"+
                                 "<td>"+((typeof ExamList[0] == 'undefined') ? '-' : ExamList[0].FinalGrade )+"</td>"+
                                 "<td>"+((typeof ExamList[0] == 'undefined') ? '-' : absentHelper[0] )+"</td>"+
                                 "<td>"+((typeof ExamList[0] == 'undefined') ? '-' : ExamList[0].ExamType )+"</td>"+
-                                "<td>"+((typeof ExamList[0] == 'undefined') ? '-' : ExamList[0].ExamDate )+"</td>"+
+                                
+                                "<td>"+((typeof ExamList[1] == 'undefined') ? '-' : ExamList[1].ExamDate )+"</td>"+
                                 "<td>"+((typeof ExamList[1] == 'undefined') ? '-' : ExamList[1].FinalGrade )+"</td>"+
                                 "<td>"+((typeof ExamList[1] == 'undefined') ? '-' : absentHelper[1] )+"</td>"+
                                 "<td>"+((typeof ExamList[1] == 'undefined') ? '-' : ExamList[1].ExamType )+"</td>"+
-                                "<td>"+((typeof ExamList[1] == 'undefined') ? '-' : ExamList[1].ExamDate )+"</td>"+
+                                
 
                             "</tr>"+
           
@@ -474,8 +476,11 @@ function addData(labels,data,Totalpolicy) {
     var sumOfData = 0 ;
 
     
+    
 
     for(m = 0; m < data.length; m++){
+        
+
         notebookForWeek.data.labels[m] = labels[m];
         notebookForWeek.data.datasets[0].data[m] = data[m];
 
@@ -506,9 +511,9 @@ function addData(labels,data,Totalpolicy) {
 var notebookForWeek = new Chart(document.getElementById("line-chart"), {
     type: 'line',
     data: {
-        labels: ["هفته اول", "هفته دوم", "هفته سوم", "هفته چهارم", "هفته پنجم"],
+        labels: ["هفته اول","هفته دوم","هفته سوم","هفته چهارم","هفته پنجم"],
         datasets: [{
-            data: [0, 0, 0, 0, 0],
+            data: [0,0,0,0,0],
             borderColor: "#22de84",
             fill: true
         }
@@ -521,6 +526,14 @@ var notebookForWeek = new Chart(document.getElementById("line-chart"), {
             fontSize: 25,
             FontFamily:'tanha',
             text: 'نمودار دفترچه راهنما(کمترین امتیاز ۰ و بیشترین امتیاز ۱۸) '
+        },
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero: true,
+                    max: 18
+                }
+            }]
         }
     }
 
@@ -529,9 +542,9 @@ var notebookForWeek = new Chart(document.getElementById("line-chart"), {
 var notebookForMonth = new Chart(document.getElementById("line-chart1"), {
     type: 'line',
     data: {
-        labels: [" ","ابان", "آذر", "دی", "بهمن", "اسفند", "فروردین", "اردیبهشت"],
+        labels: ["مهر","ابان", "آذر", "دی", "بهمن", "اسفند", "فروردین", "اردیبهشت","خرداد"],
         datasets: [{
-            data: [18,0],
+            data: [0,0,0,0,0,0,0,0,0],
             borderColor: "#22de84",
             fill: true
         }
@@ -543,10 +556,17 @@ var notebookForMonth = new Chart(document.getElementById("line-chart1"), {
             display: true,
             fontSize: 25,
             FontFamily:'tanha',
-            text: 'میانگین دفترچه راهنما'
+            text: ' میانگین دفترچه راهنما '
+        },
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero: true,
+                    max: 18
+                }
+            }]
         }
     }
-
 });
 
 var didnotDoPolicy = new Chart(document.getElementById("bar-chart"), {
@@ -556,7 +576,7 @@ var didnotDoPolicy = new Chart(document.getElementById("bar-chart"), {
         datasets: [
             {
                 backgroundColor: ["#fff", "#000","#000",""],
-                data: [-12,0,0,0]
+                data: [0,0,0,0]
             }
         ]
     },
@@ -566,10 +586,31 @@ var didnotDoPolicy = new Chart(document.getElementById("bar-chart"), {
             display: true,
             fontSize: 25,
             FontFamily:'tanha',
-            text: 'نمودار نقاص عملکرد علمی - انضباطی'
+            text: ' نمودار نقصان عملکرد علمی انضباطی '
+        },
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero: true,
+                    reverse: true,
+                    steps: 1,
+                    min: -10
+
+                }
+            }]
         }
     }
 });
+
+function autoPrint(){
+
+    var v = document.getElementById("search-report").options.item(selectedStudent).innerText;
+    console.log(v);
+
+    var t = document.getElementById("nameOfStudent").innerText = "کارنامه ماهیانه " + v + " - پایه هفتم";
+    console.log(t);
+
+}
 
 function tableprint(){
 

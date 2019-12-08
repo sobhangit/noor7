@@ -181,6 +181,37 @@ div.panel-tiles .tile h5 {
     background-color: #ffffff;
 }
 
+#description {
+    margin-top: 20px !important;
+    height: 100px;
+    text-align: center;
+    direction:rtl;
+    border: 3px solid #000 !important;
+    border-radius: 3px !important;
+    padding:5px;
+}
+
+#opinionOfParents {
+    margin-top: 20px !important;
+    height: 100px;
+    text-align: center;
+    direction:rtl;
+    border: 3px solid #000 !important;
+    border-radius: 3px !important;
+    margin-bottom:10px !important;
+    padding:5px;
+}
+
+.report-view-table{
+    padding-bottom:20px;
+}
+
+.report-view-table p {
+    text-align: right !important;
+    direction: rtl;
+    font-family: Tanha;
+}
+
 .report-view-table table .exam-status-title td {
     padding: 2px;
 }
@@ -255,4 +286,10 @@ div.panel-tiles .tile h5 {
     font-weight:bold;
     padding:3px;
     margin: 0 2.5px;
+}
+
+.page-break {
+    page-break-after: always;
+    height: 0;
+    display: none;
 }

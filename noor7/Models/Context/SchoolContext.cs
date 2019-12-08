@@ -19,5 +19,7 @@ namespace noor7.Models
         public DbSet<Course> Courses { get; set; }
         public DbSet<Notebook> Notebooks { get; set; }
         public DbSet<Practice> Practices { get; set; }
+        public DbSet<Job> Jobs { get; set; }
+       
     }
 }

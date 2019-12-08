@@ -129,6 +129,8 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\EditController.cs" />
+    <Compile Include="Controllers\JobManagmentController.cs" />
     <Compile Include="Controllers\ResultController.cs" />
     <Compile Include="Controllers\LateManagmentController.cs" />
     <Compile Include="Controllers\DefectManagmentController.cs" />
@@ -257,6 +259,8 @@
     <Content Include="Views\Report\GetTableReport.cshtml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <Content Include="Views\Result\Index.cshtml" />
+    <Content Include="Views\Edit\Index.cshtml" />
+    <Content Include="Views\JobManagment\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201911300707509_first.resx">
