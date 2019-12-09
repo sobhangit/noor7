@@ -31,7 +31,7 @@ namespace noor7.Models
         public  ICollection<Late> Lates { get; set; }
         public  ICollection<Speak> Speaks { get; set; }
         public  ICollection<Job> Jobs { get; set; }
-
+        public  ICollection<NotebookAve> NotebookAves { get; set; }
 
     }
 }

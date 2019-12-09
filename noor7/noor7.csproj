@@ -148,6 +148,7 @@
     <Compile Include="Dtos\Report\CourseForReportDto.cs" />
     <Compile Include="Dtos\Report\ExamForReportDto.cs" />
     <Compile Include="Dtos\Report\forTableReportDto.cs" />
+    <Compile Include="Dtos\Report\NotebookAveDtos.cs" />
     <Compile Include="Dtos\Report\ReportDto.cs" />
     <Compile Include="Dtos\Report\studentForReportDto.cs" />
     <Compile Include="Dtos\Student\RemoveStudentDto.cs" />
@@ -162,11 +163,20 @@
     <Compile Include="Migrations\201911300707509_first.Designer.cs">
       <DependentUpon>201911300707509_first.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201912081009422_NoteAve.cs" />
+    <Compile Include="Migrations\201912081009422_NoteAve.Designer.cs">
+      <DependentUpon>201912081009422_NoteAve.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201912081043494_fix.cs" />
+    <Compile Include="Migrations\201912081043494_fix.Designer.cs">
+      <DependentUpon>201912081043494_fix.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Absent.cs" />
     <Compile Include="Models\Course.cs" />
     <Compile Include="Models\Defect.cs" />
     <Compile Include="Models\Exam.cs" />
+    <Compile Include="Models\NotebookAve.cs" />
     <Compile Include="Models\Job.cs" />
     <Compile Include="Models\Late.cs" />
     <Compile Include="Models\Notebook.cs" />
@@ -265,6 +275,12 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201911300707509_first.resx">
       <DependentUpon>201911300707509_first.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201912081009422_NoteAve.resx">
+      <DependentUpon>201912081009422_NoteAve.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201912081043494_fix.resx">
+      <DependentUpon>201912081043494_fix.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -309,6 +309,7 @@ function sendJsonDataToReport() {
                 var Exams =  jsonObj["Exams"];
                 var GradeOfNotebook = jsonObj["GradeOfNotebook"];
                 var Totalpolicy = jsonObj["Totalpolicy"];
+                var NoteBookAves = jsonObj["NoteBookAves"];
 
                 var ExamList = [];  
                 var PracticeList = [];
@@ -458,7 +459,7 @@ function sendJsonDataToReport() {
                 //Chart Updating
 
                 var labels = ['هفته اول', 'هفته دوم', 'هفته سوم', 'هفته چهارم', 'هفته پنجم'];
-                addData(labels,GradeOfNotebook,Totalpolicy);
+                addData(labels,GradeOfNotebook,Totalpolicy,NoteBookAves);
 
                 var e = "-" + Totalpolicy.elmi
                 var t = "-" + Totalpolicy.total
@@ -471,24 +472,16 @@ function sendJsonDataToReport() {
     });
 }
 
-function addData(labels,data,Totalpolicy) {
-
-    var sumOfData = 0 ;
-
-    
-    
+function addData(labels,data,Totalpolicy,NoteBookAves) {
 
     for(m = 0; m < data.length; m++){
-        
-
         notebookForWeek.data.labels[m] = labels[m];
-        notebookForWeek.data.datasets[0].data[m] = data[m];
-
-        sumOfData += data[m];
+        notebookForWeek.data.datasets[0].data[m] = data[m];  
     }
 
-    notebookForMonth.data.datasets[0].data[1] = sumOfData/data.length
-
+    for(m = 0; m < NoteBookAves.length; m++){
+        notebookForMonth.data.datasets[0].data[m] = NoteBookAves[m];
+    }
 
     didnotDoPolicy.data.datasets[0].data[1] = Totalpolicy.total * -1;
     didnotDoPolicy.data.datasets[0].data[2] = Totalpolicy.elmi * -1;
@@ -544,7 +537,7 @@ var notebookForMonth = new Chart(document.getElementById("line-chart1"), {
     data: {
         labels: ["مهر","ابان", "آذر", "دی", "بهمن", "اسفند", "فروردین", "اردیبهشت","خرداد"],
         datasets: [{
-            data: [0,0,0,0,0,0,0,0,0],
+            data: [],
             borderColor: "#22de84",
             fill: true
         }
@@ -596,6 +589,50 @@ var didnotDoPolicy = new Chart(document.getElementById("bar-chart"), {
                     steps: 1,
                     min: -10
 
+                }
+            }]
+        }
+    }
+});
+
+
+var jobs = new Chart(document.getElementById("bar-chart-jobs"), {
+    type: 'bar',
+    data: {
+        labels: ["دوره اول","دوره دوم", "دوره سوم","دوره چهارم"],
+        datasets: [
+            {
+                backgroundColor: ["#000", "#000","#000","#000"],
+                data: [1,3,3,3]
+            }
+        ]
+    },
+    options: {
+        legend: { display: false },
+        title: {
+            display: true,
+            fontSize: 25,
+            FontFamily:'tanha',
+            text: ' نمودار مسئولیت ها '
+        },
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero: true,
+                    steps: 1,
+                    max: 3,
+                    callback: function(label, index, labels) {
+                        switch (label) {
+                            case 0:
+                                return ' ';
+                            case 1:
+                                return 'ضعیف';
+                            case 2:
+                                return 'متوسط';
+                            case 3:
+                                return 'خوب';
+                        }
+                    }
                 }
             }]
         }

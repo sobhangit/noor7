@@ -19,7 +19,7 @@
     }
 
     .forPrint {
-            display: block !important;
+        display: block !important;
     }
 
     #nameOfStudent {
@@ -30,24 +30,54 @@
     }
 
     .report-view-table {
-        width: 100vw;
-        height: 1100px;
+        width: 1000px;
+        height: 1380px;
         position:relative;
         page-break-after: always;
     }
 
-    #opinionOfParents{
-        position:absolute;
-        width:692px;
-        z-index:100;
-        height:100px;
-        bottom:0px;
+    #description {
+        position: absolute;
+        width: 960px;
+        z-index: 100;
+        height: 150px;
+        bottom: 250px;
+        left: 50%;
+        margin-left: -480px;
+    }
+
+    #opinionOfParents {
+        position: absolute;
+        width: 960px;
+        z-index: 100;
+        height: 150px;
+        bottom: 0px;
+        left: 50%;
+        margin-left: -480px;
     }
 
     .report-view-chart {
-        width: 100vw;
-        height: 100% !important;
+        margin-top:20px !important;
+        width: 1000px;
+        height: 1380px !important;
+        margin-bottom:5px !important;
     }
-    
+
+    .report-view-chart .row {
+        display: grid;
+        grid-template-columns: auto auto;
+        background-color: #2196F3;
+    }
+
+    .report-view-chart .row > div {
+        background-color: lightcyan;
+        text-align: center;
+    }
+
+    canvas {
+        width:450px !important;
+        height:300px !important;
+        margin: 0 auto !important;
+    }
    
   }

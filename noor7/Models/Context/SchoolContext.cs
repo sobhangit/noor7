@@ -20,6 +20,7 @@ namespace noor7.Models
         public DbSet<Notebook> Notebooks { get; set; }
         public DbSet<Practice> Practices { get; set; }
         public DbSet<Job> Jobs { get; set; }
-       
+        public DbSet<NotebookAve> NotebookAves { get; set; }
+
     }
 }

@@ -176,8 +176,10 @@ namespace noor7.Controllers
             }
 
             var gradeOfNotebook = notebookForStudent(studentForReport);
+            var stdId = Convert.ToInt32(studentForReport.studentID);
+            var notebookAves = _context.NotebookAves.Where(s => s.StudentID == stdId).OrderBy(s=>s.Month).Select(x => x.Average).ToList();
 
-            var jsonObj = JsonConvert.SerializeObject(new forTableReportDto { CourseForReportDtos = courseForSelected, ReportDtos = objForTable , Exams = examsForPrint, GradeOfNotebook = gradeOfNotebook, Totalpolicy = totalPolicy });
+            var jsonObj = JsonConvert.SerializeObject(new forTableReportDto { CourseForReportDtos = courseForSelected, ReportDtos = objForTable , Exams = examsForPrint, GradeOfNotebook = gradeOfNotebook, Totalpolicy = totalPolicy, NoteBookAves = notebookAves });
 
             return Json(new { success = true, responseText = jsonObj }, JsonRequestBehavior.AllowGet);
         }
