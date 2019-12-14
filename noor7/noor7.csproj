@@ -144,6 +144,7 @@
     <Compile Include="Controllers\StudentManagmentController.cs" />
     <Compile Include="Dtos\Absent\AbsentClassDto.cs" />
     <Compile Include="Dtos\Defect\DefectClassDto.cs" />
+    <Compile Include="Dtos\Job\JobClassDto.cs" />
     <Compile Include="Dtos\Late\LateClassDto.cs" />
     <Compile Include="Dtos\Report\CourseForReportDto.cs" />
     <Compile Include="Dtos\Report\ExamForReportDto.cs" />
@@ -170,6 +171,14 @@
     <Compile Include="Migrations\201912081043494_fix.cs" />
     <Compile Include="Migrations\201912081043494_fix.Designer.cs">
       <DependentUpon>201912081043494_fix.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201912091034220_jobModulChange.cs" />
+    <Compile Include="Migrations\201912091034220_jobModulChange.Designer.cs">
+      <DependentUpon>201912091034220_jobModulChange.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201912100614122_jobUpdate.cs" />
+    <Compile Include="Migrations\201912100614122_jobUpdate.Designer.cs">
+      <DependentUpon>201912100614122_jobUpdate.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Absent.cs" />
@@ -199,6 +208,7 @@
     <Content Include="Content\custome.css" />
     <Content Include="Content\defact.jpg" />
     <Content Include="Content\exam.jpg" />
+    <Content Include="Content\job.png" />
     <Content Include="Content\late.jpg" />
     <Content Include="Content\notebook.jpg" />
     <Content Include="Content\practice.jpg" />
@@ -281,6 +291,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201912081043494_fix.resx">
       <DependentUpon>201912081043494_fix.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201912091034220_jobModulChange.resx">
+      <DependentUpon>201912091034220_jobModulChange.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201912100614122_jobUpdate.resx">
+      <DependentUpon>201912100614122_jobUpdate.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

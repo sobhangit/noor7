@@ -107,5 +107,9 @@ namespace noor7.Controllers
         {
             return RedirectToAction("Index", "LateManagment");
         }
+        public ActionResult AddJob()
+        {
+            return RedirectToAction("Index", "JobManagment");
+        }
     }
 }

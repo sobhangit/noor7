@@ -177,9 +177,29 @@ namespace noor7.Controllers
 
             var gradeOfNotebook = notebookForStudent(studentForReport);
             var stdId = Convert.ToInt32(studentForReport.studentID);
-            var notebookAves = _context.NotebookAves.Where(s => s.StudentID == stdId).OrderBy(s=>s.Month).Select(x => x.Average).ToList();
 
-            var jsonObj = JsonConvert.SerializeObject(new forTableReportDto { CourseForReportDtos = courseForSelected, ReportDtos = objForTable , Exams = examsForPrint, GradeOfNotebook = gradeOfNotebook, Totalpolicy = totalPolicy, NoteBookAves = notebookAves });
+            var notebookAves = _context.NotebookAves.Where(s => s.StudentID == stdId).OrderBy(s => s.Month).Select(x => x.Average).ToList();
+
+            var jobsCount = _context.Jobs.Where(x => x.StudentID == stdId).Count();
+            var jobList = new Dictionary<int, int>();
+
+            if (jobsCount > 0){
+                var jobs = _context.Jobs.Where(x => x.StudentID == stdId).OrderBy(s=>s.Cycle).ToList();
+
+                foreach (var item in jobs)
+                {
+                    jobList.Add(item.Cycle, item.Grade);
+                }
+            }
+            else{
+                jobList.Add(0, 0);
+            }
+
+
+
+
+
+            var jsonObj = JsonConvert.SerializeObject(new forTableReportDto { CourseForReportDtos = courseForSelected, ReportDtos = objForTable , Exams = examsForPrint, GradeOfNotebook = gradeOfNotebook, Totalpolicy = totalPolicy, NoteBookAves = notebookAves, jobsList = jobList });
 
             return Json(new { success = true, responseText = jsonObj }, JsonRequestBehavior.AllowGet);
         }

@@ -14,7 +14,7 @@ namespace noor7.Models
         [Required]
         public int Cycle { get; set; }
         [Required]
-        public JobType JobType { get; set; }
+        public string JobType { get; set; }
         [Required]
         public int Grade { get; set; }
         public Student Student { get; set; }

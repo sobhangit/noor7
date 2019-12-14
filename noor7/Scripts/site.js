@@ -272,6 +272,38 @@ function sendJsonDataForLate() {
 }
 
 
+function sendJsonDataForJob() {
+
+    var studentID = document.getElementById("studentID").value;
+    var cycle = document.getElementById("cycle").value;
+    var jobType = document.getElementById("jobType").value;
+    var grade = document.getElementById("grade").value;
+
+    var jsonObject = {};
+
+    jsonObject.studentID = studentID;
+    jsonObject.cycle = cycle;
+    jsonObject.jobType = jobType;
+    jsonObject.grade = grade;
+
+    console.log(JSON.stringify(jsonObject));
+
+
+    $.ajax({
+        url: "/JobManagment/AddJob",
+        type: "POST",
+        data: JSON.stringify(jsonObject),
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        error: function (response) {
+            alert(response.responseText);
+        },
+        success: function (response) {
+            alert(JSON.stringify(jsonObject));
+        }
+    });
+}
+
 
 
 //////////// For Report
@@ -310,7 +342,8 @@ function sendJsonDataToReport() {
                 var GradeOfNotebook = jsonObj["GradeOfNotebook"];
                 var Totalpolicy = jsonObj["Totalpolicy"];
                 var NoteBookAves = jsonObj["NoteBookAves"];
-
+                var jobsList = jsonObj["jobsList"];
+            
                 var ExamList = [];  
                 var PracticeList = [];
 
@@ -459,7 +492,7 @@ function sendJsonDataToReport() {
                 //Chart Updating
 
                 var labels = ['هفته اول', 'هفته دوم', 'هفته سوم', 'هفته چهارم', 'هفته پنجم'];
-                addData(labels,GradeOfNotebook,Totalpolicy,NoteBookAves);
+                addData(labels,GradeOfNotebook,Totalpolicy,NoteBookAves,jobsList);
 
                 var e = "-" + Totalpolicy.elmi
                 var t = "-" + Totalpolicy.total
@@ -467,12 +500,13 @@ function sendJsonDataToReport() {
                 var policy = [e,t];
                 console.log("elmi : ",e);
                 console.log("enzebati : ",t);
+
             }
         }
     });
 }
 
-function addData(labels,data,Totalpolicy,NoteBookAves) {
+function addData(labels,data,Totalpolicy,NoteBookAves,jobsList) {
 
     for(m = 0; m < data.length; m++){
         notebookForWeek.data.labels[m] = labels[m];
@@ -483,12 +517,66 @@ function addData(labels,data,Totalpolicy,NoteBookAves) {
         notebookForMonth.data.datasets[0].data[m] = NoteBookAves[m];
     }
 
+    var counterJobs = 0;
+    
+    let jobsLable = " ";
+    let jobsValue = 0;
+
+    for (const [key, value] of Object.entries(jobsList)) {
+        console.log(key, value);
+
+        switch(key) {
+          case "0":
+            jobsLable = " ";
+            jobsValue = 0;
+            break;
+          case "1":
+            jobsLable = "دوره اول";
+            jobsValue = value;
+            break;
+          case "2":
+            jobsLable = "دوره دوم";
+            jobsValue = value;
+            break;
+          case "3":
+            jobsLable = "دوره سوم";
+            jobsValue = value;
+            break;
+          case "4":
+            jobsLable = "دوره چهارم";
+            jobsValue = value;
+            break;
+          case "5":
+            jobsLable = "دوره پنجم";
+            jobsValue = value;
+            break;
+          case "6":
+            jobsLable = "دوره ششم";
+            jobsValue = value;
+            break;
+          case "7":
+            jobsLable = "دوره هفتم";
+            jobsValue = value;
+            break;
+          case "8":
+            jobsLable = "دوره هشتم";
+            jobsValue = value;
+            break;
+        }
+    
+        jobs.data.labels[counterJobs] = jobsLable;
+        jobs.data.datasets[0].data[counterJobs] = jobsValue; 
+
+        counterJobs++;
+    }
+
     didnotDoPolicy.data.datasets[0].data[1] = Totalpolicy.total * -1;
     didnotDoPolicy.data.datasets[0].data[2] = Totalpolicy.elmi * -1;
     
     didnotDoPolicy.update();
     notebookForMonth.update();
     notebookForWeek.update();
+    jobs.update();
 }
 
 /*function ul(index) {
@@ -562,6 +650,20 @@ var notebookForMonth = new Chart(document.getElementById("line-chart1"), {
     }
 });
 
+/*Chart.types.Line.extend({
+  name: "LineAlt",
+  draw: function(){
+    Chart.types.Line.prototype.draw.apply(this, arguments);
+
+    this.chart.ctx.textAlign = "center"
+    // y value and x index
+    this.chart.ctx.fillText("ZONE1", this.scale.calculateX(3.5), this.scale.calculateY(20.75))
+    this.chart.ctx.fillText("ZONE2", this.scale.calculateX(11.5), this.scale.calculateY(13))
+    this.chart.ctx.fillText("ZONE3", this.scale.calculateX(2), this.scale.calculateY(9.75))
+    this.chart.ctx.fillText("ZONE4", this.scale.calculateX(14.5), this.scale.calculateY(22.75))
+  }
+});*/
+
 var didnotDoPolicy = new Chart(document.getElementById("bar-chart"), {
     type: 'bar',
     data: {
@@ -583,12 +685,47 @@ var didnotDoPolicy = new Chart(document.getElementById("bar-chart"), {
         },
         scales: {
             yAxes: [{
+                display: true,
+                scaleLabel: {
+                    display: true,
+                    labelString: 'پرسش برانگیز',
+                    fontSize:20,
+                    FontFamily:'tanha',
+                    lineHeight:1
+                },
                 ticks: {
-                    beginAtZero: true,
-                    reverse: true,
-                    steps: 1,
-                    min: -10
+                    min: -10,
+                    max: 1,
+                    stepSize: 1,
+                    callback: function(label){
+                        switch(label){
 
+                            case 1:
+                                return "خوب";
+                            case 0:
+                                return ["(۰)","درحدانتظار"];
+                            case -1:
+                                return ["(۱-)","نیازبه تلاش بیشتر"];
+                            case -2:
+                                return ["(۲-)","پرسش برانگیز"];
+                            case -3:
+                                return "۳-";
+                            case -4:
+                                return "۴-";
+                            case -5:
+                                return "۵-";
+                            case -6:
+                                return "۶-";
+                            case -7:
+                                return "۷-";
+                            case -8:
+                                return "۸-";
+                            case -9:
+                                return "۹-";
+                            case -10:
+                                return "۱۰-";
+                        }
+                    }
                 }
             }]
         }
@@ -599,11 +736,13 @@ var didnotDoPolicy = new Chart(document.getElementById("bar-chart"), {
 var jobs = new Chart(document.getElementById("bar-chart-jobs"), {
     type: 'bar',
     data: {
-        labels: ["دوره اول","دوره دوم", "دوره سوم","دوره چهارم"],
+        labels: [],
         datasets: [
             {
-                backgroundColor: ["#000", "#000","#000","#000"],
-                data: [1,3,3,3]
+                backgroundColor: '#fff',
+                borderColor: '#000',
+                borderWidth: 5,
+                data: []
             }
         ]
     },
@@ -621,7 +760,7 @@ var jobs = new Chart(document.getElementById("bar-chart-jobs"), {
                     beginAtZero: true,
                     steps: 1,
                     max: 3,
-                    callback: function(label, index, labels) {
+                    callback: function(label) {
                         switch (label) {
                             case 0:
                                 return ' ';
@@ -660,7 +799,13 @@ function tableprint(){
     var x = document.getElementById("selectedStudent").value;
     console.log(x);
 
-    var selectedStudent = x-2;//x-1
+    var selectedStudent = x-1;//x-2 after 36
+
+    if(x <= 36){
+        selectedStudent = x-1;//x-2 after 36
+    }else {
+        selectedStudent = x-2;
+    }
 
     var v = document.getElementById("search-report").options.item(selectedStudent).innerText;
     console.log(v);

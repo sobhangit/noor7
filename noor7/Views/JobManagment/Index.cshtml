@@ -1,2 +1,53 @@
 ﻿
-    <h1>job</h1>
+<div>
+
+   <div class="row" style="width:90%;margin:0 auto; padding:5px;">
+
+       <form class="form-inline">
+           <input id="studentID" list="search-report" class="form-control col-md-3" placeholder="نام و نام خانوادگی">
+           <datalist id="search-report">
+
+               @foreach (var item in ViewBag.students)
+               {
+                   <option value="@item.Id">@item.FirstName @item.LastName @item.Class</option>
+               }
+
+           </datalist>
+
+           <input id="cycle" list="cycle-list" class="form-control col-md-2" placeholder="دوره">
+
+           <input id="jobType" list="job-list" class="form-control col-md-2" placeholder="نوع مسئولیت">
+           <datalist id="job-list">
+
+               <option value="قرآن"></option>
+               <option value="فناوری"></option>
+               <option value="مبصر"></option>
+               <option value="بازدید تکلیف"></option>
+               <option value="گزارش کار"></option>
+               <option value="مهرکامل"></option>
+               <option value="نمازخانه"></option>
+
+           </datalist>
+
+           <input id="grade" list="grade-list" class="form-control col-md-2" placeholder="نمره">
+           <datalist id="grade-list">
+
+               <option value="1"></option>
+               <option value="2"></option>
+               <option value="3"></option>
+
+           </datalist>
+
+
+           <input type="button" class="btn btn-success" value="ثبت" onclick="sendJsonDataForJob();">
+
+       </form>
+
+    </div>
+</div>
+
+
+
+<div style="position:absolute;bottom:70px">
+    @Html.ActionLink("بازگشت به پنل کاربری", "Index", "Home")
+</div>
