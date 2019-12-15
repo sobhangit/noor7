@@ -497,9 +497,8 @@ function sendJsonDataToReport() {
                 var e = "-" + Totalpolicy.elmi
                 var t = "-" + Totalpolicy.total
 
-                var policy = [e,t];
-                console.log("elmi : ",e);
-                console.log("enzebati : ",t);
+                console.log("elmi : ",Totalpolicy.elmi);
+                console.log("enzebati : ",Totalpolicy.total);
 
             }
         }
@@ -570,8 +569,37 @@ function addData(labels,data,Totalpolicy,NoteBookAves,jobsList) {
         counterJobs++;
     }
 
-    didnotDoPolicy.data.datasets[0].data[1] = Totalpolicy.total * -1;
-    didnotDoPolicy.data.datasets[0].data[2] = Totalpolicy.elmi * -1;
+    //didnotDoPolicy.data.datasets[0].data[1] = Totalpolicy.total * -1;
+    //didnotDoPolicy.data.datasets[0].data[2] = Totalpolicy.elmi * -1;
+    
+    didnotDoPolicy.data.datasets[0].data[1] = 1;
+    didnotDoPolicy.data.datasets[0].data[2] = -1;
+
+    switch(Totalpolicy.total) {
+        case "0":
+            didnotDoPolicy.data.datasets[0].data[1] = 9;
+        break;
+        case "1":
+            didnotDoPolicy.data.datasets[0].data[1] = 8;
+        break;
+        case "2":
+            didnotDoPolicy.data.datasets[0].data[1] = 7;
+        break;
+        
+    }
+
+    switch(Totalpolicy.elmi) {
+        case "0":
+            didnotDoPolicy.data.datasets[0].data[2] = 9;
+        break;
+        case "1":
+            didnotDoPolicy.data.datasets[0].data[2] = 8;
+        break;
+        case "2":
+            didnotDoPolicy.data.datasets[0].data[2] = 7;
+        break;
+        
+    }
     
     didnotDoPolicy.update();
     notebookForMonth.update();
@@ -664,50 +692,120 @@ var notebookForMonth = new Chart(document.getElementById("line-chart1"), {
   }
 });*/
 
-var didnotDoPolicy = new Chart(document.getElementById("bar-chart"), {
+var barChart = document.getElementById("bar-chart");
+
+var plugin = {
+    afterDraw: function (chart) {
+        var width = barChart.width,
+            height = barChart.height,
+            ctx = barChart.getContext('2d');
+        ctx.restore();
+        ctx.font = "1.4em tanha";
+        ctx.textAlign = "center";
+        ctx.textBaseline = "middle";
+        ctx.fillText("خوب", width * .50, height * .165);
+        ctx.fillText("نیاز به تلاش بیشتر", width * .50, height * .257);
+        ctx.fillText("پرسش برانگیز", width * .50, height * .60);
+        ctx.save();
+    }
+};
+
+Chart.plugins.register(plugin);
+
+Chart.pluginService.register({
+    afterDraw: function(chart) {
+        if (typeof chart.config.options.lineAt != 'undefined') {
+
+
+        	var lineAt = chart.config.options.lineAt;
+            var ctxPlugin = chart.chart.ctx;
+            var xAxe = chart.scales[chart.config.options.scales.xAxes[0].id];
+            var yAxe = chart.scales[chart.config.options.scales.yAxes[0].id];
+           	
+            var holder = 0;
+            // I'm not good at maths
+            // So I couldn't find a way to make it work ...
+            // ... without having the `min` property set to 0
+            //if(yAxe.min != 0) return;
+            
+            ctxPlugin.strokeStyle = "blue";
+        	ctxPlugin.beginPath();
+            //holder = (lineAt[0] - (yAxe.min)) * (100 / (yAxe.max));
+            //holder = (100 - holder) / 100 * (yAxe.height) + yAxe.top;
+            
+            ctxPlugin.moveTo(xAxe.left, 50);
+            ctxPlugin.lineTo(xAxe.right, 50);
+    
+            ctxPlugin.moveTo(xAxe.left, 88);
+            ctxPlugin.lineTo(xAxe.right, 88);
+
+            ctxPlugin.moveTo(xAxe.left, 126);
+            ctxPlugin.lineTo(xAxe.right,126);
+
+            ctxPlugin.moveTo(xAxe.left, 392);
+            ctxPlugin.lineTo(xAxe.right,392);
+            
+            ctxPlugin.stroke();
+
+        }
+    }
+});
+
+var didnotDoPolicy = new Chart(barChart, {
     type: 'bar',
     data: {
-        labels: [" ","انضباطی", "علمی",""],
+        labels: ["تاخیر ورود به مدرسه","غیبت غیرموجه","رعایت نظم", "موارد علمی"],
         datasets: [
             {
-                backgroundColor: ["#fff", "#000","#000",""],
+                backgroundColor: '#898585',
                 data: [0,0,0,0]
             }
         ]
     },
     options: {
+        plugins: [plugin],
         legend: { display: false },
         title: {
             display: true,
             fontSize: 25,
             FontFamily:'tanha',
-            text: ' نمودار نقصان عملکرد علمی انضباطی '
+            text: ' نمودار عملکرد علمی انضباطی '
         },
+        lineAt: [1,0],
         scales: {
+            xAxes: [{
+                barPercentage: 0.4,
+                gridLines: {
+                    display:false
+                }
+            }],
             yAxes: [{
+                gridLines: {
+                    display:false
+                },
                 display: true,
                 scaleLabel: {
-                    display: true,
+                    display: false,
                     labelString: 'پرسش برانگیز',
                     fontSize:20,
                     FontFamily:'tanha',
                     lineHeight:1
                 },
                 ticks: {
-                    min: -10,
+                    min: -8,
                     max: 1,
                     stepSize: 1,
                     callback: function(label){
                         switch(label){
 
                             case 1:
-                                return "خوب";
+                                return "۱";
                             case 0:
-                                return ["(۰)","درحدانتظار"];
+                                return "۰";
                             case -1:
-                                return ["(۱-)","نیازبه تلاش بیشتر"];
+                                return "۱-";
                             case -2:
-                                return ["(۲-)","پرسش برانگیز"];
+                                return "۲-";
                             case -3:
                                 return "۳-";
                             case -4:
@@ -720,10 +818,6 @@ var didnotDoPolicy = new Chart(document.getElementById("bar-chart"), {
                                 return "۷-";
                             case -8:
                                 return "۸-";
-                            case -9:
-                                return "۹-";
-                            case -10:
-                                return "۱۰-";
                         }
                     }
                 }
@@ -755,6 +849,9 @@ var jobs = new Chart(document.getElementById("bar-chart-jobs"), {
             text: ' نمودار مسئولیت ها '
         },
         scales: {
+            xAxes: [{
+                barPercentage: 0.4,
+            }],
             yAxes: [{
                 ticks: {
                     beginAtZero: true,
