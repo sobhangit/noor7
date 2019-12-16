@@ -305,6 +305,43 @@ function sendJsonDataForJob() {
 }
 
 
+function changeCycle() {
+
+    var studentID = document.getElementById("studentID").value;
+
+    var jsonObject = {};
+
+    jsonObject.studentID = studentID;
+
+    console.log(JSON.stringify(jsonObject));
+
+
+    $.ajax({
+        url: "/JobManagment/changeCycle",
+        type: "POST",
+        data: JSON.stringify(jsonObject),
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        error: function (response) {
+            alert(response.responseText);
+        },
+        success: function (response) {
+            if(response.success){ 
+                
+                console.log(response.responseText);
+
+                var jsonObj = JSON.parse(response.responseText)
+                var Cycle = jsonObj["Cycle"];
+                
+                document.getElementById('cycle').value = Cycle;
+                
+
+            }
+        }
+    });
+}
+
+
 
 //////////// For Report
 
@@ -343,7 +380,8 @@ function sendJsonDataToReport() {
                 var Totalpolicy = jsonObj["Totalpolicy"];
                 var NoteBookAves = jsonObj["NoteBookAves"];
                 var jobsList = jsonObj["jobsList"];
-            
+                var jobsNames = jsonObj["jobsNames"];            
+
                 var ExamList = [];  
                 var PracticeList = [];
 
@@ -492,20 +530,20 @@ function sendJsonDataToReport() {
                 //Chart Updating
 
                 var labels = ['هفته اول', 'هفته دوم', 'هفته سوم', 'هفته چهارم', 'هفته پنجم'];
-                addData(labels,GradeOfNotebook,Totalpolicy,NoteBookAves,jobsList);
+                addData(labels,GradeOfNotebook,Totalpolicy,NoteBookAves,jobsList,jobsNames);
 
-                var e = "-" + Totalpolicy.elmi
-                var t = "-" + Totalpolicy.total
+                
 
-                console.log("elmi : ",Totalpolicy.elmi);
-                console.log("enzebati : ",Totalpolicy.total);
-
+                console.log("late : ",Totalpolicy.late);
+                console.log("absent : ",Totalpolicy.absent);
+                console.log("nazm : ",Totalpolicy.naqsEnzebati);
+                console.log("elmi : ",Totalpolicy.naqsElmi);
             }
         }
     });
 }
 
-function addData(labels,data,Totalpolicy,NoteBookAves,jobsList) {
+function addData(labels,data,Totalpolicy,NoteBookAves,jobsList,jobsNames) {
 
     for(m = 0; m < data.length; m++){
         notebookForWeek.data.labels[m] = labels[m];
@@ -530,35 +568,35 @@ function addData(labels,data,Totalpolicy,NoteBookAves,jobsList) {
             jobsValue = 0;
             break;
           case "1":
-            jobsLable = "دوره اول";
+            jobsLable = "دوره اول" + ((typeof jobsNames[1] == 'undefined') ? ' ' : "(" + jobsNames[1] + ")" );
             jobsValue = value;
             break;
           case "2":
-            jobsLable = "دوره دوم";
+            jobsLable = "دوره دوم" + ((typeof jobsNames[2] == 'undefined') ? ' ' : "(" + jobsNames[2] + ")" ) ;
             jobsValue = value;
             break;
           case "3":
-            jobsLable = "دوره سوم";
+            jobsLable = "دوره سوم" + ((typeof jobsNames[3] == 'undefined') ? ' ' : "(" + jobsNames[3] + ")" );
             jobsValue = value;
             break;
           case "4":
-            jobsLable = "دوره چهارم";
+            jobsLable = "دوره چهارم" + ((typeof jobsNames[4] == 'undefined') ? ' ' : "(" + jobsNames[4] + ")" );
             jobsValue = value;
             break;
           case "5":
-            jobsLable = "دوره پنجم";
+            jobsLable = "دوره پنجم" + ((typeof jobsNames[5] == 'undefined') ? ' ' : "(" + jobsNames[5] + ")" );
             jobsValue = value;
             break;
           case "6":
-            jobsLable = "دوره ششم";
+            jobsLable = "دوره ششم" + ((typeof jobsNames[6] == 'undefined') ? ' ' : "(" + jobsNames[6] + ")" );
             jobsValue = value;
             break;
           case "7":
-            jobsLable = "دوره هفتم";
+            jobsLable = "دوره هفتم" + ((typeof jobsNames[7] == 'undefined') ? ' ' : "(" + jobsNames[7] + ")" );
             jobsValue = value;
             break;
           case "8":
-            jobsLable = "دوره هشتم";
+            jobsLable = "دوره هشتم"+ ((typeof jobsNames[8] == 'undefined') ? ' ' : "(" + jobsNames[8] + ")" );
             jobsValue = value;
             break;
         }
@@ -569,37 +607,27 @@ function addData(labels,data,Totalpolicy,NoteBookAves,jobsList) {
         counterJobs++;
     }
 
-    //didnotDoPolicy.data.datasets[0].data[1] = Totalpolicy.total * -1;
-    //didnotDoPolicy.data.datasets[0].data[2] = Totalpolicy.elmi * -1;
+    if(Totalpolicy.late == 0){
+            didnotDoPolicy.data.datasets[0].data[0] = 1;
+    }else{
+            didnotDoPolicy.data.datasets[0].data[0] = Totalpolicy.late * -1;
+    }
+
+    if(Totalpolicy.absent == 0){
+            didnotDoPolicy.data.datasets[0].data[1] = 1;
+    }else{
+            didnotDoPolicy.data.datasets[0].data[1] = Totalpolicy.absent * -1;
+    }
+
+    if(Totalpolicy.nazm == 0){
+            didnotDoPolicy.data.datasets[0].data[2] = 1;
+    }else{
+            didnotDoPolicy.data.datasets[0].data[2] = Totalpolicy.nazm * -1;
+    }
+
+    didnotDoPolicy.data.datasets[0].data[3] = Totalpolicy.elmi * -1;
     
-    didnotDoPolicy.data.datasets[0].data[1] = 1;
-    didnotDoPolicy.data.datasets[0].data[2] = -1;
-
-    switch(Totalpolicy.total) {
-        case "0":
-            didnotDoPolicy.data.datasets[0].data[1] = 9;
-        break;
-        case "1":
-            didnotDoPolicy.data.datasets[0].data[1] = 8;
-        break;
-        case "2":
-            didnotDoPolicy.data.datasets[0].data[1] = 7;
-        break;
-        
-    }
-
-    switch(Totalpolicy.elmi) {
-        case "0":
-            didnotDoPolicy.data.datasets[0].data[2] = 9;
-        break;
-        case "1":
-            didnotDoPolicy.data.datasets[0].data[2] = 8;
-        break;
-        case "2":
-            didnotDoPolicy.data.datasets[0].data[2] = 7;
-        break;
-        
-    }
+    
     
     didnotDoPolicy.update();
     notebookForMonth.update();
@@ -707,6 +735,8 @@ var plugin = {
         ctx.fillText("نیاز به تلاش بیشتر", width * .50, height * .257);
         ctx.fillText("پرسش برانگیز", width * .50, height * .60);
         ctx.save();
+
+        
     }
 };
 
@@ -728,14 +758,15 @@ Chart.pluginService.register({
             // ... without having the `min` property set to 0
             //if(yAxe.min != 0) return;
             
-            ctxPlugin.strokeStyle = "blue";
+            ctxPlugin.strokeStyle = "black";
         	ctxPlugin.beginPath();
             //holder = (lineAt[0] - (yAxe.min)) * (100 / (yAxe.max));
             //holder = (100 - holder) / 100 * (yAxe.height) + yAxe.top;
             
             ctxPlugin.moveTo(xAxe.left, 50);
             ctxPlugin.lineTo(xAxe.right, 50);
-    
+            
+            
             ctxPlugin.moveTo(xAxe.left, 88);
             ctxPlugin.lineTo(xAxe.right, 88);
 
@@ -754,7 +785,7 @@ Chart.pluginService.register({
 var didnotDoPolicy = new Chart(barChart, {
     type: 'bar',
     data: {
-        labels: ["تاخیر ورود به مدرسه","غیبت غیرموجه","رعایت نظم", "موارد علمی"],
+        labels: ["تاخیر ورود به مدرسه","غیبت غیرموجه","رعایت نظم", "نقص علمی"],
         datasets: [
             {
                 backgroundColor: '#898585',
@@ -792,6 +823,7 @@ var didnotDoPolicy = new Chart(barChart, {
                     lineHeight:1
                 },
                 ticks: {
+                    fontSize: 16,
                     min: -8,
                     max: 1,
                     stepSize: 1,
@@ -862,11 +894,11 @@ var jobs = new Chart(document.getElementById("bar-chart-jobs"), {
                             case 0:
                                 return ' ';
                             case 1:
-                                return 'ضعیف';
+                                return 'نیازمند تلاش بیشتر';
                             case 2:
-                                return 'متوسط';
+                                return 'درحدانتظار';
                             case 3:
-                                return 'خوب';
+                                return 'رضایت بخش';
                         }
                     }
                 }

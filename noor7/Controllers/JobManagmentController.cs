@@ -1,4 +1,5 @@
-﻿using noor7.Dtos.Job;
+﻿using Newtonsoft.Json;
+using noor7.Dtos.Job;
 using noor7.Models;
 using System;
 using System.IO;
@@ -18,6 +19,8 @@ namespace noor7.Controllers
 
         public ActionResult Index()
         {
+
+            
             var students = _context.Students.ToList();
             ViewBag.students = students;
 
@@ -25,8 +28,27 @@ namespace noor7.Controllers
         }
 
         [HttpPost]
+        public ActionResult changeCycle(StudentForCycleDto cycleDto) {
+            int stdId = Convert.ToInt32(cycleDto.studentID);
+            int cycle = 1;
+            var jobsCycleCount = _context.Jobs.Where(x=>x.StudentID == stdId).Select(s => s.Cycle).Count();
+
+            if (jobsCycleCount != 0) {
+                var jobsCycle = _context.Jobs.Where(x => x.StudentID == stdId).Select(s => s.Cycle).ToList();
+                jobsCycle.Sort();
+                cycle = jobsCycle.Last() + 1;
+            }
+
+
+            var jsonObj = JsonConvert.SerializeObject(new StudentAndCycleDtos { Cycle = cycle });
+
+            return Json(new { success = true, responseText = jsonObj }, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
         public ActionResult AddJob(JobClassDto jobDto)
         {
+
             if (jobDto.studentID != null)
             {
                 try
@@ -55,7 +77,6 @@ namespace noor7.Controllers
                 }
                 finally
                 {
-
 
                 }
             }

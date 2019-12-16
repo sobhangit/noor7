@@ -182,6 +182,7 @@ namespace noor7.Controllers
 
             var jobsCount = _context.Jobs.Where(x => x.StudentID == stdId).Count();
             var jobList = new Dictionary<int, int>();
+            var jobNames = new Dictionary<int, string>();
 
             if (jobsCount > 0){
                 var jobs = _context.Jobs.Where(x => x.StudentID == stdId).OrderBy(s=>s.Cycle).ToList();
@@ -189,17 +190,16 @@ namespace noor7.Controllers
                 foreach (var item in jobs)
                 {
                     jobList.Add(item.Cycle, item.Grade);
+                    jobNames.Add(item.Cycle, item.JobType);
                 }
             }
             else{
                 jobList.Add(0, 0);
+                jobNames.Add(0," ");
             }
 
-
-
-
-
-            var jsonObj = JsonConvert.SerializeObject(new forTableReportDto { CourseForReportDtos = courseForSelected, ReportDtos = objForTable , Exams = examsForPrint, GradeOfNotebook = gradeOfNotebook, Totalpolicy = totalPolicy, NoteBookAves = notebookAves, jobsList = jobList });
+            
+            var jsonObj = JsonConvert.SerializeObject(new forTableReportDto { CourseForReportDtos = courseForSelected, ReportDtos = objForTable , Exams = examsForPrint, GradeOfNotebook = gradeOfNotebook, Totalpolicy = totalPolicy, NoteBookAves = notebookAves, jobsList = jobList, jobsNames = jobNames });
 
             return Json(new { success = true, responseText = jsonObj }, JsonRequestBehavior.AllowGet);
         }
@@ -632,10 +632,16 @@ namespace noor7.Controllers
 
             }
 
-            var total = naqsEnzebati + late + absent;
+            //var total = naqsEnzebati + late + absent;
 
+            totalPolicy.Add("late", late);
+            totalPolicy.Add("absent", absent);
+            totalPolicy.Add("nazm", naqsEnzebati);
             totalPolicy.Add("elmi", naqsElmi);
-            totalPolicy.Add("total", total);
+            
+            
+
+            //totalPolicy.Add("total", total);
 
             return totalPolicy;
         }

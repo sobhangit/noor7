@@ -145,6 +145,8 @@
     <Compile Include="Dtos\Absent\AbsentClassDto.cs" />
     <Compile Include="Dtos\Defect\DefectClassDto.cs" />
     <Compile Include="Dtos\Job\JobClassDto.cs" />
+    <Compile Include="Dtos\Job\StudentAndCycleDtos.cs" />
+    <Compile Include="Dtos\Job\StudentForCycleDto.cs" />
     <Compile Include="Dtos\Late\LateClassDto.cs" />
     <Compile Include="Dtos\Report\CourseForReportDto.cs" />
     <Compile Include="Dtos\Report\ExamForReportDto.cs" />

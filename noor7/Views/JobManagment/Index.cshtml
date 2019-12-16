@@ -4,7 +4,7 @@
    <div class="row" style="width:90%;margin:0 auto; padding:5px;">
 
        <form class="form-inline">
-           <input id="studentID" list="search-report" class="form-control col-md-3" placeholder="نام و نام خانوادگی">
+           <input id="studentID" list="search-report" class="form-control col-md-3" placeholder="نام و نام خانوادگی" onchange="changeCycle();">
            <datalist id="search-report">
 
                @foreach (var item in ViewBag.students)
@@ -14,14 +14,15 @@
 
            </datalist>
 
-           <input id="cycle" list="cycle-list" class="form-control col-md-2" placeholder="دوره">
+           <input id="cycle" list="cycle-list" class="form-control col-md-2" placeholder="دوره" value="">
 
            <input id="jobType" list="job-list" class="form-control col-md-2" placeholder="نوع مسئولیت">
            <datalist id="job-list">
 
                <option value="قرآن"></option>
                <option value="فناوری"></option>
-               <option value="مبصر"></option>
+               <option value="نماینده"></option>
+               <option value="حضوروغیاب"></option>
                <option value="بازدید تکلیف"></option>
                <option value="گزارش کار"></option>
                <option value="مهرکامل"></option>

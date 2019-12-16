@@ -15,6 +15,7 @@ namespace noor7.Dtos.Report
         public Dictionary<string,int> Totalpolicy { get; set; }
         public List<float> NoteBookAves { get; set; }
         public Dictionary<int, int> jobsList { get; set; }
+        public Dictionary<int, string> jobsNames { get; set; }
 
     }
 }
