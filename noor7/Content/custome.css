@@ -254,6 +254,10 @@ div.panel-tiles .tile h5 {
         width: 25%;
     }
 
+.report-view-chart {
+    position:relative !important;
+}
+
 .report-view-chart .row > div {
     margin-bottom: 40px;
 }
@@ -293,3 +297,12 @@ div.panel-tiles .tile h5 {
     height: 0;
     display: none;
 }
+
+.helpContent {
+    width: 100% !important;
+    height: auto;
+    white-space: normal;
+    padding: 12px;
+    text-align: justify;
+}
+

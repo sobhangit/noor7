@@ -732,7 +732,7 @@ var plugin = {
         ctx.textAlign = "center";
         ctx.textBaseline = "middle";
         ctx.fillText("خوب", width * .50, height * .165);
-        ctx.fillText("نیاز به تلاش بیشتر", width * .50, height * .257);
+        ctx.fillText("نیازمند تلاش بیشتر", width * .50, height * .257);
         ctx.fillText("پرسش برانگیز", width * .50, height * .60);
         ctx.save();
 
@@ -909,22 +909,6 @@ var jobs = new Chart(document.getElementById("bar-chart-jobs"), {
 
 function autoPrint(){
 
-    var v = document.getElementById("search-report").options.item(selectedStudent).innerText;
-    console.log(v);
-
-    var t = document.getElementById("nameOfStudent").innerText = "کارنامه ماهیانه " + v + " - پایه هفتم";
-    console.log(t);
-
-}
-
-function tableprint(){
-
-    var d = document.getElementById("charPrint");
-    d.className += " dont-print";
-
-    var m = document.getElementById("tblPrint");
-    m.classList.remove("dont-print");
-
     var x = document.getElementById("selectedStudent").value;
     console.log(x);
 
@@ -937,10 +921,32 @@ function tableprint(){
     }
 
     var v = document.getElementById("search-report").options.item(selectedStudent).innerText;
-    console.log(v);
+    
+    var n = v.split(" ");
+    console.log(n[n.length - 1]);//last character . class name
 
-    var t = document.getElementById("nameOfStudent").innerText = "کارنامه ماهیانه " + v + " - پایه هفتم";
+    var name = " ";
+    for (i = 0; i < n.length - 1; i++) {
+        name += n[i] + " ";
+    }
+
+    var spaceCount = (v.split(" ").length - 1);
+    console.log(spaceCount);
+
+    var t = document.getElementById("nameOfStudent").innerText = "کارنامه ماهیانه" + name + "کلاس هفتم " + n[n.length - 1];
     console.log(t);
+
+}
+
+function tableprint(){
+
+    var d = document.getElementById("charPrint");
+    d.className += " dont-print";
+
+    var m = document.getElementById("tblPrint");
+    m.classList.remove("dont-print");
+
+    
 
     
 }
