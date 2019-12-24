@@ -627,7 +627,12 @@ function addData(labels,data,Totalpolicy,NoteBookAves,jobsList,jobsNames) {
 
     didnotDoPolicy.data.datasets[0].data[3] = Totalpolicy.elmi * -1;
     
-    
+    if(Totalpolicy.mailToHome == 0){
+            didnotDoPolicy.data.datasets[0].data[4] = 1;
+    }else{
+            didnotDoPolicy.data.datasets[0].data[4] = Totalpolicy.mailToHome * -1;
+    }
+
     
     didnotDoPolicy.update();
     notebookForMonth.update();
@@ -662,7 +667,7 @@ var notebookForWeek = new Chart(document.getElementById("line-chart"), {
             display: true,
             fontSize: 25,
             FontFamily:'tanha',
-            text: 'نمودار دفترچه راهنما(کمترین امتیاز ۰ و بیشترین امتیاز ۱۸) '
+            text: 'نمودار دفترچه راهنما'
         },
         scales: {
             yAxes: [{
@@ -693,7 +698,7 @@ var notebookForMonth = new Chart(document.getElementById("line-chart1"), {
             display: true,
             fontSize: 25,
             FontFamily:'tanha',
-            text: ' میانگین دفترچه راهنما '
+            text: ' نمودار ماهانه دفترچه راهنما '
         },
         scales: {
             yAxes: [{
@@ -733,7 +738,7 @@ var plugin = {
         ctx.textBaseline = "middle";
         ctx.fillText("خوب", width * .50, height * .165);
         ctx.fillText("نیازمند تلاش بیشتر", width * .50, height * .257);
-        ctx.fillText("پرسش برانگیز", width * .50, height * .60);
+        ctx.fillText("پرسش برانگیز", width * .50, height * .340);
         ctx.save();
 
         
@@ -763,18 +768,17 @@ Chart.pluginService.register({
             //holder = (lineAt[0] - (yAxe.min)) * (100 / (yAxe.max));
             //holder = (100 - holder) / 100 * (yAxe.height) + yAxe.top;
             
-            ctxPlugin.moveTo(xAxe.left, 50);
-            ctxPlugin.lineTo(xAxe.right, 50);
-            
+            //ctxPlugin.moveTo(xAxe.left, 50);
+            //ctxPlugin.lineTo(xAxe.right, 50);
             
             ctxPlugin.moveTo(xAxe.left, 88);
             ctxPlugin.lineTo(xAxe.right, 88);
 
-            ctxPlugin.moveTo(xAxe.left, 126);
-            ctxPlugin.lineTo(xAxe.right,126);
+            //ctxPlugin.moveTo(xAxe.left, 126);
+            //ctxPlugin.lineTo(xAxe.right,126);
 
-            ctxPlugin.moveTo(xAxe.left, 392);
-            ctxPlugin.lineTo(xAxe.right,392);
+            //ctxPlugin.moveTo(xAxe.left, 392);
+            //ctxPlugin.lineTo(xAxe.right,392);
             
             ctxPlugin.stroke();
 
@@ -785,11 +789,11 @@ Chart.pluginService.register({
 var didnotDoPolicy = new Chart(barChart, {
     type: 'bar',
     data: {
-        labels: ["تاخیر ورود به مدرسه","غیبت غیرموجه","رعایت نظم", "نقص علمی"],
+        labels: ["تاخیر ورود به مدرسه","غیبت غیرموجه","رعایت نظم", "نقص علمی","ارائه نامه خانه"],
         datasets: [
             {
                 backgroundColor: '#898585',
-                data: [0,0,0,0]
+                data: [0,0,0,0,0]
             }
         ]
     },
@@ -808,11 +812,15 @@ var didnotDoPolicy = new Chart(barChart, {
                 barPercentage: 0.4,
                 gridLines: {
                     display:false
+                },
+                ticks: {
+                    fontSize: 16,
+                    FontFamily:'tanha',
                 }
             }],
             yAxes: [{
                 gridLines: {
-                    display:false
+                    display:true
                 },
                 display: true,
                 scaleLabel: {
@@ -823,7 +831,7 @@ var didnotDoPolicy = new Chart(barChart, {
                     lineHeight:1
                 },
                 ticks: {
-                    fontSize: 16,
+                    fontSize: 22,
                     min: -8,
                     max: 1,
                     stepSize: 1,
@@ -850,6 +858,7 @@ var didnotDoPolicy = new Chart(barChart, {
                                 return "۷-";
                             case -8:
                                 return "۸-";
+                            
                         }
                     }
                 }

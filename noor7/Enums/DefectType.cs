@@ -8,6 +8,7 @@ namespace noor7.Enums
     public enum DefectType
     {
         انضباطی,
-        علمی
+        علمی,
+        اطلاعیه
     }
 }

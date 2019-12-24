@@ -561,11 +561,13 @@ namespace noor7.Controllers
 
             int naqsElmi = 0;
             int naqsEnzebati = 0;
+            int mailToHome = 0;
             int late = 0;
             int absent = 0;
 
             var defectDates = _context.Defects.Where(s => s.Type == Enums.DefectType.علمی && s.StudentID == stdID).Select(s => s.DefaceDate).ToList();
             var defectDatesE = _context.Defects.Where(s => s.Type == Enums.DefectType.انضباطی && s.StudentID == stdID).Select(s => s.DefaceDate).ToList();
+            var defectDatesM = _context.Defects.Where(s => s.Type == Enums.DefectType.اطلاعیه && s.StudentID == stdID).Select(s => s.DefaceDate).ToList();
             var lateDates = _context.Lates.Where(s => s.StudentID == stdID && s.IsTrue == false).Select(s=>s.LateDate).ToList();
             var absentDates = _context.Absents.Where(s => s.StudentID == stdID && s.IsTrue == false).ToList();
 
@@ -583,6 +585,13 @@ namespace noor7.Controllers
                     naqsEnzebati += 1;
                 }
             }
+            foreach (var date in defectDatesM)
+            {
+                if (date >= fromDateForSelect && date <= toDateForSelect)
+                {
+                    mailToHome += 1;
+                }
+            }
             foreach (var date in lateDates)
             {
                 if (date >= fromDateForSelect && date <= toDateForSelect)
@@ -592,8 +601,14 @@ namespace noor7.Controllers
             }
             foreach (var date in absentDates)
             {
-              
-                List<DateTime> tempDate = new List<DateTime> { };
+                if (absentDates != null || absentDates.Count != 0){
+                    if (date.FromDate >= fromDateForSelect && date.ToDate <= toDateForSelect)
+                    {
+                        absent += 1;
+                    }
+                }
+
+                /*List<DateTime> tempDate = new List<DateTime> { };
                 if (absentDates != null || absentDates.Count != 0)
                 {
                     foreach (var absentD in absentDates)
@@ -629,7 +644,7 @@ namespace noor7.Controllers
                     }
 
                 }
-
+*/
             }
 
             //var total = naqsEnzebati + late + absent;
@@ -638,8 +653,8 @@ namespace noor7.Controllers
             totalPolicy.Add("absent", absent);
             totalPolicy.Add("nazm", naqsEnzebati);
             totalPolicy.Add("elmi", naqsElmi);
-            
-            
+            totalPolicy.Add("mailToHome", mailToHome);
+
 
             //totalPolicy.Add("total", total);
 
