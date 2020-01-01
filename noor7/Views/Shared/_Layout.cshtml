@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="~/Content/custome.css" />
     <link rel="stylesheet" href="~/Content/site.css" />
     <link rel="stylesheet" media="print" href="~/Content/print.css">
+    <link type="text/css" rel="stylesheet" href="~/Content/persianDatepicker-default.css" />
 
 
 </head>
@@ -62,10 +63,14 @@
     <script src="~/Scripts/jquery.js"></script>
     <script src="~/Scripts/bootstrap.js"></script>
     <script src="~/Scripts/Chart.min.js" asp-append-version="true"></script>
+    <script type="text/javascript" src="~/Scripts/persianDatepicker.js"></script>
     <script src="~/Scripts/site.js" asp-append-version="true"></script>
 
-
-
+    <script type="text/javascript">
+        $(function() {
+            $("#date, #datePicker").persianDatepicker();
+        });
+    </script>
 
 </body>
 </html>

@@ -341,8 +341,6 @@ function changeCycle() {
     });
 }
 
-
-
 //////////// For Report
 
 function sendJsonDataToReport() {
@@ -954,9 +952,6 @@ function tableprint(){
 
     var m = document.getElementById("tblPrint");
     m.classList.remove("dont-print");
-
-    
-
     
 }
 
@@ -965,9 +960,99 @@ function chartprint(){
     var d = document.getElementById("tblPrint");
     d.className += " dont-print";
 
-
     var m = document.getElementById("charPrint");
     m.classList.remove("dont-print");
-
     
 }
+
+
+
+//Edit Area -------------------------------------
+
+function showTable() {
+
+
+
+    var typeOfShow = document.getElementById("type").value;
+    var course  = document.getElementById("course").value;
+    var date = document.getElementById("date").value;
+    var calssname  = document.getElementById("class").value;
+    
+    var jsonObject = {};
+
+    jsonObject.course = course;
+    jsonObject.date = date;
+    jsonObject.calssname = calssname;
+
+    console.log(JSON.stringify(jsonObject));
+ 
+
+    $.ajax({
+        url: (typeOfShow == "تکلیف") ? "/Edit/showPractice" : "/Edit/showExam",
+        type: "POST",
+        data: JSON.stringify(jsonObject),
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        error: function (response) {
+            alert(response);
+        },
+        success: function (response) {
+            console.log(response.responseText);
+
+            
+
+            var jsonObj = JSON.parse(response.responseText);
+            console.log(jsonObj);
+            var Students = jsonObj["Students"];
+            var CourseIds = jsonObj["CourseIds"];
+            var Exams =  jsonObj["Exams"];
+            var FinalGrade = jsonObj["FinalGrade"];
+
+            console.log(Object.keys(jsonObj[0].Students));
+            //console.log(jsonObj[0].Exams[j]);
+
+            var keys = Object.keys(jsonObj[0].Students);
+            var values = Object.values(jsonObj[0].Students);
+            var grades = Object.values(jsonObj[0].Exams);
+
+            $("#myTable tr").remove(); 
+
+            var table = document.getElementById("myTable");
+
+            var row = table.insertRow(0);
+            var cell1 = row.insertCell(0);
+            var cell2 = row.insertCell(1);
+            var cell3 = row.insertCell(2);
+
+            cell1.innerHTML = "شناسه",
+            cell2.innerHTML = "نام و نام خانوادگی",
+            cell3.innerHTML = "نمره";
+
+            for (var j = 0; j < keys.length; j++){
+
+                var row = table.insertRow(j+1);
+                var cell1 = row.insertCell(0);
+                var cell2 = row.insertCell(1);
+                var cell3 = row.insertCell(2);
+
+                cell1.innerHTML = keys[j],
+                cell2.innerHTML = values[j],
+                cell3.innerHTML = grades[j];
+                    
+            }  
+
+            var att = document.createAttribute("contenteditable");
+            att.value = true;                          
+            $("myTable td").setAttributeNode(att);
+            
+            $("myTable").html(table);  
+
+         
+        }
+    });
+//location.reload(true);
+}
+
+
+
+     

@@ -4,10 +4,27 @@
 
 
 <div class="col-md-6">
-    <header style="background-color:lightcoral;padding:5px;">
-        <form class="form-inline">
+    <div style="padding:5px;">
+        <h4>ویرایش امتحان</h4>
+        <hr />
+        <form class="form-inline" style="justify-content: center;">
+            <input id="type" list="typeSelect" class="form-control col-md-2" placeholder="نوع">
+            <datalist id="typeSelect">
+                <option value="تکلیف">تکلیف</option>
+                <option value="امتحان">امتحان</option>
+            </datalist>
+
+            <input id="course" list="courseSelect" class="form-control col-md-2" placeholder="درس">
+            <datalist id="courseSelect">
+                @foreach (var item in ViewBag.vv)
+                {
+                    <option value="@item.Title">@item.Title</option>
+                }
+
+            </datalist>
 
             <input id="date" class="form-control col-md-2" placeholder="تاریخ">
+            <span  id="datePicker" style="display:none"></span>
 
             <input id="class" list="classSelect" class="form-control col-md-2" placeholder="کلاس">
             <datalist id="classSelect">
@@ -16,22 +33,20 @@
                 <option value="ج">ج</option>
             </datalist>
 
-            <input id="type" list="typeSelect" class="form-control col-md-2" placeholder="نوع">
-            <datalist id="typeSelect">
-                <option value="تکلیف">تکلیف</option>
-                <option value="امتحان">امتحان</option>
-                <option value="دفترچه">دفترچه</option>
-            </datalist>
 
-            <input type="button" class="btn btn-success form-control col-md-2" value="ثبت" onclick="sendJsonDataForAbsent();">
+            <input type="button" class="btn btn-success form-control col-md-2" value="نمایش" onclick="showTable();">
         </form>
-        <div class="show1" >
-            
-
+        
+    </div>
+    <div style="padding:5px;height:400px;white-space: nowrap;overflow-y: scroll;">
+        <div>
+            <table id="myTable" cellpadding="2" cellspacing="2" border="1"></table>
         </div>
-    </header>
+        
+    </div>
     
 </div>
 <div class="col-md-6">
     
 </div>
+

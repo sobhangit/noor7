@@ -163,6 +163,8 @@
     <Compile Include="Controllers\StudentManagmentController.cs" />
     <Compile Include="Dtos\Absent\AbsentClassDto.cs" />
     <Compile Include="Dtos\Defect\DefectClassDto.cs" />
+    <Compile Include="Dtos\Edit\SendExamToViewDtos.cs" />
+    <Compile Include="Dtos\Edit\ShowDto.cs" />
     <Compile Include="Dtos\ExcelReportDto.cs" />
     <Compile Include="Dtos\Job\JobClassDto.cs" />
     <Compile Include="Dtos\Job\StudentAndCycleDtos.cs" />
@@ -233,6 +235,7 @@
     <Content Include="Content\job.png" />
     <Content Include="Content\late.jpg" />
     <Content Include="Content\notebook.jpg" />
+    <Content Include="Content\persianDatepicker-default.css" />
     <Content Include="Content\practice.jpg" />
     <Content Include="Content\print.css" />
     <Content Include="Content\setting.jpg" />
@@ -257,6 +260,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\LICENSE.txt" />
+    <Content Include="Scripts\persianDatepicker.js" />
     <Content Include="Scripts\site.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
