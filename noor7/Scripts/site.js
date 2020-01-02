@@ -969,15 +969,19 @@ function chartprint(){
 
 //Edit Area -------------------------------------
 
+var courseIdsForUpdate = new Array();
+var typeOfShowG = "";
+ 
 function showTable() {
-
-
 
     var typeOfShow = document.getElementById("type").value;
     var course  = document.getElementById("course").value;
     var date = document.getElementById("date").value;
     var calssname  = document.getElementById("class").value;
-    
+
+    typeOfShowG = typeOfShow;
+    examDateForUpdate = date;    
+
     var jsonObject = {};
 
     jsonObject.course = course;
@@ -999,7 +1003,6 @@ function showTable() {
         success: function (response) {
             console.log(response.responseText);
 
-            
 
             var jsonObj = JSON.parse(response.responseText);
             console.log(jsonObj);
@@ -1014,6 +1017,17 @@ function showTable() {
             var keys = Object.keys(jsonObj[0].Students);
             var values = Object.values(jsonObj[0].Students);
             var grades = Object.values(jsonObj[0].Exams);
+
+            console.log(jsonObj[0].CourseIds.length);
+
+            //new Array for Global for local []
+            var frameArray = [];
+            for(var i = 0; i < jsonObj[0].CourseIds.length; i++){
+                
+                frameArray.push(jsonObj[0].CourseIds[i]);
+            }   
+
+            courseIdsForUpdate = frameArray;
 
             $("#myTable tr").remove(); 
 
@@ -1038,21 +1052,59 @@ function showTable() {
                 cell1.innerHTML = keys[j],
                 cell2.innerHTML = values[j],
                 cell3.innerHTML = grades[j];
+
+                cell3.tabIndex = j+1;
                     
             }  
 
-            var att = document.createAttribute("contenteditable");
-            att.value = true;                          
-            $("myTable td").setAttributeNode(att);
+            //$("#myTable").html(table);
             
-            $("myTable").html(table);  
-
-         
+            document.getElementById("showdate").value = date;
+            document.getElementById("finalGrade").value = jsonObj[0].FinalGrade;
+            document.getElementById("myTable").contentEditable = "true";
+        
+            
         }
     });
 //location.reload(true);
 }
 
+function getTableColumnValues(col){
+    var columnValues=[];
+    $('table[id]').each(function() {
+        $('tr>td:nth-child('+col+')',$(this)).each(function(key,value) {
+            if(key != 0){
+                columnValues.push($(this).text());
+            }
+        });
+    });
+    return columnValues;
+}
 
+function updateDatabase(){
 
-     
+    var examDateForUpdate = document.getElementById("showdate").value;
+    var finalGradeForUpdate = document.getElementById("finalGrade").value;
+
+    var Grades = getTableColumnValues(3);
+
+    var jsonObject = {};
+    jsonObject.courseIdsForUpdate = courseIdsForUpdate;
+    jsonObject.Grades = Grades;
+    jsonObject.examDateForUpdate = examDateForUpdate;
+    console.log(JSON.stringify(jsonObject));
+
+    $.ajax({
+        url: (typeOfShowG == "تکلیف") ? "/Edit/updatePractice" : "/Edit/updateExam",
+        type: "POST",
+        data: JSON.stringify(jsonObject),
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        error: function (response) {
+            alert(response);
+        },
+        success: function (response) {
+            console.log(response.responseText);
+        }
+    });
+}     

@@ -165,6 +165,7 @@
     <Compile Include="Dtos\Defect\DefectClassDto.cs" />
     <Compile Include="Dtos\Edit\SendExamToViewDtos.cs" />
     <Compile Include="Dtos\Edit\ShowDto.cs" />
+    <Compile Include="Dtos\Edit\UpdateDto.cs" />
     <Compile Include="Dtos\ExcelReportDto.cs" />
     <Compile Include="Dtos\Job\JobClassDto.cs" />
     <Compile Include="Dtos\Job\StudentAndCycleDtos.cs" />

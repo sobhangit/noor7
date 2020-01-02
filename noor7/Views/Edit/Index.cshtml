@@ -4,10 +4,10 @@
 
 
 <div class="col-md-6">
-    <div style="padding:5px;">
+    <div style="padding:5px;justify-content: center;">
         <h4>ویرایش امتحان</h4>
         <hr />
-        <form class="form-inline" style="justify-content: center;">
+        <form class="form-inline">
             <input id="type" list="typeSelect" class="form-control col-md-2" placeholder="نوع">
             <datalist id="typeSelect">
                 <option value="تکلیف">تکلیف</option>
@@ -24,7 +24,7 @@
             </datalist>
 
             <input id="date" class="form-control col-md-2" placeholder="تاریخ">
-            <span  id="datePicker" style="display:none"></span>
+            <span id="datePicker" style="display:none"></span>
 
             <input id="class" list="classSelect" class="form-control col-md-2" placeholder="کلاس">
             <datalist id="classSelect">
@@ -36,13 +36,21 @@
 
             <input type="button" class="btn btn-success form-control col-md-2" value="نمایش" onclick="showTable();">
         </form>
-        
+
+        <input type="button" class="btn btn-success form-control col-md-2" value="بروزرسانی" onclick="updateDatabase();">
+
     </div>
     <div style="padding:5px;height:400px;white-space: nowrap;overflow-y: scroll;">
+
+        <label for="finalGrade">بارم :</label>
+        <input id="finalGrade" type="text" name="finalGrade" value="" />
+        <label for="showdate">تاریخ :</label>
+        <input id="showdate" type="text" name="showdate" value="" />
+
         <div>
             <table id="myTable" cellpadding="2" cellspacing="2" border="1"></table>
         </div>
-        
+
     </div>
     
 </div>

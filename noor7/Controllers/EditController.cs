@@ -99,10 +99,37 @@ namespace noor7.Controllers
             return Content("ok");
         }
 
-        public ActionResult updateExam()
+        public ActionResult updateExam(UpdateDto updateDto)
         {
+            var date = updateDto.examDateForUpdate;
+            var persianTime = PersianDateTime.Parse(date);
+            var dateTime = persianTime.ToDateTime();
 
-            return Content("ok");
+            var courseIds = updateDto.courseIdsForUpdate;
+            List<float> grades = new List<float> { };
+
+            foreach (var item in updateDto.Grades)
+            {
+                if (item == "نمره")
+                {
+                    continue;
+                }
+                grades.Add(float.Parse(item));
+            }
+
+
+            for (int i = 0; i < grades.Count() ; i++)
+            {
+                var cid = courseIds[i];
+                var result = _context.Exams.SingleOrDefault(s => s.ExamDate == dateTime && s.CourseID == cid);
+                if (result != null)
+                {
+                    result.Grade = grades[i];
+                    _context.SaveChanges();
+                }
+            }
+
+            return Json(new { success = true, responseText = "امتحان بروزرسانی شد" }, JsonRequestBehavior.AllowGet);
         }
         public ActionResult updatePractice()
         {
