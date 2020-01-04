@@ -163,6 +163,7 @@
     <Compile Include="Controllers\StudentManagmentController.cs" />
     <Compile Include="Dtos\Absent\AbsentClassDto.cs" />
     <Compile Include="Dtos\Defect\DefectClassDto.cs" />
+    <Compile Include="Dtos\Edit\SendPracticeToViewDtos.cs" />
     <Compile Include="Dtos\Edit\SendExamToViewDtos.cs" />
     <Compile Include="Dtos\Edit\ShowDto.cs" />
     <Compile Include="Dtos\Edit\UpdateDto.cs" />
