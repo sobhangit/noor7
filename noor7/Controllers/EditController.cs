@@ -23,7 +23,6 @@ namespace noor7.Controllers
             ViewBag.vv = courses;
             return View();
         }
-
         [HttpPost]
         public ActionResult showExam(ShowDto showDto) {
 
@@ -87,7 +86,6 @@ namespace noor7.Controllers
             return Json(new { success = true, responseText = jsonObj }, JsonRequestBehavior.AllowGet);
 
         }
-
         [HttpPost]
         public ActionResult showPractice(ShowDto showDto)
         {
@@ -152,7 +150,55 @@ namespace noor7.Controllers
             return Json(new { success = true, responseText = jsonObj }, JsonRequestBehavior.AllowGet);
 
         }
+        [HttpPost]
+        public ActionResult showNotebook(ShowDtoForNotebook showDto) {
+            var className = showDto.calssname;
+            var persianDate = PersianDateTime.Parse(showDto.date);
+            var examDate = persianDate.ToDateTime();
 
+            var allStudentInClass = _context.Students.Where(s => s.Class == className).OrderBy(s => s.Id).ToList();
+
+            //all notebook in selected date
+            var allNotebook = _context.Notebooks.Where(s => s.NoteBookDate == examDate).ToList();
+
+            List<Notebook> notebooks = new List<Notebook> { };
+
+            foreach (var item in allStudentInClass)
+            {
+                var a = allNotebook.Where(s => s.StudentID == item.Id).SingleOrDefault();
+                notebooks.Add(a);
+            }
+            //////////////////////
+            ///
+            Dictionary<int, string> students = new Dictionary<int, string> { };
+            foreach (var item in allStudentInClass)
+            {
+                students.Add(item.Id, item.FirstName + " " + item.LastName);
+            }
+
+            var counter = 0;
+
+            List<float> notebookForView = new List<float> { };
+            foreach (var item in notebooks)
+            {
+                counter++;
+                notebookForView.Add(item.Grade);
+            }
+
+            var result = new List<SendNotebookToViewDtos> { };
+
+            result.Add(
+                new SendNotebookToViewDtos
+                {
+                    Students = students,
+                    Notebooks = notebookForView
+                }
+            );
+
+            var jsonObj = JsonConvert.SerializeObject(result);
+            return Json(new { success = true, responseText = jsonObj }, JsonRequestBehavior.AllowGet);
+
+        }
         public ActionResult updateExam(UpdateDto updateDto)
         {
             var date = updateDto.examDateForUpdate;
@@ -171,7 +217,6 @@ namespace noor7.Controllers
                 grades.Add(float.Parse(item));
             }
 
-
             for (int i = 0; i < grades.Count() ; i++)
             {
                 var cid = courseIds[i];
@@ -185,7 +230,6 @@ namespace noor7.Controllers
 
             return Json(new { success = true, responseText = "امتحان بروزرسانی شد" }, JsonRequestBehavior.AllowGet);
         }
-
         public ActionResult updatePractice(UpdateDto updateDto)
         {
 
@@ -216,7 +260,36 @@ namespace noor7.Controllers
                 }
             }
 
-            return Json(new { success = true, responseText = "تکلیف بروزرسانی شد" }, JsonRequestBehavior.AllowGet); return Content("ok");
+            return Json(new { success = true, responseText = "تکلیف بروزرسانی شد" }, JsonRequestBehavior.AllowGet);
         }
+        public ActionResult updateNotebook(UpdateDtoForNotebook updateDto) {
+
+            var date = updateDto.examDateForUpdate;
+            var persianTime = PersianDateTime.Parse(date);
+            var dateTime = persianTime.ToDateTime();
+
+            var studentIds = updateDto.studentIdsForUpdate;
+            List<float> grades = new List<float> { };
+
+            foreach (var item in updateDto.Grades)
+            {
+                grades.Add(float.Parse(item));
+            }
+
+            for (int i = 0; i < grades.Count(); i++)
+            {
+                var cid = studentIds[i];
+                var result = _context.Notebooks.SingleOrDefault(s => s.NoteBookDate == dateTime && s.StudentID == cid);
+                if (result != null)
+                {
+                    result.Grade = grades[i];
+                    _context.SaveChanges();
+                }
+            }
+
+            return Json(new { success = true, responseText = "دفترچه بروزرسانی شد" }, JsonRequestBehavior.AllowGet);
+           
+        }
+
     }
 }

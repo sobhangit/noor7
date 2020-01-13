@@ -309,3 +309,17 @@ div.panel-tiles .tile h5 {
     text-align: justify;
 }
 
+#editChoiseArea {
+    margin:5px 0;
+}
+
+#editChoiseArea form {
+    justify-content: center;
+}
+
+#editChoiseArea input {
+    margin:0 2.5px;
+}
+
+
+

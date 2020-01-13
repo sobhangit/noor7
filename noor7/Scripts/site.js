@@ -970,6 +970,8 @@ function chartprint(){
 //Edit Area -------------------------------------
 
 var courseIdsForUpdate = new Array();
+var studentIdsForUpdate = new Array();
+
 var typeOfShowG = "";
  
 function showTable() {
@@ -989,10 +991,19 @@ function showTable() {
     jsonObject.calssname = calssname;
 
     console.log(JSON.stringify(jsonObject));
- 
+    
+    var redirectionAddress = "";    
+
+    if(typeOfShow == "تکلیف"){
+        redirectionAddress = "/Edit/showPractice";
+    }else if(typeOfShow == "امتحان"){
+        redirectionAddress = "/Edit/showExam";
+    }else if(typeOfShow == "دفترچه"){
+        redirectionAddress = "/Edit/showNotebook";
+    }
 
     $.ajax({
-        url: (typeOfShow == "تکلیف") ? "/Edit/showPractice" : "/Edit/showExam",
+        url: redirectionAddress,
         type: "POST",
         data: JSON.stringify(jsonObject),
         contentType: "application/json; charset=utf-8",
@@ -1014,19 +1025,32 @@ function showTable() {
                 
                 if(typeOfShow == "تکلیف"){
                     var grades = Object.values(jsonObj[0].Practices);
-                }else{
+                }else if(typeOfShow == "امتحان"){
                     var grades = Object.values(jsonObj[0].Exams);
+                }else if(typeOfShow == "دفترچه"){
+                    var grades = Object.values(jsonObj[0].Notebooks);
+
+                    var frameArray = [];
+                    for(var i = 0; i < keys.length; i++){
+                        frameArray.push(keys[i]);
+                    }   
+
+                    studentIdsForUpdate = frameArray; 
+
                 }
 
-                console.log(jsonObj[0].CourseIds.length);
+                if(typeOfShow != "دفترچه"){
 
-                //new Array for Global for local []
-                var frameArray = [];
-                for(var i = 0; i < jsonObj[0].CourseIds.length; i++){
-                    frameArray.push(jsonObj[0].CourseIds[i]);
-                }   
+                    console.log(jsonObj[0].CourseIds.length);
 
-                courseIdsForUpdate = frameArray;
+                    //new Array for Global for local []
+                    var frameArray = [];
+                    for(var i = 0; i < jsonObj[0].CourseIds.length; i++){
+                        frameArray.push(jsonObj[0].CourseIds[i]);
+                    }   
+
+                    courseIdsForUpdate = frameArray;            
+                }
 
                 $("#myTable tr").remove(); 
 
@@ -1059,16 +1083,30 @@ function showTable() {
                 //$("#myTable").html(table);
             
                 document.getElementById("showdate").value = date;
+
                 if(typeOfShow == "تکلیف"){
                     document.getElementById("finalGrade").value = jsonObj[0].Numbers;
-                }else{
+                }else if(typeOfShow == "امتحان"){
                     document.getElementById("finalGrade").value = jsonObj[0].FinalGrade;
                 }
+
                 document.getElementById("myTable").contentEditable = "true";
        
         }
     });
 //location.reload(true);
+}
+
+
+function changeShowPlan(){
+    var type  = document.getElementById("type").value; 
+    if(type == "دفترچه"){
+        document.getElementById("course").style.display = 'none';
+        document.getElementById("finalGrade").style.display = 'none';
+    }else{
+        document.getElementById("course").style.display = 'inline-block';
+        document.getElementById("finalGrade").style.display = 'inline-block';
+    }
 }
 
 function getTableColumnValues(col){
@@ -1091,15 +1129,31 @@ function updateDatabase(){
     var Grades = getTableColumnValues(3);
 
     var jsonObject = {};
-    jsonObject.courseIdsForUpdate = courseIdsForUpdate;
-    jsonObject.Grades = Grades;
-    jsonObject.examDateForUpdate = examDateForUpdate;
-
-
+    
+    if(typeOfShowG == "دفترچه"){
+        jsonObject.studentIdsForUpdate = studentIdsForUpdate;
+        jsonObject.Grades = Grades;
+        jsonObject.examDateForUpdate = examDateForUpdate;
+    }else{
+        jsonObject.courseIdsForUpdate = courseIdsForUpdate;
+        jsonObject.Grades = Grades;
+        jsonObject.examDateForUpdate = examDateForUpdate;
+    }
+    
     console.log(JSON.stringify(jsonObject));
 
+    var redirectionAddress = "";    
+
+    if(typeOfShowG == "تکلیف"){
+        redirectionAddress = "/Edit/updatePractice";
+    }else if(typeOfShowG == "امتحان"){
+        redirectionAddress = "/Edit/updateExam";
+    }else if(typeOfShowG == "دفترچه"){
+        redirectionAddress = "/Edit/updateNotebook";
+    }
+
     $.ajax({
-        url: (typeOfShowG == "تکلیف") ? "/Edit/updatePractice" : "/Edit/updateExam",
+        url: redirectionAddress,
         type: "POST",
         data: JSON.stringify(jsonObject),
         contentType: "application/json; charset=utf-8",
@@ -1108,7 +1162,7 @@ function updateDatabase(){
             alert(response);
         },
         success: function (response) {
-            console.log(response.responseText);
+            alert(response.responseText);
         }
     });
 }     

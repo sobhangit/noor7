@@ -1,63 +1,61 @@
 ﻿@{
     ViewData["Title"] = "صفحه ویرایش";
 }
+<div id="editChoiseArea" class="row" style="justify-content: center;">
+    <form class="form-inline">
+        <input id="type" list="typeSelect" class="form-control col-md-2" placeholder="نوع" onchange="changeShowPlan();">
+        <datalist id="typeSelect">
+            <option value="تکلیف">تکلیف</option>
+            <option value="امتحان">امتحان</option>
+            <option value="دفترچه">دفترچه</option>
+        </datalist>
+
+        <input id="course" list="courseSelect" class="form-control col-md-1" placeholder="درس">
+        <datalist id="courseSelect">
+            @foreach (var item in ViewBag.vv)
+            {
+                <option value="@item.Title">@item.Title</option>
+            }
+        </datalist>
+
+        <input id="date" class="form-control col-md-1" placeholder="تاریخ">
+        <span id="datePicker" style="display:none"></span>
+
+        <input id="class" list="classSelect" class="form-control col-md-2" placeholder="کلاس">
+        <datalist id="classSelect">
+            <option value="الف">الف</option>
+            <option value="ب">ب</option>
+            <option value="ج">ج</option>
+        </datalist>
 
 
-<div class="col-md-6">
-    <div style="padding:5px;justify-content: center;">
-        <h4>ویرایش امتحان</h4>
-        <hr />
-        <form class="form-inline">
-            <input id="type" list="typeSelect" class="form-control col-md-2" placeholder="نوع">
-            <datalist id="typeSelect">
-                <option value="تکلیف">تکلیف</option>
-                <option value="امتحان">امتحان</option>
-            </datalist>
+        <input type="button" class="btn btn-success form-control col-md-1" value="نمایش" onclick="showTable();">
+        <input type="button" class="btn btn-success form-control col-md-1" value="بروزرسانی" onclick="updateDatabase();">
 
-            <input id="course" list="courseSelect" class="form-control col-md-2" placeholder="درس">
-            <datalist id="courseSelect">
-                @foreach (var item in ViewBag.vv)
-                {
-                    <option value="@item.Title">@item.Title</option>
-                }
-
-            </datalist>
-
-            <input id="date" class="form-control col-md-2" placeholder="تاریخ">
-            <span id="datePicker" style="display:none"></span>
-
-            <input id="class" list="classSelect" class="form-control col-md-2" placeholder="کلاس">
-            <datalist id="classSelect">
-                <option value="الف">الف</option>
-                <option value="ب">ب</option>
-                <option value="ج">ج</option>
-            </datalist>
-
-
-            <input type="button" class="btn btn-success form-control col-md-2" value="نمایش" onclick="showTable();">
-        </form>
-
-        <input type="button" class="btn btn-success form-control col-md-2" value="بروزرسانی" onclick="updateDatabase();">
-
-    </div>
-    <div style="padding:5px;height:400px;white-space: nowrap;overflow-y: scroll;">
-        
-        <div id="examOtherInformation">
-            <label for="finalGrade">بارم :</label>
-            <input id="finalGrade" type="text" name="finalGrade" value="" />
-            <label for="showdate">تاریخ :</label>
-            <input id="showdate" type="text" name="showdate" value="" />
-        </div>
-        
-
-        <div>
-            <table id="myTable" cellpadding="2" cellspacing="2" border="1"></table>
-        </div>
-
-    </div>
-    
+    </form>
 </div>
-<div class="col-md-6">
-    
+<div class="row" style="justify-content: center;">
+    <div id="examOtherInformation">
+        <label for="finalGrade">بارم :</label>
+        <input id="finalGrade" type="text" name="finalGrade" value="" />
+        <label for="showdate">تاریخ :</label>
+        <input id="showdate" type="text" name="showdate" value="" />
+    </div>
 </div>
 
+<div class="row">
+    <div class="col-md-6">
+        
+        <div style="padding:5px;height:400px;white-space: nowrap;overflow-y: scroll;">
+
+            <div>
+                <table id="myTable" cellpadding="2" cellspacing="2" border="1"></table>
+            </div>
+
+        </div>
+
+    </div>
+    <div class="col-md-6">
+        
+    </div>
+</div>
